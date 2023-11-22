@@ -1,6 +1,8 @@
 const express = require('express');
 const route = express.Router()
 
+const verifyToken = require('../middleware/auth')
+const authRoute = require('./auth-route')
 const userRoute = require('./user-route')
 
 route.get('/', (req, res) => {
@@ -9,6 +11,7 @@ route.get('/', (req, res) => {
     })
 })
 
-route.use("/user", userRoute)
+route.use('/auth', authRoute)
+route.use("/user", verifyToken, userRoute)
 
 module.exports = route;
