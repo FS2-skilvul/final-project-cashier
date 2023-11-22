@@ -1,10 +1,11 @@
 const bcrypt = require('bcrypt');
-const {User} = require('../models');
+const {User, Product} = require('../models');
 // const Todo = require('../models/Todo');
 
 module.exports = {
     getAllUser: async (req, res) => {
-        const users = await User.findAll()
+        // const users = await User.findAll({include: Product})
+        const users = await User.findAll({ include: Product })
         // const users = await User.findAll()
 
         res.json({
