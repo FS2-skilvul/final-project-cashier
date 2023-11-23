@@ -150,41 +150,41 @@ module.exports = {
         }
     },
 
-    // updateTransaction: async (req, res) => {
-    //     const transactionId = req.params.id;
-    //     const data = req.body;
-    //     const userId = req.payload.id
+    updateTransaction: async (req, res) => {
+        const transactionId = req.params.id;
+        const data = req.body;
+        const userId = req.payload.id
 
-    //     try {
-    //         // Temukan todo berdasarkan ID dan User ID
-    //         const transaction = await Transaction.findOne({
-    //             where: {
-    //                 id: transactionId,
-    //                 user_id: userId
-    //             }
-    //         });
+        try {
+            // Temukan todo berdasarkan ID dan User ID
+            const transaction = await Transaction.findOne({
+                where: {
+                    id: transactionId,
+                    user_id: userId
+                }
+            });
 
-    //         if (!transaction) {
-    //             return res.status(404).json({
-    //                 message: 'Product tidak ditemukan'
-    //             });
-    //         }
+            if (!transaction) {
+                return res.status(404).json({
+                    message: 'Product tidak ditemukan'
+                });
+            }
 
-    //         // Ubah data todo
-    //         await transaction.update(data);
+            // Ubah data todo
+            await transaction.update(data);
 
-    //         res.json({
-    //             message: 'Transaksi berhasil diubah',
-    //             data: transaction
-    //         });
+            res.json({
+                message: 'Transaksi berhasil diubah',
+                data: transaction
+            });
 
-    //     } catch (error) {
-    //         console.error(error);
-    //         res.status(500).json({
-    //             message: 'Terjadi kesalahan server'
-    //         });
-    //     }
-    // },
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Terjadi kesalahan server'
+            });
+        }
+    },
 
     deleteTransaction: async (req, res) => {
         const transactionId = req.params.id;

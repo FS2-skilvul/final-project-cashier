@@ -5,14 +5,14 @@ const{
     getAllTransaction,
     getTransactionById,
     createTransaction,
-    // updateTransaction,
+    updateTransaction,
     deleteTransaction,
 } = require("../controllers/transaction-controller")
 
 route.get("/", getAllTransaction)
 route.get("/:id", getTransactionById)
 route.post("/", createTransaction)
-// route.put("/:id", updateTransaction)
+route.put("/:id", updateTransaction)
 route.delete("/:id", deleteTransaction)
 
 module.exports = route
