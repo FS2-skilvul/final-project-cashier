@@ -9,7 +9,7 @@ module.exports = {
             const roleUser = req.payload.role
 
             const userAdmin = await User.findAll()
-            const userUser = await User.findByPk(userId, {include:Product})
+            const userUser = await User.findByPk(userId, { include: Product })
 
             if (roleUser == 'admin') {
                 return res.status(200).json({
@@ -97,9 +97,12 @@ module.exports = {
                 });
             }
 
-            // hash password
-            const hashPassword = bcrypt.hashSync(data.password, 10)
-            data.password = hashPassword
+            // Cek apakah password diubah
+            if (data.password) {
+                // hash password
+                const hashPassword = bcrypt.hashSync(data.password, 10)
+                data.password = hashPassword
+            }
 
             // Ubah data user
             await user.update(data);
