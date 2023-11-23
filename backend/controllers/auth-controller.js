@@ -3,36 +3,44 @@ const jwt = require('jsonwebtoken')
 
 require('dotenv').config()
 
-const {User} = require("../models")
+const { User } = require("../models")
 
 module.exports = {
     login: async (req, res) => {
         try {
             let data = req.body
 
-            const user = await User.findOne({
-                where: {
-                    email: data.email
+            if (data.email && data.password) {
+                const user = await User.findOne({
+                    where: {
+                        email: data.email
+                    }
+                });
+
+                if (!user) {
+                    return res.status(400).json({
+                        message: "email tidak ditemukan"
+                    })
                 }
-            });
 
-            if (!user) {
-                return res.status(400).json({
-                    message: "anda tuh siapaa??"
-                })
-            }
+                if (bcrypt.compareSync(data.password, user.password)) {
+                    const token = jwt.sign({ id: user.id, nama: user.nama, email: data.email, role: user.role }, process.env.JWT_KEY)
+                    return res.json({
+                        message: "anda berhasil login",
+                        token
+                    })
+                }
 
-            if (bcrypt.compareSync(data.password, user.password)) {
-                const token = jwt.sign({ id: user.id, nama:user.nama, email: data.email, role:user.role }, process.env.JWT_KEY)
                 return res.json({
-                    message: "anda berhasil login",
-                    token
+                    message: "password anda salah"
                 })
+
             }
 
-            res.json({
-                message: "password anda salah"
+            res.status(400).json({
+                message: "email atau password anda masih kosong"
             })
+
         } catch (error) {
             console.error(error);
             res.status(500).json({

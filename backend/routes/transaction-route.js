@@ -5,7 +5,7 @@ const{
     getAllTransaction,
     getTransactionById,
     createTransaction,
-    updateTransaction,
+    // updateTransaction,
     deleteTransaction,
 } = require("../controllers/transaction-controller")
 
