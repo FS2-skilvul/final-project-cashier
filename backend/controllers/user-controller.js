@@ -1,17 +1,37 @@
 const bcrypt = require('bcrypt');
-const {User, Product} = require('../models');
+const { User, Product } = require('../models');
 // const Todo = require('../models/Todo');
 
 module.exports = {
     getAllUser: async (req, res) => {
-        // const users = await User.findAll({include: Product})
-        const users = await User.findAll({ include: Product })
-        // const users = await User.findAll()
+        try {
+            const userId = req.payload.id
+            const roleUser = req.payload.role
 
-        res.json({
-            message: "berhasil mendapatkan data user",
-            data: users
-        })
+            const userAdmin = await User.findAll()
+            const userUser = await User.findByPk(userId, {include:Product})
+
+            if (roleUser == 'admin') {
+                return res.status(200).json({
+                    message: 'Data user berhasil didapatkan',
+                    data: userAdmin
+                })
+            } else if (roleUser == 'user') {
+                return res.status(200).json({
+                    message: 'Data user berhasil didapatkan',
+                    data: userUser
+                })
+            } else {
+                return res.status(404).json({
+                    message: 'Data user gagal didapatkan',
+                })
+            }
+        } catch (error) {
+            return res.status(500).json({
+                message: 'Terjadi kesalah server',
+                error: error.message
+            })
+        }
     },
 
     getUserById: async (req, res) => {

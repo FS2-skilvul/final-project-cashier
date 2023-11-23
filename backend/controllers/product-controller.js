@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const { Product } = require('../models');
 // const Todo = require('../models/Todo');
 
@@ -78,16 +78,17 @@ module.exports = {
 
         try {
             // input data
-            if (data) {
-                await Product.create(data)
+            if (data.nama && data.harga_beli && data.harga_jual && data.stok) {
+                const product = await Product.create(data)
 
                 // send response
                 res.status(201).json({
                     message: "berhasil menambahkan product",
+                    data: product
                 })
             } else {
                 res.status(404).json({
-                    message: "gagal menambahkan product karena nilai value tidak ada",
+                    message: "gagal menambahkan product karena beberapa value tidak ada nilainya",
                 })
             }
 
