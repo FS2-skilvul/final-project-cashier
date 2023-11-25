@@ -6,13 +6,13 @@ function LandingHome() {
 	return (
 		<div>
 			<NavbarLanding />
-			<main className="w-screen flex justify-center flex-col md:flex-row">
-				<section className="flex w-full md:w-1/2 justify-center items-center md:h-[485px] px-12">
-					<div className="text-5xl font-semibold ml-20">
-						<p className="my-4">Kelola Usaha Anda</p>{' '}
-						<p className="my-4">Dengan Aplikasi</p>{' '}
+			<main className="w-screen h-[87.5vh] flex justify-center flex-col md:flex-row">
+				<section className="flex w-1/2 justify-center items-center px-12">
+					<div className="text-7xl font-semibold ml-20">
+						<p className="my-4">Kelola Usaha Anda</p>
+						<p className="my-4">Dengan Aplikasi</p>
 						<p className="my-4 font-bold text-primary">Kasir Online</p>
-						<p className="text-lg">
+						<p className="text-lg pr-48">
 							Kami membantu Anda mendapatkan data-data menarik dari transaksi
 							Anda sehingga Anda bisa menjual lebih banyak lagi.
 						</p>
@@ -21,11 +21,15 @@ function LandingHome() {
 						</a>
 					</div>
 				</section>
-				<section className="flex w-full md:w-1/2 justify-center items-center md:h-[485px]">
-					<img src={foto} alt="Ini Gambar" className="w-[65%]" />
+				<section className="flex w-1/2 justify-center items-center">
+					<img
+						src={foto}
+						alt="Ini Gambar"
+						className="w-[80%] items-center justify-center"
+					/>
 				</section>
 			</main>
-			<footer className="w-screen bg-primary absolute bottom-0 p-4 px-12 text-white text-justify">
+			<footer className="w-screen bg-primary p-4 px-12 text-white text-justify absolute bottom-0">
 				<p>
 					<b>KasirOnline</b> merupakan solusi pembukuan dan manajemen bisnis
 					digital yang akan membantu pengguna mengelola bisnis mereka dengan
