@@ -1,6 +1,7 @@
 import React from 'react';
 import NavbarLanding from '../../components/navbar-landing';
 import foto from '../../assets/unsplash_ONlW_Ye8HcQ.png';
+import logoKecil from '../../assets/Vector (2).png';
 
 function LandingHome() {
 	return (
@@ -11,7 +12,10 @@ function LandingHome() {
 					<div className="text-7xl font-semibold ml-20">
 						<p className="my-4">Kelola Usaha Anda</p>
 						<p className="my-4">Dengan Aplikasi</p>
-						<p className="my-4 font-bold text-primary">Kasir Online</p>
+						<div className="flex flex-row items-center">
+							<span className="my-4 font-bold text-primary">Kasir Online</span>
+							<img src={logoKecil} alt="" className="ml-4 h-[100%]" />
+						</div>
 						<p className="text-lg pr-48">
 							Kami membantu Anda mendapatkan data-data menarik dari transaksi
 							Anda sehingga Anda bisa menjual lebih banyak lagi.

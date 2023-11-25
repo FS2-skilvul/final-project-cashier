@@ -4,6 +4,7 @@ import ContainerFitur from '../../components/container-fitur';
 import ImgDashboard from '../../assets/Businesswoman using a tablet to analysis graph company finance strategy statistics success concept and planning for future in office room.png';
 import ImgGudang from '../../assets/Interior of large distribution warehouse with shelves stacked with palettes and goods ready for the market.png';
 import ImgKasir from '../../assets/Close up on education and economy objects.png';
+import logoKecil from '../../assets/Vector (2).png';
 
 function LandingFitur() {
 	return (
@@ -14,6 +15,7 @@ function LandingFitur() {
 					<h1 className="text-6xl font-bold ">
 						FITUR UTAMA <span className="text-primary">Kasir Online</span>
 					</h1>
+					<img src={logoKecil} alt="" className="ml-4 h-[100%]" />
 				</div>
 				<div className="flex mx-24 gap-16 justify-center items-center">
 					<ContainerFitur
