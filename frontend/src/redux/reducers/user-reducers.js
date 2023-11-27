@@ -1,95 +1,95 @@
-import axios from "axios"
-
+import axios from 'axios';
 
 const initialState = {
-    users: [],
-    isLoading: false,
-    isEmailExist: false,
-    isSuccess: false,
-    isLoginSuccess: true,
-    isMovePage: false,
-}
+	users: [],
+	isLoading: false,
+	isEmailExist: false,
+	isSuccess: false,
+	isLoginSuccess: true,
+	isMovePage: false,
+};
 
 function userReducer(state = initialState, action) {
-    switch (action.type) {
-        case "START_FETCHING":
-            return {
-                ...state,
-                isLoading: true
-            }
-        case "SUCCESS_REGISTER_USER":
-            return {
-                ...state,
-                isLoading: false,
-                isSuccess: true
-            }
-        case "FAILED_REGISTER_USER":
-            return {
-                ...state,
-                isLoading: false,
-                isEmailExist: true
-            }
-        case "SUCCESS_LOGIN_USER":
-            return {
-                ...state,
-                isLoading: false,
-                users: action.payload,
-                isMovePage: true,
-            }
-        case "FAILED_LOGIN_USER":
-            return {
-                ...state,
-                isLoading: false,
-                isLoginSuccess: false
-            }
-        case "RESET_STATE":
-            return {
-                ...state,
-                isLoading: false,
-                isEmailExist: false,
-                isSuccess: false,
-                isLoginSuccess: true,
-                isMovePage: false,
-            }
-        default: return state
-    }
+	switch (action.type) {
+		case 'START_FETCHING':
+			return {
+				...state,
+				isLoading: true,
+			};
+		case 'SUCCESS_REGISTER_USER':
+			return {
+				...state,
+				isLoading: false,
+				isSuccess: true,
+			};
+		case 'FAILED_REGISTER_USER':
+			return {
+				...state,
+				isLoading: false,
+				isEmailExist: true,
+			};
+		case 'SUCCESS_LOGIN_USER':
+			return {
+				...state,
+				isLoading: false,
+				users: action.payload,
+				isMovePage: true,
+			};
+		case 'FAILED_LOGIN_USER':
+			return {
+				...state,
+				isLoading: false,
+				isLoginSuccess: false,
+			};
+		case 'RESET_STATE':
+			return {
+				...state,
+				isLoading: false,
+				isEmailExist: false,
+				isSuccess: false,
+				isLoginSuccess: true,
+				isMovePage: false,
+			};
+		default:
+			return state;
+	}
 }
 
 function startFetching() {
-    return {
-        type: "START_FETCHING"
-    }
+	return {
+		type: 'START_FETCHING',
+	};
 }
 
 function successRegisterUser() {
-    return {
-        type: "SUCCESS_REGISTER_USER"
-    }
+	return {
+		type: 'SUCCESS_REGISTER_USER',
+	};
 }
 
 function emailAlreadyRegistered() {
-    return {
-        type: "FAILED_REGISTER_USER"
-    }
+	return {
+		type: 'FAILED_REGISTER_USER',
+	};
 }
 
 function successLoginUser(getUser) {
-    return {
-        type: "SUCCESS_LOGIN_USER",
-        payload: getUser
-    }
+	return {
+		type: 'SUCCESS_LOGIN_USER',
+		payload: getUser,
+	};
 }
 
 function failedLoginUser() {
-    return {
-        type: "FAILED_LOGIN_USER"
-    }
+	return {
+		type: 'FAILED_LOGIN_USER',
+	};
 }
 
 export function resetState() {
-    return {
-        type: "RESET_STATE"
-    }
+	return {
+		type: 'RESET_STATE',
+	};
 }
 
 // export function getTodo() {
@@ -103,69 +103,76 @@ export function resetState() {
 // }
 
 export function loginUser(dataUser) {
-    return async function (dispatch) {
-        try {
-            dispatch(startFetching())
-            const login = await axios.post("https://final-project-cashier-production.up.railway.app/auth/login", dataUser)
+	return async function (dispatch) {
+		try {
+			dispatch(startFetching());
+			const login = await axios.post(
+				'https://final-project-cashier-production.up.railway.app/auth/login',
+				dataUser,
+			);
 
-            if (login.data.token) {
-                localStorage.setItem('token', login.data.token)
+			if (login.data.token) {
+				localStorage.setItem('token', login.data.token);
 
-                const headers = { 'Authorization': `Bearer ${login.data.token}` }; // auth header with bearer token
-                const {data} = await axios.get('https://final-project-cashier-production.up.railway.app/user', { headers })
+				const headers = { Authorization: `Bearer ${login.data.token}` }; // auth header with bearer token
+				const { data } = await axios.get(
+					'https://final-project-cashier-production.up.railway.app/user',
+					{ headers },
+				);
 
-                // console.log(login.data.token, data.data.nama)
-                dispatch(successLoginUser(data.data));
-            } else {
-                dispatch(failedLoginUser())
-            }
+				// console.log(login.data.token, data.data.nama)
+				dispatch(successLoginUser(data.data));
+			} else {
+				dispatch(failedLoginUser());
+			}
+		} catch (error) {
+			// Tangani kesalahan jika ada
+			console.error('Error adding user:', error);
 
-        } catch (error) {
-            // Tangani kesalahan jika ada
-            console.error("Error adding user:", error);
+			// Dapatkan status code dari error (jika ada)
+			const statusCode = error.response ? error.response.status : null;
 
-            // Dapatkan status code dari error (jika ada)
-            const statusCode = error.response ? error.response.status : null;
+			// Dapatkan pesan kesalahan dari error (jika ada)
+			const errorMessage = error.response ? error.response.data.message : null;
 
-            // Dapatkan pesan kesalahan dari error (jika ada)
-            const errorMessage = error.response ? error.response.data.message : null;
+			// Log status code dan pesan kesalahan
+			console.log('Status Code:', statusCode);
+			console.log('Error Message:', errorMessage);
 
-            // Log status code dan pesan kesalahan
-            console.log("Status Code:", statusCode);
-            console.log("Error Message:", errorMessage);
-
-            dispatch(failedLoginUser());
-        }
-    }
+			dispatch(failedLoginUser());
+		}
+	};
 }
 
-
 export function registerUser(newUser) {
-    return async function (dispatch) {
-        try {
-            dispatch(startFetching())
-            const response = await axios.post("https://final-project-cashier-production.up.railway.app/auth/regis", newUser)
+	return async function (dispatch) {
+		try {
+			dispatch(startFetching());
+			const response = await axios.post(
+				'https://final-project-cashier-production.up.railway.app/auth/regis',
+				newUser,
+			);
 
-            dispatch(successRegisterUser());
-        } catch (error) {
-            // Tangani kesalahan jika ada
-            console.error("Error adding user:", error);
+			dispatch(successRegisterUser());
+		} catch (error) {
+			// Tangani kesalahan jika ada
+			console.error('Error adding user:', error);
 
-            // Dapatkan status code dari error (jika ada)
-            const statusCode = error.response ? error.response.status : null;
+			// Dapatkan status code dari error (jika ada)
+			const statusCode = error.response ? error.response.status : null;
 
-            // Dapatkan pesan kesalahan dari error (jika ada)
-            const errorMessage = error.response ? error.response.data.message : null;
+			// Dapatkan pesan kesalahan dari error (jika ada)
+			const errorMessage = error.response ? error.response.data.message : null;
 
-            // Log status code dan pesan kesalahan
-            console.log("Status Code:", statusCode);
-            console.log("Error Message:", errorMessage);
+			// Log status code dan pesan kesalahan
+			console.log('Status Code:', statusCode);
+			console.log('Error Message:', errorMessage);
 
-            if (statusCode === 400) {
-                dispatch(emailAlreadyRegistered());
-            }
-        }
-    }
+			if (statusCode === 400) {
+				dispatch(emailAlreadyRegistered());
+			}
+		}
+	};
 }
 
 // export function centangTodo(id, completed) {
