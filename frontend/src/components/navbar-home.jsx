@@ -1,7 +1,18 @@
 import logoBiru from '../assets/Logo Biru.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { IoIosArrowDown } from 'react-icons/io';
+import { useState } from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
 
 function NavbarHome() {
+	const [toogle, setToogle] = useState(false);
+	const location = useLocation();
+	const isActivePage = (pathname) => location.pathname === pathname;
+
+	function toogleButton() {
+		setToogle(!toogle);
+	}
+
 	return (
 		<header className="flex justify-between w-full h-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
 			<div className="flex gap-6 font-bold items-center justify-center">
@@ -10,7 +21,13 @@ function NavbarHome() {
 				</Link>
 				<div className="flex mx-24 gap-6 text-isPasif">
 					<Link to="/dashboard">
-						<button className="flex gap-4 hover:text-isActive fill-isPasif hover:fill-isActive">
+						<button
+							className={`flex gap-4 ${
+								isActivePage('/dashboard')
+									? 'text-blue-500 fill-blue-500'
+									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+							}`}
+						>
 							<svg
 								width="24"
 								height="24"
@@ -23,7 +40,13 @@ function NavbarHome() {
 						</button>
 					</Link>
 					<Link to="/gudang">
-						<button className="flex gap-4 hover:text-isActive fill-isPasif hover:fill-isActive">
+						<button
+							className={`flex gap-4 ${
+								isActivePage('/gudang')
+									? 'text-blue-500 fill-blue-500'
+									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+							}`}
+						>
 							<svg
 								width="28"
 								height="28"
@@ -44,7 +67,13 @@ function NavbarHome() {
 						</button>
 					</Link>
 					<Link to="/kasir">
-						<button className="flex gap-4 hover:text-isActive fill-isPasif hover:fill-isActive">
+						<button
+							className={`flex gap-4 ${
+								isActivePage('/kasir')
+									? 'text-blue-500 fill-blue-500'
+									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+							}`}
+						>
 							<svg
 								width="26"
 								height="26"
@@ -62,7 +91,29 @@ function NavbarHome() {
 					</Link>
 				</div>
 			</div>
-			<div className="flex gap-2 font-semibold text-base"></div>
+			<div className="flex gap-2 font-semibold text-base items-center justify-center text-primary">
+				<img
+					src="https://c.pxhere.com/images/0d/18/4fa31701d2cfa087836d807967f3-1447663.jpg!d"
+					alt=""
+					className="border rounded-full w-10 border-primary"
+				/>
+				<p>Ilham Rahmaddani</p>
+				<div className="relative">
+					<button onClick={toogleButton}>
+						{toogle && true ? <IoIosArrowForward /> : <IoIosArrowDown />}
+					</button>
+					{toogle && (
+						<div className="flex flex-col absolute top-[4rem] right-2">
+							<button className="bg-white border px-16 py-1">
+								<Link to="/profile">Profile</Link>
+							</button>
+							<button className='"bg-white border px-16 py-1'>
+								<Link to="/profile">Keluar</Link>
+							</button>
+						</div>
+					)}
+				</div>
+			</div>
 		</header>
 	);
 }
