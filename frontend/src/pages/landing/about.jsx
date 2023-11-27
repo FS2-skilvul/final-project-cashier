@@ -5,6 +5,7 @@ import { IoMapSharp } from 'react-icons/io5';
 import { MdEmail } from 'react-icons/md';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaFacebook, FaInstagram, FaTwitter, FaTiktok } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function LandingAbout() {
 	return (
@@ -34,27 +35,13 @@ function LandingAbout() {
 							individu.
 						</p>
 					</section>
-					<section className="w-1/5 font-bold text-2xl text-secondary">
-						<div>
-							<li className="py-2">
-								<a href="/">Home</a>
-							</li>
-							<li className="py-2">
-								<a href="/fitur">Fitur</a>
-							</li>
-							<li className="py-2">
-								<a href="/about">Tentang Kami</a>
-							</li>
-							<li className="py-2">
-								<a href="/sk">Syarat & Ketentuan</a>
-							</li>
-							<li className="py-2">
-								<a href="/kp">Kebijakan Privasi</a>
-							</li>
-							<li className="py-2">
-								<a href="/bantuan">Bantuan</a>
-							</li>
-						</div>
+					<section className="flex flex-col w-1/5 font-bold text-2xl text-secondary gap-4">
+						<Link to="/">Home</Link>
+						<Link to="/fitur">Fitur</Link>
+						<Link to="/about">Tentang Kami</Link>
+						<Link to="/sk">Syarat dan Ketentuan</Link>
+						<Link to="/kp">Kebijakan Privasi</Link>
+						<Link to="/bantuan">Bantuan</Link>
 					</section>
 					<section className="w-1/5 text-2xl">
 						<div className="text-secondary">

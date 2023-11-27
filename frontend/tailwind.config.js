@@ -6,6 +6,8 @@ export default {
 			colors: {
 				primary: '#5371FF',
 				secondary: '#FFFFFF',
+				isPasif: '#989B9E',
+				isActive: '#5371FF',
 			},
 		},
 	},

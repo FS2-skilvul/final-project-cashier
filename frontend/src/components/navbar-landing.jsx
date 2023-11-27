@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logoBiru from '../assets/Logo Biru.png';
 
 function NavbarLanding() {
@@ -9,9 +10,15 @@ function NavbarLanding() {
 				</a>
 			</div>
 			<div className="flex gap-6 font-bold">
-				<a href="/">Home</a>
-				<a href="/fitur">Fitur</a>
-				<a href="/about">Tentang Kami</a>
+				<Link to="/">
+					<div className="flex gap-4">Home</div>
+				</Link>
+				<Link to="/fitur">
+					<div className="flex gap-4">Fitur</div>
+				</Link>
+				<Link to="/about">
+					<div className="flex gap-4">Tentang Kami</div>
+				</Link>
 			</div>
 			<div className="flex gap-2 font-semibold text-base">
 				<a
