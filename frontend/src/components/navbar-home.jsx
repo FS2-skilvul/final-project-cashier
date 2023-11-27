@@ -1,8 +1,12 @@
 import logoBiru from '../assets/Logo Biru.png';
 import { Link, useLocation } from 'react-router-dom';
-import { IoIosArrowDown } from 'react-icons/io';
+import {
+	IoIosArrowDown,
+	IoMdPerson,
+	IoIosArrowForward,
+	IoIosLogOut,
+} from 'react-icons/io';
 import { useState } from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
 
 function NavbarHome() {
 	const [toogle, setToogle] = useState(false);
@@ -104,11 +108,21 @@ function NavbarHome() {
 					</button>
 					{toogle && (
 						<div className="flex flex-col absolute top-[4rem] right-2">
-							<button className="bg-white border px-16 py-1">
-								<Link to="/profile">Profile</Link>
+							<button className="bg-white border px-12 py-1">
+								<Link to="/profile">
+									<div className="flex flex-row items-center justify-center gap-2">
+										<IoMdPerson />
+										Profile
+									</div>
+								</Link>
 							</button>
-							<button className='"bg-white border px-16 py-1'>
-								<Link to="/profile">Keluar</Link>
+							<button className='"bg-white border px-12 py-1'>
+								<Link to="/profile">
+									<div className="flex flex-row items-center justify-center gap-2">
+										<IoIosLogOut />
+										Keluar
+									</div>
+								</Link>
 							</button>
 						</div>
 					)}
