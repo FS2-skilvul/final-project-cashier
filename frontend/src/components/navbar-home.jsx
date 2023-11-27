@@ -109,8 +109,8 @@ function NavbarHome() {
 						{toogle && true ? <IoIosArrowForward /> : <IoIosArrowDown />}
 					</button>
 					{toogle && (
-						<div className="flex flex-col absolute top-[4rem] right-2">
-							<button className="bg-white border px-12 py-1">
+						<div className="flex flex-col fixed top-[6.5em] right-[1em]">
+							<button className="bg-white border px-8 py-1">
 								<Link to="/profile">
 									<div className="flex flex-row items-center justify-center gap-2">
 										<IoMdPerson />
@@ -118,7 +118,7 @@ function NavbarHome() {
 									</div>
 								</Link>
 							</button>
-							<button className='"bg-white border px-12 py-1'>
+							<button className='"bg-white border px-8 py-1'>
 								<Link to="/profile">
 									<div className="flex flex-row items-center justify-center gap-2">
 										<IoIosLogOut />

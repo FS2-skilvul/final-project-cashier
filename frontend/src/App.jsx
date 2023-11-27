@@ -10,6 +10,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import GudangTambah from './pages/gudang-tambah';
 import GudangEdit from './pages/gudang-edit';
+import ProfilePage from './pages/profil';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/profile" element={<ProfilePage />} />
 
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
