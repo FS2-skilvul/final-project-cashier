@@ -8,6 +8,8 @@ import GudangPage from './pages/gudang';
 import KasirPage from './pages/kasir';
 import Login from './pages/login';
 import Register from './pages/register';
+import GudangTambah from './pages/gudang-tambah';
+import GudangEdit from './pages/gudang-edit';
 
 function App() {
 	return (
@@ -22,6 +24,9 @@ function App() {
 
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
+				<Route path="/gudang/tambah" element={<GudangTambah />} />
+				<Route path="/gudang/edit" element={<GudangEdit />} />
+
 				<Route path="/kasir" element={<KasirPage />} />
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />

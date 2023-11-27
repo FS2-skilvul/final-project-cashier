@@ -18,7 +18,8 @@ function TableGudang({ no, nama, kode, beli, jual, stok, id }) {
 				</td>
 				<td className="p-1 border-2">
 					<button className="border-2 rounded bg-green-500 p-1">
-						<Link to={`/gudang/edit/${id}`}>Edit</Link>
+						<Link to={`/gudang/edit/`}>Edit</Link>
+						{/* harusnya gudang/edit/$id */}
 					</button>
 				</td>
 			</tbody>

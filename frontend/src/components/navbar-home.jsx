@@ -43,10 +43,12 @@ function NavbarHome() {
 							Dashboard
 						</button>
 					</Link>
-					<Link to="/gudang">
+					<Link to={'/gudang'}>
 						<button
 							className={`flex gap-4 ${
-								isActivePage('/gudang')
+								isActivePage('/gudang') ||
+								isActivePage('/gudang/tambah') ||
+								isActivePage('/gudang/edit')
 									? 'text-blue-500 fill-blue-500'
 									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
 							}`}

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import NavbarHome from '../components/navbar-home';
 import TableGudang from '../components/table-gudang';
+import { FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function GudangPage() {
 	const [search, setSearch] = useState('');
@@ -127,32 +129,36 @@ function GudangPage() {
 	return (
 		<>
 			<NavbarHome />
-			<main className="relative h-[80vh] w-[125vh] m-auto mt-6 bg-secondary border shadow-xl border-primary rounded">
+			<main className="relative h-[35em] w-[65em] m-auto mt-6 bg-secondary border shadow-xl border-primary rounded">
 				<header className="flex justify-start w-full h-[8%] bg-primary items-center">
 					<p className="ml-8 font-bold text-white text-xl">Daftar Barang</p>
 				</header>
 				<section className="flex flex-row justify-between relative m-8">
-					<button className="border-2 border-primary rounded px-4 py-2 absolute left-0 -top-5 bg-green-500">
-						Tambah Barang
-					</button>
+					<Link to={'/gudang/tambah'}>
+						<button className="border-2 border-primary rounded px-4 py-2 absolute left-0 -top-5 bg-green-500 flex items-center gap-2 font-bold text-white">
+							<FaPlus />
+							Tambah Barang
+						</button>
+					</Link>
 					<input
 						type="text"
 						className="border-2 border-primary rounded px-4 py-2 absolute right-0 -top-5"
 						value={search}
 						onChange={searchBar}
+						placeholder="Cari Barang"
 					></input>
 				</section>
 				<section className="flex justify-center ">
-					<table className="table-auto border-2 border-collapse border-slate-500 w-full mx-8">
-						<thead className="text-center">
-							<th className="p-1 border-2">No</th>
-							<th className="p-1 border-2">Nama Barang</th>
-							<th className="p-1 border-2">Kode Barang</th>
-							<th className="p-1 border-2">Harga Beli</th>
-							<th className="p-1 border-2">Harga Jual</th>
-							<th className="p-1 border-2">Stok Barang</th>
-							<th className="p-1 border-2">Hapus</th>
-							<th className="p-1 border-2">Edit</th>
+					<table className="table-auto border-2 border-collapse  w-full mx-8 border-black">
+						<thead className="text-center bg-primary text-white">
+							<th className="p-1 py-2 border-2">No</th>
+							<th className="p-1 py-2 border-2">Nama Barang</th>
+							<th className="p-1 py-2 border-2">Kode Barang</th>
+							<th className="p-1 py-2 border-2">Harga Beli</th>
+							<th className="p-1 py-2 border-2">Harga Jual</th>
+							<th className="p-1 py-2 border-2">Stok Barang</th>
+							<th className="p-1 py-2 border-2">Hapus</th>
+							<th className="p-1 py-2 border-2">Edit</th>
 						</thead>
 						{tableContent}
 					</table>
