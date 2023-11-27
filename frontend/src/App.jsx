@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import AdminDashboardPage from "./pages/admin-dashboard"
+import AdminDashboardPage from './pages/admin-dashboard';
 import LandingHome from '../src/pages/landing/home';
 import LandingFitur from '../src/pages/landing/fitur';
 import LandingAbout from '../src/pages/landing/about';
@@ -16,19 +16,18 @@ function App() {
 				<Route path="/" element={<LandingHome />} />
 				<Route path="/fitur" element={<LandingFitur />} />
 				<Route path="/about" element={<LandingAbout />} />
-          
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
 
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
 				<Route path="/kasir" element={<KasirPage />} />
 
-        <Route path="/admin-dashboard" element={<AdminDashboardPage/>} />
+				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
 			</Routes>
 		</>
 	);
-
 }
 
 export default App;
