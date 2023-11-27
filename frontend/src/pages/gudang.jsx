@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 function GudangPage() {
 	const [search, setSearch] = useState('');
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage] = useState(8);
 	const [value, setValue] = useState([
 		{
 			no: 1,
@@ -17,72 +19,236 @@ function GudangPage() {
 			id: 1,
 		},
 		{
-			no: 2,
-			nama: 'Ganja',
-			kode: '#987',
-			beli: 2,
-			jual: 2,
-			stok: 2,
-			id: 2,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 3,
-			nama: 3,
-			kode: 3,
-			beli: 3,
-			jual: 3,
-			stok: 3,
-			id: 3,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 4,
-			nama: 4,
-			kode: 4,
-			beli: 4,
-			jual: 4,
-			stok: 4,
-			id: 4,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 5,
-			nama: 5,
-			kode: 5,
-			beli: 5,
-			jual: 5,
-			stok: 5,
-			id: 5,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 6,
-			nama: 6,
-			kode: 6,
-			beli: 6,
-			jual: 6,
-			stok: 6,
-			id: 6,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 7,
-			nama: 7,
-			kode: 7,
-			beli: 7,
-			jual: 7,
-			stok: 7,
-			id: 7,
+			no: 1,
+			nama: 'Miwdk',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 		{
-			no: 8,
-			nama: 8,
-			kode: 8,
-			beli: 8,
-			jual: 8,
-			stok: 8,
-			id: 8,
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 1,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
+		},
+		{
+			no: 12,
+			nama: 'Minyak',
+			kode: '#123',
+			beli: 45.0,
+			jual: 1,
+			stok: 1,
+			id: 1,
 		},
 	]);
 
 	const searchBar = (e) => {
 		setSearch(e.target.value);
+		setCurrentPage(1);
 	};
 
 	const filteredValue = value.filter((item) => {
@@ -101,10 +267,25 @@ function GudangPage() {
 		);
 	});
 
+	const nextPage = () => {
+		setCurrentPage((prevPage) => prevPage + 1);
+	};
+
+	const prevPage = () => {
+		setCurrentPage((prevPage) => prevPage - 1);
+	};
+
+	const totalItems = filteredValue.length;
+	const indexOfLastValue = currentPage * 8;
+	const indexOfFirstValue = indexOfLastValue - 8;
+	const currentValues = filteredValue.slice(
+		indexOfFirstValue,
+		indexOfLastValue,
+	);
 	let tableContent;
 
-	if (filteredValue.length > 0) {
-		tableContent = filteredValue.map((item) => (
+	if (currentValues.length > 0) {
+		tableContent = currentValues.map((item) => (
 			<TableGudang
 				key={item.id}
 				no={item.no}
@@ -163,13 +344,34 @@ function GudangPage() {
 						{tableContent}
 					</table>
 				</section>
-				<footer className="flex justify-center bg-primary absolute bottom-0 w-full h-[8%]">
-					<section className="relative w-full flex items-center">
-						<div className="border-2 border-secondary rounded absolute left-5 p-1 bg-white px-2">
-							<button>Tombol</button>
+				<footer className="flex justify-center bg-primary absolute bottom-0 w-full h-[8%] item-center">
+					<section
+						className="relative w-full flex justify-between items-center
+					 mx-8"
+					>
+						<div>
+							<p className="flex text-center text-white ">
+								{indexOfFirstValue + 1} -{' '}
+								{Math.min(indexOfLastValue, totalItems)} data | Halaman{' '}
+								{currentPage} | Jumlah Barang : {totalItems}
+							</p>
+							<p></p>
 						</div>
-						<div className="border-2 border-secondary rounded absolute right-5 p-1 bg-white px-2">
-							<button>Tombol</button>
+						<div className="flex items-center justify-end gap-2">
+							<button
+								onClick={prevPage}
+								disabled={currentPage === 1}
+								className="px-4 py-1 text-blue-500 bg-white rounded"
+							>
+								Previous
+							</button>
+							<button
+								onClick={nextPage}
+								disabled={currentValues.length < 8}
+								className="px-4 py-1 text-blue-500 bg-white rounded"
+							>
+								Next
+							</button>
 						</div>
 					</section>
 				</footer>
