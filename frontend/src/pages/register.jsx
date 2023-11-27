@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addUser } from '../redux/reducers/user-reducers'
+import { registerUser } from '../redux/reducers/user-reducers'
 
 import logo from '../assets/Logo Putih.png'
 import ilus_kasir from '../assets/cashier-ilust.png'
@@ -31,7 +31,7 @@ function Register() {
                 email,
                 password
             }
-            dispatch(addUser(newUser))
+            dispatch(registerUser(newUser))
         }
     }
 
