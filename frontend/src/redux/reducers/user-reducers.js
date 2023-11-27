@@ -1,10 +1,13 @@
 import axios from "axios"
 
+
 const initialState = {
     users: [],
     isLoading: false,
     isEmailExist: false,
-    isSuccess: false
+    isSuccess: false,
+    isLoginSuccess: true,
+    isMovePage: false,
 }
 
 function userReducer(state = initialState, action) {
@@ -14,17 +17,39 @@ function userReducer(state = initialState, action) {
                 ...state,
                 isLoading: true
             }
-        case "SUCCESS_ADD_USER":
+        case "SUCCESS_REGISTER_USER":
             return {
                 ...state,
                 isLoading: false,
                 isSuccess: true
             }
-        case "FAILED_ADD_USER":
+        case "FAILED_REGISTER_USER":
             return {
                 ...state,
                 isLoading: false,
                 isEmailExist: true
+            }
+        case "SUCCESS_LOGIN_USER":
+            return {
+                ...state,
+                isLoading: false,
+                users: action.payload,
+                isMovePage: true,
+            }
+        case "FAILED_LOGIN_USER":
+            return {
+                ...state,
+                isLoading: false,
+                isLoginSuccess: false
+            }
+        case "RESET_STATE":
+            return {
+                ...state,
+                isLoading: false,
+                isEmailExist: false,
+                isSuccess: false,
+                isLoginSuccess: true,
+                isMovePage: false,
             }
         default: return state
     }
@@ -36,39 +61,92 @@ function startFetching() {
     }
 }
 
-function successAddUser() {
+function successRegisterUser() {
     return {
-        type: "SUCCESS_ADD_USER"
+        type: "SUCCESS_REGISTER_USER"
     }
 }
 
 function emailAlreadyRegistered() {
     return {
-        type: "FAILED_ADD_USER"
+        type: "FAILED_REGISTER_USER"
     }
 }
 
-export function getTodo() {
+function successLoginUser(getUser) {
+    return {
+        type: "SUCCESS_LOGIN_USER",
+        payload: getUser
+    }
+}
+
+function failedLoginUser() {
+    return {
+        type: "FAILED_LOGIN_USER"
+    }
+}
+
+export function resetState() {
+    return {
+        type: "RESET_STATE"
+    }
+}
+
+// export function getTodo() {
+//     return async function (dispatch) {
+//         dispatch(startFetching())
+
+//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
+
+//         dispatch(successGetTodo(data))
+//     }
+// }
+
+export function loginUser(dataUser) {
     return async function (dispatch) {
-        dispatch(startFetching())
+        try {
+            dispatch(startFetching())
+            const login = await axios.post("https://final-project-cashier-production.up.railway.app/auth/login", dataUser)
 
-        const { data } = await axios("https://final-project-cashier-production.up.railway.app")
+            if (login.data.token) {
+                localStorage.setItem('token', login.data.token)
 
-        dispatch(successGetTodo(data))
+                const headers = { 'Authorization': `Bearer ${login.data.token}` }; // auth header with bearer token
+                const {data} = await axios.get('https://final-project-cashier-production.up.railway.app/user', { headers })
+
+                // console.log(login.data.token, data.data.nama)
+                dispatch(successLoginUser(data.data));
+            } else {
+                dispatch(failedLoginUser())
+            }
+
+        } catch (error) {
+            // Tangani kesalahan jika ada
+            console.error("Error adding user:", error);
+
+            // Dapatkan status code dari error (jika ada)
+            const statusCode = error.response ? error.response.status : null;
+
+            // Dapatkan pesan kesalahan dari error (jika ada)
+            const errorMessage = error.response ? error.response.data.message : null;
+
+            // Log status code dan pesan kesalahan
+            console.log("Status Code:", statusCode);
+            console.log("Error Message:", errorMessage);
+
+            dispatch(failedLoginUser());
+        }
     }
 }
 
 
-export function addUser(newUser) {
+export function registerUser(newUser) {
     return async function (dispatch) {
         try {
             dispatch(startFetching())
             const response = await axios.post("https://final-project-cashier-production.up.railway.app/auth/regis", newUser)
 
-            const { data } = response;
-            console.log(data)
-
-            dispatch(successAddUser());
+            dispatch(successRegisterUser());
         } catch (error) {
             // Tangani kesalahan jika ada
             console.error("Error adding user:", error);
@@ -100,24 +178,24 @@ export function addUser(newUser) {
 //     }
 // }
 
-export function editTodo(id, value) {
-    return async function (dispatch) {
-        dispatch(startFetching())
-        await axios.put(`https://final-project-cashier-production.up.railway.app/${id}`, { value })
+// export function editTodo(id, value) {
+//     return async function (dispatch) {
+//         dispatch(startFetching())
+//         await axios.put(`https://final-project-cashier-production.up.railway.app/${id}`, { value })
 
-        const { data } = await axios("https://final-project-cashier-production.up.railway.app")
-        dispatch(successGetTodo(data))
-    }
-}
+//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
+//         dispatch(successGetTodo(data))
+//     }
+// }
 
-export function deleteTodo(id) {
-    return async function (dispatch) {
-        dispatch(startFetching())
-        await axios.delete(`https://final-project-cashier-production.up.railway.app/${id}`)
+// export function deleteTodo(id) {
+//     return async function (dispatch) {
+//         dispatch(startFetching())
+//         await axios.delete(`https://final-project-cashier-production.up.railway.app/${id}`)
 
-        const { data } = await axios("https://final-project-cashier-production.up.railway.app")
-        dispatch(successGetTodo(data))
-    }
-}
+//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
+//         dispatch(successGetTodo(data))
+//     }
+// }
 
 export default userReducer;
