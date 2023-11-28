@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 function GudangPage() {
 	const [search, setSearch] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(8);
 	const [value, setValue] = useState([
 		{
 			no: 1,
