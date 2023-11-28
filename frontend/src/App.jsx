@@ -16,15 +16,15 @@ function App() {
 				<Route path="/" element={<LandingHome />} />
 				<Route path="/fitur" element={<LandingFitur />} />
 				<Route path="/about" element={<LandingAbout />} />
-          
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
+
+				<Route path="/login" element={<Login />} />
+				<Route path="/register" element={<Register />} />
 
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
 				<Route path="/kasir" element={<KasirPage />} />
 
-        <Route path="/admin-dashboard" element={<AdminDashboardPage/>} />
+				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
 			</Routes>
 		</>
 	);
