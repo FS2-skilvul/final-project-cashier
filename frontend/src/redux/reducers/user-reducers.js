@@ -1,14 +1,13 @@
-import axios from "axios"
-
+import axios from 'axios';
 
 const initialState = {
-    users: [],
-    isLoading: false,
-    isEmailExist: false,
-    isSuccess: false,
-    isLoginSuccess: true,
-    isMovePage: false,
-}
+	users: [],
+	isLoading: false,
+	isEmailExist: false,
+	isSuccess: false,
+	isLoginSuccess: true,
+	isMovePage: false,
+};
 
 function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -67,34 +66,34 @@ function userReducer(state = initialState, action) {
 }
 
 function startFetching() {
-    return {
-        type: "START_FETCHING"
-    }
+	return {
+		type: 'START_FETCHING',
+	};
 }
 
 function successRegisterUser() {
-    return {
-        type: "SUCCESS_REGISTER_USER"
-    }
+	return {
+		type: 'SUCCESS_REGISTER_USER',
+	};
 }
 
 function emailAlreadyRegistered() {
-    return {
-        type: "FAILED_REGISTER_USER"
-    }
+	return {
+		type: 'FAILED_REGISTER_USER',
+	};
 }
 
 function successLoginUser(getUser) {
-    return {
-        type: "SUCCESS_LOGIN_USER",
-        payload: getUser
-    }
+	return {
+		type: 'SUCCESS_LOGIN_USER',
+		payload: getUser,
+	};
 }
 
 function failedLoginUser() {
-    return {
-        type: "FAILED_LOGIN_USER"
-    }
+	return {
+		type: 'FAILED_LOGIN_USER',
+	};
 }
 
 function successGetDataUser(data) {
@@ -111,9 +110,9 @@ function failedGetDataUser() {
 }
 
 export function resetState() {
-    return {
-        type: "RESET_STATE"
-    }
+	return {
+		type: 'RESET_STATE',
+	};
 }
 
 // export function getTodo() {
@@ -163,33 +162,35 @@ export function loginUser(dataUser) {
     }
 }
 
-
 export function registerUser(newUser) {
-    return async function (dispatch) {
-        try {
-            dispatch(startFetching())
-            const response = await axios.post("https://final-project-cashier-production.up.railway.app/auth/regis", newUser)
+	return async function (dispatch) {
+		try {
+			dispatch(startFetching());
+			const response = await axios.post(
+				'https://final-project-cashier-production.up.railway.app/auth/regis',
+				newUser,
+			);
 
-            dispatch(successRegisterUser());
-        } catch (error) {
-            // Tangani kesalahan jika ada
-            console.error("Error adding user:", error);
+			dispatch(successRegisterUser());
+		} catch (error) {
+			// Tangani kesalahan jika ada
+			console.error('Error adding user:', error);
 
-            // Dapatkan status code dari error (jika ada)
-            const statusCode = error.response ? error.response.status : null;
+			// Dapatkan status code dari error (jika ada)
+			const statusCode = error.response ? error.response.status : null;
 
-            // Dapatkan pesan kesalahan dari error (jika ada)
-            const errorMessage = error.response ? error.response.data.message : null;
+			// Dapatkan pesan kesalahan dari error (jika ada)
+			const errorMessage = error.response ? error.response.data.message : null;
 
-            // Log status code dan pesan kesalahan
-            console.log("Status Code:", statusCode);
-            console.log("Error Message:", errorMessage);
+			// Log status code dan pesan kesalahan
+			console.log('Status Code:', statusCode);
+			console.log('Error Message:', errorMessage);
 
-            if (statusCode === 400) {
-                dispatch(emailAlreadyRegistered());
-            }
-        }
-    }
+			if (statusCode === 400) {
+				dispatch(emailAlreadyRegistered());
+			}
+		}
+	};
 }
 
 export function getDataUser() {

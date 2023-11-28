@@ -1,8 +1,12 @@
 import logoBiru from '../assets/Logo Biru.png';
 import { Link, useLocation } from 'react-router-dom';
-import { IoIosArrowDown } from 'react-icons/io';
+import {
+	IoIosArrowDown,
+	IoMdPerson,
+	IoIosArrowForward,
+	IoIosLogOut,
+} from 'react-icons/io';
 import { useState } from 'react';
-import { IoIosArrowForward } from 'react-icons/io';
 
 function NavbarHome() {
 	const [toogle, setToogle] = useState(false);
@@ -16,7 +20,7 @@ function NavbarHome() {
 	return (
 		<header className="fixed flex justify-between w-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
 			<div className="flex gap-6 font-bold items-center justify-center">
-				<Link to="/dashboard">
+				<Link to="/user-dashboard">
 					<img src={logoBiru} alt="Logo Kasir Online" />
 				</Link>
 				<div className="flex mx-24 gap-6 text-isPasif">
@@ -39,10 +43,12 @@ function NavbarHome() {
 							Dashboard
 						</button>
 					</Link>
-					<Link to="/gudang">
+					<Link to={'/gudang'}>
 						<button
 							className={`flex gap-4 ${
-								isActivePage('/gudang')
+								isActivePage('/gudang') ||
+								isActivePage('/gudang/tambah') ||
+								isActivePage('/gudang/edit')
 									? 'text-blue-500 fill-blue-500'
 									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
 							}`}
@@ -104,11 +110,21 @@ function NavbarHome() {
 					</button>
 					{toogle && (
 						<div className="flex flex-col absolute top-[4rem] right-2">
-							<button className="bg-white border px-16 py-1">
-								<Link to="/profile">Profile</Link>
+							<button className="bg-white border px-12 py-1">
+								<Link to="/profile">
+									<div className="flex flex-row items-center justify-center gap-2">
+										<IoMdPerson />
+										Profile
+									</div>
+								</Link>
 							</button>
-							<button className='"bg-white border px-16 py-1'>
-								<Link to="/profile">Keluar</Link>
+							<button className='"bg-white border px-12 py-1'>
+								<Link to="/profile">
+									<div className="flex flex-row items-center justify-center gap-2">
+										<IoIosLogOut />
+										Keluar
+									</div>
+								</Link>
 							</button>
 						</div>
 					)}
