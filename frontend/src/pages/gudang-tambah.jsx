@@ -14,7 +14,7 @@ function GudangTambah() {
 		setShowModal(!showModal);
 	};
 	return (
-		<>
+		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
 			<NavbarHome />
 			<main className="bg-secondary border-2 rounded border-primary w-[40em] h-[36em] flex flex-col mx-auto mt-8">
 				<div>
@@ -104,7 +104,7 @@ function GudangTambah() {
 					</div>
 				)}
 			</section>
-		</>
+		</div>
 	);
 }
 
