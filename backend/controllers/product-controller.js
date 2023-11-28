@@ -78,7 +78,7 @@ module.exports = {
 
         try {
             // input data
-            if (data.nama && data.harga_beli && data.harga_jual && data.stok) {
+            if (data.kode_barang && data.nama && data.harga_beli && data.harga_jual && data.stok) {
                 const product = await Product.create(data)
 
                 // send response

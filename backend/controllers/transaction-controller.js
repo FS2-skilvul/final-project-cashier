@@ -115,7 +115,7 @@ module.exports = {
             }
 
             // input data
-            if (products && total_biaya) {
+            if (products.length > 0 && total_biaya) {
                 const transaction = await Transaction.create(createTransaction)
                 for (const { product_id, qty, sub_total } of products) {
                     createDetailTransaction = {
