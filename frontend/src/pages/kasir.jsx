@@ -1,10 +1,19 @@
 import NavbarHome from '../components/navbar-home';
 import TableKasir from '../components/table-kasir';
 import { useState } from 'react';
+import { BsBasketFill } from 'react-icons/bs';
+import { FaCartPlus, FaCheckCircle, FaCheckSquare } from 'react-icons/fa';
+import { ImPrinter } from 'react-icons/im';
+import { MdClose } from 'react-icons/md';
 
 function KasirPage() {
 	const [search, setSearch] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
+	const [showModal, setShowModal] = useState(false);
+
+	const toggleModal = () => {
+		setShowModal(!showModal);
+	};
 	const [value, setValue] = useState([
 		{
 			no: 1,
@@ -177,87 +186,109 @@ function KasirPage() {
 			<NavbarHome />
 			<main>
 				<section className="flex">
-					<div className="w-1/2 flex flex-col border border-black mx-12 my-8 rounded-lg bg-white ">
-						<div className="flex flex-col items-center my-4">
-							<p className="text-3xl font-bold m-4">Input Transaksi</p>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p className="">Tanggal Transaksi :</p>
-								<input
-									type="text"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Tanggal Transaksi"
-									value=""
-								/>
+					<div className="w-1/2 flex flex-col ">
+						<div className="flex flex-col border border-black mx-8 my-8 rounded-lg bg-white justify-around">
+							<div className="w-full relative px-18">
+								<p className="text-3xl font-bold m-4 text-center py-2">
+									Input Transaksi
+								</p>
+								<div className="flex flex-col gap-4">
+									<div className="flex gap-4 px-8 w-full items-center ">
+										<p className="w-[10em]">Tgl Transaksi :</p>
+										<input
+											type="text"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Tanggal Transaksi"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Kode Barang :</p>
+										<input
+											type="text"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Kode Barang"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Nama Barang :</p>
+										<input
+											type="text"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Nama Barang"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Harga :</p>
+										<input
+											type="number"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Harga"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Quantity :</p>
+										<input
+											type="number"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Quantity"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Jumlah :</p>
+										<input
+											type="number"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Jumlah"
+											value=""
+										/>
+									</div>
+								</div>
+								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+									<FaCartPlus />
+									Tambah ke Nota
+								</button>
+								<br />
+								<br />
 							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Kode Barang :</p>
-								<input
-									type="text"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Kode Barang"
-									value=""
-								/>
-							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Nama Barang :</p>
-								<input
-									type="text"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Nama Barang"
-									value=""
-								/>
-							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Harga :</p>
-								<input
-									type="number"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Harga"
-									value=""
-								/>
-							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Quantity :</p>
-								<input
-									type="number"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Quantity"
-									value=""
-								/>
-							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Jumlah :</p>
-								<input
-									type="number"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Jumlah"
-									value=""
-								/>
-							</div>
-							<br />
-							<div className="border-b-2 border-black w-full"></div>
-							<br />
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Bayar :</p>
-								<input
-									type="number"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Bayar"
-									value=""
-								/>
-							</div>
-							<div className="flex gap-4 my-4 w-full items-center justify-end">
-								<p>Kembali :</p>
-								<input
-									type="number"
-									className="w-[35em] h-8 rounded mr-12 border border-black p-2"
-									placeholder="Kembali"
-									value=""
-								/>
+							<div className="relative">
+								<div className="border-b-2 border-black w-full"></div>
+								<br />
+								<div className="flex flex-col gap-4">
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Bayar :</p>
+										<input
+											type="number"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Bayar"
+											value=""
+										/>
+									</div>
+									<div className="flex gap-4 px-8 w-full items-center justify-end">
+										<p className="w-[10em]">Kembali :</p>
+										<input
+											type="number"
+											className="w-full h-8 rounded border border-black p-2"
+											placeholder="Kembali"
+											value=""
+										/>
+									</div>
+								</div>
+
+								<br />
+								<br />
+								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+									<BsBasketFill />
+									Bayar
+								</button>
 							</div>
 						</div>
 					</div>
-					<div className="relative w-1/2 flex flex-col border border-black mx-12 my-8 rounded-lg bg-white">
+					<div className="relative w-1/2 flex flex-col border border-black mx-8 my-8 rounded-lg bg-white">
 						<div className="flex flex-col items-center m-2">
 							<img src="" alt="Logo Usaha" />
 							<p>Nama Usaha</p>
@@ -283,7 +314,7 @@ function KasirPage() {
 								</tbody>
 							</table>
 						</div>
-						<div className="absolute bottom-16 w-full px-10">
+						<div className="absolute bottom-12 w-full px-10">
 							<div className="border-b-2 border-black"></div>
 							<div className="flex justify-between">
 								<div>
@@ -297,13 +328,53 @@ function KasirPage() {
 									<p>0</p>
 								</div>
 							</div>
-							<div className="text-center">
+							<div className="text-center font-bold">
 								*** TERIMAKASIH TELAH BERBELANJA ***
 							</div>
 						</div>
+						<div className="absolute bottom-0 right-0 mx-6 my-2 flex gap-2">
+							<button className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center">
+								<ImPrinter />
+							</button>
+							<button
+								className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center"
+								onClick={toggleModal}
+							>
+								<FaCheckSquare /> Selesai
+							</button>
+						</div>
+					</div>
+					<div className="relative">
+						{showModal && (
+							<div className="fixed inset-0 flex items-center justify-center z-10 ">
+								<div className="absolute inset-0 bg-black opacity-50"></div>
+								<div className="bg-white p-6 rounded z-20 w-[40em] h-[20em] items-center flex flex-col justify-center gap-4 relative">
+									<button
+										className="absolute right-0 top-0 m-5"
+										onClick={toggleModal}
+									>
+										<MdClose className="text-2xl font-bold" />
+									</button>
+									<div className="flex justify-center">
+										<FaCheckCircle className="text-8xl text-center m-2 fill-primary" />
+									</div>
+									<h2 className="text-2xl font-bold mb-2 text-center text-primary">
+										PEMBAYARAN BERHASIL
+									</h2>
+									<div className="flex justify-center">
+										<button
+											onClick={toggleModal}
+											className="border-blue-500 hover:bg-blue-700 text-primary font-bold py-2 px-16 rounded mt-4 border-2"
+										>
+											OK
+										</button>
+									</div>
+								</div>
+							</div>
+						)}
 					</div>
 				</section>
-				<section className="border border-black mx-12 rounded-lg relative h-[36em]">
+				<section className="border border-black mx-8 rounded-lg relative h-[36em]">
 					<div>
 						<h1 className="text-left ml-10 text-2xl m-4 font-bold">
 							Laporan Transaksi
