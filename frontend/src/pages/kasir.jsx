@@ -182,13 +182,13 @@ function KasirPage() {
 	}
 
 	return (
-		<div className="relative w-full h-full bg-[#F2F4F9] pt-20 pb-12">
+		<div className="w-full h-full bg-[#F2F4F9] pt-20 pb-12">
 			<NavbarHome />
 			<main>
 				<section className="flex">
 					<div className="w-1/2 flex flex-col ">
 						<div className="flex flex-col border border-black mx-8 my-8 rounded-lg bg-white justify-around">
-							<div className="w-full relative px-18">
+							<div className="w-full px-18">
 								<p className="text-3xl font-bold m-4 text-center py-2">
 									Input Transaksi
 								</p>
@@ -248,40 +248,37 @@ function KasirPage() {
 										/>
 									</div>
 								</div>
-								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+							</div>
+							<div className="flex justify-end mx-8 my-4">
+								<button className="border-2 p-1 px-4 rounded-lg bg-primary text-white flex font-bold items-center gap-2 ">
 									<FaCartPlus />
 									Tambah ke Nota
 								</button>
-								<br />
-								<br />
 							</div>
-							<div className="relative">
-								<div className="border-b-2 border-black w-full"></div>
-								<br />
-								<div className="flex flex-col gap-4">
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Bayar :</p>
-										<input
-											type="number"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Bayar"
-											value=""
-										/>
-									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Kembali :</p>
-										<input
-											type="number"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Kembali"
-											value=""
-										/>
-									</div>
+							<hr className=" border-black mx-8"></hr>
+							<br />
+							<div className="flex flex-col gap-4">
+								<div className="flex gap-4 px-8 w-full items-center justify-end">
+									<p className="w-[10em]">Bayar :</p>
+									<input
+										type="number"
+										className="w-full h-8 rounded border border-black p-2"
+										placeholder="Bayar"
+										value=""
+									/>
 								</div>
-
-								<br />
-								<br />
-								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+								<div className="flex gap-4 px-8 w-full items-center justify-end">
+									<p className="w-[10em]">Kembali :</p>
+									<input
+										type="number"
+										className="w-full h-8 rounded border border-black p-2"
+										placeholder="Kembali"
+										value=""
+									/>
+								</div>
+							</div>
+							<div className="flex justify-end mx-8 my-4">
+								<button className="border-2 p-1 px-4 rounded-lg bg-primary text-white font-bold flex items-center gap-2">
 									<BsBasketFill />
 									Bayar
 								</button>
