@@ -18,7 +18,7 @@ function NavbarHome() {
 	}
 
 	return (
-		<header className="flex justify-between w-full h-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
+		<header className="fixed z-50 flex justify-between w-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
 			<div className="flex gap-6 font-bold items-center justify-center">
 				<Link to="/user-dashboard">
 					<img src={logoBiru} alt="Logo Kasir Online" />
@@ -27,7 +27,7 @@ function NavbarHome() {
 					<Link to="/user-dashboard">
 						<button
 							className={`flex gap-4 ${
-								isActivePage('/dashboard')
+								isActivePage('/user-dashboard')
 									? 'text-blue-500 fill-blue-500'
 									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
 							}`}
