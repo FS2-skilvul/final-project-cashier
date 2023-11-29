@@ -8,7 +8,7 @@ import ilus_kasir from '../assets/cashier-ilust.png'
 import logo_biru from '../assets/Logo Biru.png'
 
 function Register() {
-    const { users, isLoading, isEmailExist, isSuccess } = useSelector((state) => state.user)
+    const { isLoading, isEmailExist, isSuccess } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const [nama, setNama] = useState("")
     const [email, setEmail] = useState("")

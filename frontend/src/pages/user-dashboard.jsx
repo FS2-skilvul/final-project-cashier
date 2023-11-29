@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDataUser } from '../redux/reducers/user-reducers';
 
 function UserDashboard() {
-    const { users, isLoading } = useSelector((state) => state.user)
+    const { userSelf, isLoading } = useSelector((state) => state.user)
     const { transactions } = useSelector((state) => state.transaction);
     const dispatch = useDispatch()
 
@@ -13,16 +13,16 @@ function UserDashboard() {
         dispatch(getDataUser())
     }, [dispatch])
 
-    const total_barang = users?.Products?.reduce((total, product) => total + product.stok, 0);
+    const total_barang = userSelf?.Products?.reduce((total, product) => total + product.stok, 0);
     // Filter produk yang stoknya kurang dari 10
-    const filteredProducts = users?.Products?.filter((product) => product.stok <= 10) || [];
+    const filteredProducts = userSelf?.Products?.filter((product) => product.stok <= 10) || [];
 
     return (
         <div className="relative w-full h-auto bg-[#F2F4F9] pt-20 pb-12">
             <NavbarHome />
             <div className="flex flex-col w-full items-center space-y-10">
                 <div className='flex w-[1200px] justify-center mt-9 py-9 bg-primary text-white font-bold text-base md:text-3xl shadow-2xl shadow-gray-300'>
-                    {users.nama ? `Selamat Datang ${users.nama}, Ini Adalah Semua Statistik dari UMKM Kamu` : ''}
+                    {userSelf.nama ? `Selamat Datang ${userSelf.nama}, Ini Adalah Semua Statistik dari UMKM Kamu` : ''}
                 </div>
                 <div className='flex w-[1200px] justify-around'>
                     <div className='w-[300px] bg-white px-9 py-4 space-y-6 text-gray-500 rounded-lg shadow-2xl shadow-gray-300'>
@@ -34,7 +34,7 @@ function UserDashboard() {
                     </div>
                     <div className='w-[300px] bg-white px-9 py-4 space-y-6 text-gray-500 rounded-lg shadow-2xl shadow-gray-300'>
                         <div className='flex w-full items-center justify-between'>
-                            <p className='text-5xl font-semibold text-primary'>{users && users.Products ? users.Products.length : 0}</p>
+                            <p className='text-5xl font-semibold text-primary'>{userSelf && userSelf.Products ? userSelf.Products.length : 0}</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 2048 2048"><path fill="currentColor" d="m1344 2l704 352v785l-128-64V497l-512 256v258l-128 64V753L768 497v227l-128-64V354zm0 640l177-89l-463-265l-211 106zm315-157l182-91l-497-249l-149 75zm-507 654l-128 64v-1l-384 192v455l384-193v144l-448 224L0 1735v-676l576-288l576 288zm-640 710v-455l-384-192v454zm64-566l369-184l-369-185l-369 185zm576-1l448-224l448 224v527l-448 224l-448-224zm384 576v-305l-256-128v305zm384-128v-305l-256 128v305zm-320-288l241-121l-241-120l-241 120z" /></svg>
                         </div>
                         <p className='font-bold text-lg'>Jenis Barang</p>

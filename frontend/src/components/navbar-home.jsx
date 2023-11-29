@@ -6,16 +6,25 @@ import {
 	IoIosArrowForward,
 	IoIosLogOut,
 } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDataUser } from '../redux/reducers/user-reducers';
 
 function NavbarHome() {
 	const [toogle, setToogle] = useState(false);
 	const location = useLocation();
 	const isActivePage = (pathname) => location.pathname === pathname;
+	const dispatch = useDispatch()
+	const { userSelf } = useSelector((state) => state.user)
 
 	function toogleButton() {
 		setToogle(!toogle);
 	}
+
+	useEffect(() => {
+		dispatch(getDataUser())
+	}, [dispatch])
+
 
 	return (
 		<header className="fixed z-50 flex justify-between w-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
@@ -26,11 +35,10 @@ function NavbarHome() {
 				<div className="flex mx-24 gap-6 text-isPasif">
 					<Link to="/user-dashboard">
 						<button
-							className={`flex gap-4 ${
-								isActivePage('/user-dashboard')
-									? 'text-blue-500 fill-blue-500'
-									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
-							}`}
+							className={`flex gap-4 ${isActivePage('/user-dashboard')
+								? 'text-blue-500 fill-blue-500'
+								: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+								}`}
 						>
 							<svg
 								width="24"
@@ -45,13 +53,12 @@ function NavbarHome() {
 					</Link>
 					<Link to={'/gudang'}>
 						<button
-							className={`flex gap-4 ${
-								isActivePage('/gudang') ||
+							className={`flex gap-4 ${isActivePage('/gudang') ||
 								isActivePage('/gudang/tambah') ||
 								isActivePage('/gudang/edit')
-									? 'text-blue-500 fill-blue-500'
-									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
-							}`}
+								? 'text-blue-500 fill-blue-500'
+								: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+								}`}
 						>
 							<svg
 								width="28"
@@ -74,11 +81,10 @@ function NavbarHome() {
 					</Link>
 					<Link to="/kasir">
 						<button
-							className={`flex gap-4 ${
-								isActivePage('/kasir')
-									? 'text-blue-500 fill-blue-500'
-									: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
-							}`}
+							className={`flex gap-4 ${isActivePage('/kasir')
+								? 'text-blue-500 fill-blue-500'
+								: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
+								}`}
 						>
 							<svg
 								width="26"
@@ -103,7 +109,7 @@ function NavbarHome() {
 					alt=""
 					className="border rounded-full w-10 border-primary"
 				/>
-				<p>Ilham Rahmaddani</p>
+				<p>{userSelf.nama}</p>
 				<div className="relative">
 					<button onClick={toogleButton}>
 						{toogle && true ? <IoIosArrowForward /> : <IoIosArrowDown />}
