@@ -315,7 +315,7 @@ function GudangPage() {
 
 	useEffect(() => {
 		dispatch(getDataProduct())
-	}, [])
+	}, [dispatch])
 
 
 	// Searching data
