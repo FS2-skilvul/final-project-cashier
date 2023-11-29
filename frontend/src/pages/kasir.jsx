@@ -1,10 +1,12 @@
 import NavbarHome from '../components/navbar-home';
 import TableKasir from '../components/table-kasir';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsBasketFill } from 'react-icons/bs';
 import { FaCartPlus, FaCheckCircle, FaCheckSquare } from 'react-icons/fa';
 import { ImPrinter } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { getDataTransaction } from '../redux/reducers/transaction-reducers';
 
 function KasirPage() {
 	const [search, setSearch] = useState('');
@@ -116,25 +118,25 @@ function KasirPage() {
 		},
 	]);
 
+	const { transactions } = useSelector((state) => state.transaction);
+	const dispatch = useDispatch()
+	// const [filteredValue, setFilteredValue] = useState([]);
+
+	useEffect(() => {
+		dispatch(getDataTransaction())
+	}, [dispatch])
+
 	const searchBar = (e) => {
 		setSearch(e.target.value);
 		setCurrentPage(1);
 	};
 
-	const filteredValue = value.filter((item) => {
+	const filteredValue = transactions.filter((item) => {
 		if (!search || search === '') {
 			return true;
 		}
 		return (
-			item.no_trans
-				.toString()
-				.toLowerCase()
-				.includes(search.toString().toLowerCase()) ||
-			item.tanggal
-				.toString()
-				.toLowerCase()
-				.includes(search.toString().toLowerCase()) ||
-			item.nama
+			item.id
 				.toString()
 				.toLowerCase()
 				.includes(search.toString().toLowerCase())
@@ -157,37 +159,40 @@ function KasirPage() {
 		indexOfLastValue,
 	);
 	let tableContent;
+	// console.log(transactions)
 
 	if (currentValues.length > 0) {
-		tableContent = currentValues.map((item) => (
+		tableContent = currentValues.map((item, index) => (
 			<TableKasir
-				key={item.no}
-				no={item.no}
-				nama={item.nama}
-				no_trans={item.no_trans}
-				quantity={item.quantity}
-				harga={item.harga}
-				total={item.total}
-				tanggal={item.tanggal}
+				key={item.id}
+				no={(index + 1) + indexOfLastValue - 8}
+				nama={item.products.map((n) => (n.nama))}
+				no_trans={item.id}
+				quantity={item.products.map((n) => (n.Detail_Transaction.qty))}
+				harga={item.products.map((n) => (n.Detail_Transaction.sub_total))}
+				total={item.total_biaya}
+				tanggal={item.createdAt}
 			/>
 		));
 	} else {
 		tableContent = (
-			<tr>
-				<td colSpan="8" className="text-center p-4">
-					Data tidak ditemukan
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td colSpan="8" className="text-center p-4 border-b-2 border-black">
+						Data tidak ditemukan
+					</td>
+				</tr>
+			</tbody>
 		);
 	}
 
 	return (
-		<div className="relative w-full h-full bg-[#F2F4F9] pt-20 pb-12">
+		<div className="relative flex flex-col items-center w-full h-auto bg-[#F2F4F9] pt-32 pb-12">
 			<NavbarHome />
-			<main>
-				<section className="flex">
-					<div className="w-1/2 flex flex-col ">
-						<div className="flex flex-col border border-black mx-8 my-8 rounded-lg bg-white justify-around">
+			<main className='w-full max-w-[1200px] px-3 sm:px-8'>
+				<section className="grid lg:grid-cols-2 gap-12">
+					<div className="w-full flex flex-col ">
+						<div className="flex flex-col border border-black rounded-lg bg-white justify-around">
 							<div className="w-full relative px-18">
 								<p className="text-3xl font-bold m-4 text-center py-2">
 									Input Transaksi
@@ -288,7 +293,7 @@ function KasirPage() {
 							</div>
 						</div>
 					</div>
-					<div className="relative w-1/2 flex flex-col border border-black mx-8 my-8 rounded-lg bg-white">
+					<div className="w-full flex flex-col border border-black rounded-lg bg-white">
 						<div className="flex flex-col items-center m-2">
 							<img src="" alt="Logo Usaha" />
 							<p>Nama Usaha</p>
@@ -298,41 +303,48 @@ function KasirPage() {
 							<p>Tanggal</p>
 							<p>Waktu</p>
 						</div>
-						<div className="px-8 py-2">
-							<table className="w-full border- table-fixed table">
-								<thead className="border-t-2 border-b-2 border-black">
-									<th className="py-1 w-3/6">Nama Barang</th>
-									<th className="py-1 w-1/6">Qty</th>
-									<th className="py-1 w-1/6">Harga</th>
-									<th className="py-1 w-1/6">Subtotal</th>
-								</thead>
-								<tbody className="text-center ">
-									<td className="text-left">halo</td>
-									<td>halo</td>
-									<td>halo</td>
-									<td className="text-right">Rp. 5</td>
-								</tbody>
-							</table>
-						</div>
-						<div className="absolute bottom-12 w-full px-10">
-							<div className="border-b-2 border-black"></div>
-							<div className="flex justify-between">
-								<div>
-									<p>Total</p>
-									<p>Bayar</p>
-									<p>Kembalian</p>
+						<div className='flex flex-col h-full justify-between space-y-6'>
+							<div className="px-8 py-2">
+								<table className="w-full border- table-fixed table">
+									<thead className="border-t-2 border-b-2 border-black">
+										<tr>
+											<th className="py-1 w-3/6">Nama Barang</th>
+											<th className="py-1 w-1/6">Qty</th>
+											<th className="py-1 w-1/6">Harga</th>
+											<th className="py-1 w-1/6">Subtotal</th>
+										</tr>
+									</thead>
+									<tbody className="text-center ">
+										<tr>
+											<td className="text-left">halo</td>
+											<td>halo</td>
+											<td>halo</td>
+											<td className="text-right">Rp. 5</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							{/* <div className="absolute bottom-12 w-full px-10"> */}
+							<div className="w-full px-8">
+								<div className="border-b-2 border-black"></div>
+								<div className="flex justify-between">
+									<div>
+										<p>Total</p>
+										<p>Bayar</p>
+										<p>Kembalian</p>
+									</div>
+									<div className="text-right">
+										<p>0</p>
+										<p>0</p>
+										<p>0</p>
+									</div>
 								</div>
-								<div className="text-right">
-									<p>0</p>
-									<p>0</p>
-									<p>0</p>
+								<div className="text-center font-bold">
+									*** TERIMAKASIH TELAH BERBELANJA ***
 								</div>
 							</div>
-							<div className="text-center font-bold">
-								*** TERIMAKASIH TELAH BERBELANJA ***
-							</div>
 						</div>
-						<div className="absolute bottom-0 right-0 mx-6 my-2 flex gap-2">
+						<div className="justify-end mx-6 my-2 flex gap-2">
 							<button className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center">
 								<ImPrinter />
 							</button>
@@ -374,51 +386,62 @@ function KasirPage() {
 						)}
 					</div>
 				</section>
-				<section className="border border-black mx-8 rounded-lg relative h-[36em]">
-					<div>
-						<h1 className="text-left ml-10 text-2xl m-4 font-bold">
-							Laporan Transaksi
-						</h1>
-						<input
-							type="text"
-							className="border-2 border-black rounded px-8 py-1 absolute right-8
-							 top-4"
-							value={search}
-							onChange={searchBar}
-							placeholder="Cari Transaksi"
-						></input>
+				<section className="w-full ">
+					<div className='rounded-t-lg px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-auto lg:overflow-hidden'>
+						<div className='grid grid-cols-1 sm:grid-cols-2 justify-center sm:justify-between items-center'>
+							<h1 className="text-center sm:text-left text-2xl my-4 font-bold">
+								Laporan Transaksi
+							</h1>
+							<div className='flex justify-start sm:justify-end mb-4 sm:mb-0'>
+								<input
+									type="text"
+									className=" border-2 border-black rounded px-8  sm:w-fit py-1 h-fit"
+									value={search}
+									onChange={searchBar}
+									placeholder="Cari Nomor Transaksi"
+								></input>
+							</div>
+
+						</div>
+						<div className='flex flex-col h-full justify-between space-y-9 '>
+							<div className='overflow-x-auto'>
+								<div className="w-[800px] md:w-full  flex justify-center">
+									<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-black">
+										<thead className="text-center bg-primary text-white ">
+											<tr>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													No
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													No Transaksi
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													Nama Barang
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													Quantity
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													Sub Total
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													Total
+												</th>
+												<th className="px-2 py-2 border-t-2 border-b-2 border-black">
+													Tanggal
+												</th>
+											</tr>
+										</thead>
+										{tableContent}
+									</table>
+								</div>
+							</div>
+
+						</div>
 					</div>
-					<section className="flex justify-center">
-						<table className="table-auto border-collapse w-full mx-8 border-r-2 border-l-2 border-black">
-							<thead className="text-center bg-primary text-white ">
-								<th className="p-2 py-2 border-t-2 border-b-2 border-black w-1/12">
-									No
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-2/12">
-									No Transaksi
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-5/12">
-									Nama Barang
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-1/12">
-									Quantity
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-1/12">
-									Harga
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-1/12">
-									Total
-								</th>
-								<th className="p-1 py-2 border-t-2 border-b-2 border-black w-1/12">
-									Tanggal
-								</th>
-							</thead>
-							{tableContent}
-						</table>
-					</section>
-					<footer className="flex justify-center bg-primary absolute bottom-0 w-full h-[8%] item-center">
-						<section className="relative w-full flex justify-between items-center mx-8">
-							<div>
+					<div className="flex bg-primary w-full h-auto items-center py-2 px-8 rounded-b-lg border-b border-x border-black ">
+						<div className="grid sm:grid-cols-2 gap-2 w-full justify-center sm:justify-between items-center">
+							<div className='w-full'>
 								<p className="flex text-center text-white ">
 									{indexOfFirstValue + 1} -{' '}
 									{Math.min(indexOfLastValue, totalItems)} data | Halaman{' '}
@@ -426,7 +449,7 @@ function KasirPage() {
 								</p>
 								<p></p>
 							</div>
-							<div className="flex items-center justify-end gap-2">
+							<div className="flex w-full items-center justify-center sm:justify-end gap-2">
 								<button
 									onClick={prevPage}
 									disabled={currentPage === 1}
@@ -442,8 +465,8 @@ function KasirPage() {
 									Next
 								</button>
 							</div>
-						</section>
-					</footer>
+						</div>
+					</div>
 				</section>
 			</main>
 		</div>

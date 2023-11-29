@@ -22,7 +22,7 @@ function UserDashboard() {
 		users?.Products?.filter((product) => product.stok <= 10) || [];
 
 	return (
-		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
+		<div className="relative w-full h-auto bg-[#F2F4F9] pt-20 pb-12">
 			<NavbarHome />
 			<div className="flex flex-col w-full items-center space-y-10">
 				<div className="flex w-[1200px] justify-center mt-9 py-9 bg-primary text-white font-bold text-base md:text-3xl shadow-2xl shadow-gray-300">
