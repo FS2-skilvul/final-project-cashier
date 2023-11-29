@@ -309,13 +309,12 @@ function GudangPage() {
 	// }
 
 	const { products } = useSelector((state) => state.product);
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	// const [filteredValue, setFilteredValue] = useState([]);
 
 	useEffect(() => {
-		dispatch(getDataProduct())
-	}, [dispatch])
-
+		dispatch(getDataProduct());
+	}, [dispatch]);
 
 	// Searching data
 	const searchBar = (e) => {
@@ -332,8 +331,7 @@ function GudangPage() {
 		const itemKodeLower = item.kode_barang.toLowerCase();
 
 		return (
-			itemNameLower.includes(searchLower) ||
-			itemKodeLower.includes(searchLower)
+			itemNameLower.includes(searchLower) || itemKodeLower.includes(searchLower)
 		);
 	});
 
