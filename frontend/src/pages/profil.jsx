@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import NavbarHome from '../components/navbar-home';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaAddressCard } from 'react-icons/fa';
+import { FaAddressCard, FaStore } from 'react-icons/fa';
 import { MdPhotoCamera } from 'react-icons/md';
 import ImgKasir from '../assets/Close up on education and economy objects.png';
 

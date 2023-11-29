@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import AdminDashboardPage from './pages/admin-dashboard';
+import AdminDashboardPage from './pages/admin/admin-dashboard';
 import LandingHome from '../src/pages/landing/home';
 import LandingFitur from '../src/pages/landing/fitur';
 import LandingAbout from '../src/pages/landing/about';
@@ -11,6 +11,7 @@ import Register from './pages/register';
 import GudangTambah from './pages/gudang-tambah';
 import GudangEdit from './pages/gudang-edit';
 import ProfilePage from './pages/profil';
+import AdminGudang from './pages/admin/admin-gudang';
 
 function App() {
 	return (
@@ -32,6 +33,15 @@ function App() {
 				<Route path="/kasir" element={<KasirPage />} />
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
+				<Route
+					path="/admin-dashboard/cashflow/:id"
+					element={<AdminDashboardPage />}
+				/>
+				<Route path="/admin-dashboard/gudang/:id" element={<AdminGudang />} />
+				<Route
+					path="/admin-dashboard/transaksi/:id"
+					element={<AdminDashboardPage />}
+				/>
 			</Routes>
 		</>
 	);
