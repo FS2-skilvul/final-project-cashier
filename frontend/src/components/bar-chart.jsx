@@ -49,7 +49,6 @@ function BarChart() {
                 // Jika ingin menghitung pengeluaran, tambahkan logika di sini
                 transaction.products.forEach((product) => {
                     monthlyData[monthIndex].pengeluaran += product.harga_beli * product.Detail_Transaction.qty
-                    console.log(monthlyData[monthIndex])
                 });
             });
 

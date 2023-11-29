@@ -18,7 +18,11 @@ function NavbarHome() {
 	}
 
 	return (
+<<<<<<< HEAD
 		<header className="fixed flex justify-between w-full p-4 px-16 bg-white shadow top-0 items-center text-xl z-50">
+=======
+		<header className="fixed z-50 flex justify-between w-full p-4 px-16 bg-white shadow top-0 items-center text-xl">
+>>>>>>> c6d6fa01d292748b5beaced60dd819335480c10e
 			<div className="flex gap-6 font-bold items-center justify-center">
 				<Link to="/user-dashboard">
 					<img src={logoBiru} alt="Logo Kasir Online" />
