@@ -16,10 +16,10 @@ function TableGudang({ no, nama, kode, beli, jual, stok, id }) {
 				<td className="p-1 border-2">{jual}</td>
 				<td className="p-1 border-2">{stok}</td>
 				<td className="p-1 border-2 space-x-2">
-					<button className="text-white font-bold border-2 rounded bg-green-500 hover:bg-green-600 p-1">
+					<button className="text-white font-bold border-2 rounded bg-green-500 hover:bg-green-600 py-1 px-4">
 						<Link to={`/gudang/edit/${id}`}>Edit</Link>
 					</button>
-					<button onClick={(e) => dispatch(deleteDataProduct(id))} className="text-white font-bold border-2 rounded bg-red-500 hover:bg-red-600 p-1">
+					<button onClick={(e) => dispatch(deleteDataProduct(id))} className="text-white font-bold border-2 rounded bg-red-500 hover:bg-red-600 py-1 px-4">
 						Hapus
 					</button>
 				</td>

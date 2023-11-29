@@ -390,7 +390,7 @@ function GudangPage() {
 				</header>
 				<section className="flex flex-row justify-between relative m-8">
 					<Link to={'/gudang/tambah'}>
-						<button className="border-2 border-primary rounded px-4 py-2 absolute left-0 -top-5 bg-green-500 flex items-center gap-2 font-bold text-white">
+						<button className="border-2 border-primary rounded px-4 py-2 absolute left-0 -top-5 bg-green-500 hover:bg-green-600 flex items-center gap-2 font-bold text-white">
 							<FaPlus />
 							Tambah Barang
 						</button>

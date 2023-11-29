@@ -92,6 +92,41 @@ export function getDataProduct() {
     }
 }
 
+export function addDataProduct(newData) {
+    return async function (dispatch) {
+        try {
+            dispatch(startFetching())
+            const token = localStorage.getItem('token')
+            if (token) {
+                const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
+                await axios.post('https://final-project-cashier-production.up.railway.app/product', newData, { headers })
+
+                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/product', { headers })
+
+                dispatch(successGetDataProduct(data.data));
+            } else {
+                dispatch(failedGetDataProduct())
+            }
+
+        } catch (error) {
+            // Tangani kesalahan jika ada
+            console.error("Error adding user:", error);
+
+            // Dapatkan status code dari error (jika ada)
+            const statusCode = error.response ? error.response.status : null;
+
+            // Dapatkan pesan kesalahan dari error (jika ada)
+            const errorMessage = error.response ? error.response.data.message : null;
+
+            // Log status code dan pesan kesalahan
+            console.log("Status Code:", statusCode);
+            console.log("Error Message:", errorMessage);
+
+            dispatch(failedGetDataProduct());
+        }
+    }
+}
+
 export function deleteDataProduct(id) {
     return async function (dispatch) {
         try {
