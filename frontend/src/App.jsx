@@ -25,7 +25,7 @@ function App() {
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
 				<Route path="/gudang/tambah" element={<GudangTambah />} />
-				<Route path="/gudang/edit" element={<GudangEdit />} />
+				<Route path="/gudang/edit/:id" element={<GudangEdit />} />
 
 				<Route path="/kasir" element={<KasirPage />} />
 

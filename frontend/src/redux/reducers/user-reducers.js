@@ -135,7 +135,7 @@ export function loginUser(dataUser) {
                 localStorage.setItem('token', login.data.token)
 
                 const headers = { 'Authorization': `Bearer ${login.data.token}` }; // auth header with bearer token
-                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user', { headers })
+                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', { headers })
 
                 // console.log(login.data.token, data.data.nama)
                 dispatch(successLoginUser(data.data));
@@ -200,7 +200,7 @@ export function getDataUser() {
             const token = localStorage.getItem('token')
             if (token) {
                 const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
-                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user', { headers })
+                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', { headers })
 
                 // console.log(login.data.token, data.data.nama)
                 dispatch(successGetDataUser(data.data));
