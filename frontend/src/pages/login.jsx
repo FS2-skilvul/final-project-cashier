@@ -8,7 +8,7 @@ import ilus_kasir from '../assets/cashier-ilust.png'
 import logo_biru from '../assets/Logo Biru.png'
 
 function Login() {
-    const { users, isLoading, isLoginSuccess, isMovePage } = useSelector((state) => state.user)
+    const { userSelf, isLoading, isLoginSuccess, isMovePage } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
@@ -24,13 +24,12 @@ function Login() {
         dispatch(loginUser(dataUser))
     }
 
-    // console.log(users)
+    // console.log(userSelf)
     useEffect(() => {
         if (isMovePage) {
-            console.log(users)
-            if(users.role == "user"){
+            if(userSelf.role == "user"){
                 navigate('/user-dashboard');
-            }else if(users.role == "admin"){
+            }else if(userSelf.role == "admin"){
                 navigate('/admin-dashboard');
             }
             dispatch(resetState())

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-	users: [],
+	userSelf: [],
 	isLoading: false,
 	isEmailExist: false,
 	isSuccess: false,
@@ -32,7 +32,7 @@ function userReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                users: action.payload,
+                userSelf: action.payload,
                 isMovePage: true,
             }
         case "FAILED_LOGIN_USER":
@@ -45,7 +45,7 @@ function userReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false,
-                users: action.payload,
+                userSelf: action.payload,
             }
         case "FAILED_GET_DATA_USER":
             return {
