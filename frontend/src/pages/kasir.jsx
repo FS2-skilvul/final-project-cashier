@@ -19,7 +19,7 @@ function KasirPage() {
 
 	const { transactions } = useSelector((state) => state.transaction);
 	const { products } = useSelector((state) => state.product);
-	const { users } = useSelector((state) => state.user);
+	const { userSelf } = useSelector((state) => state.user);
 	const dispatch = useDispatch()
 	// Mendapatkan tanggal hari ini
 	const today = new Date();
@@ -376,8 +376,8 @@ function KasirPage() {
 					<div className="w-full flex flex-col border border-black rounded-lg bg-white">
 						<div className="flex flex-col items-center m-2">
 							<img src={logo_hitam} alt="Logo Usaha" className='w-12' />
-							<p>UMKM {users?.nama?.toString().toUpperCase()}</p>
-							<p>{users?.alamat?.toString()}</p>
+							<p>UMKM {userSelf?.nama?.toString().toUpperCase()}</p>
+							<p>{userSelf?.alamat?.toString()}</p>
 						</div>
 						<div className="flex justify-end mx-9">
 							<p>{formattedDate}</p>

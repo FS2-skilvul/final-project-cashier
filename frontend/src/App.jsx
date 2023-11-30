@@ -35,15 +35,9 @@ function App() {
 				<Route path="/kasir" element={<KasirPage />} />
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-				<Route
-					path="/admin-dashboard/cashflow"
-					element={<AdminCashflowPage />}
-				/>
-				<Route path="/admin-dashboard/gudang" element={<AdminGudangPage />} />
-				<Route
-					path="/admin-dashboard/transaksi"
-					element={<AdminTransaksiPage />}
-				/>
+				<Route path="/admin-dashboard/cashflow/:id" element={<AdminCashflowPage />}/>
+				<Route path="/admin-dashboard/gudang/:id" element={<AdminGudangPage />} />
+				<Route path="/admin-dashboard/transaksi/:id" element={<AdminTransaksiPage />}/>
 			</Routes>
 		</>
 	);
