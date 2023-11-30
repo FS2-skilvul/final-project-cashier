@@ -288,8 +288,6 @@ function KasirPage() {
 									<FaCartPlus />
 									Tambah ke Nota
 								</button>
-								<br />
-								<br />
 							</div>
 							{/* Modal Pilih Barang */}
 							<div>
