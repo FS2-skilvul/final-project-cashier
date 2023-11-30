@@ -3,6 +3,7 @@ import axios from "axios"
 
 const initialState = {
     transactions: [],
+    allTransaction: [],
     isLoading: false,
 }
 
@@ -23,6 +24,12 @@ function transactionReducer(state = initialState, action) {
             return {
                 ...state,
                 isLoading: false
+            }
+        case "SUCCESS_GET_ALL_DATA_TRANSACTION":
+            return {
+                ...state,
+                isLoading: false,
+                allTransaction: action.payload,
             }
         case "RESET_STATE":
             return {
@@ -48,6 +55,13 @@ function successGetDataTransaction(data) {
 function failedGetDataTransaction() {
     return {
         type: "FAILED_GET_DATA_TRANSACTION",
+    }
+}
+
+function successGetAllDataTransaction(data) {
+    return {
+        type: "SUCCESS_GET_ALL_DATA_TRANSACTION",
+        payload: data
     }
 }
 
@@ -107,7 +121,7 @@ export function getAllDataTransaction(id) {
                 });
 
                 const sortedData = selectedUser.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-                dispatch(successGetDataTransaction(sortedData));
+                dispatch(successGetAllDataTransaction(sortedData));
             } else {
                 dispatch(failedGetDataTransaction())
             }

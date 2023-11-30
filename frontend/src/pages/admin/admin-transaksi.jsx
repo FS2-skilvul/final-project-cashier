@@ -115,7 +115,7 @@ function AdminTransaksi() {
 			tanggal: 'wefwefwe',
 		},
 	]);
-	const { transactions } = useSelector((state) => state.transaction);
+	const { allTransaction } = useSelector((state) => state.transaction);
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -151,24 +151,16 @@ function AdminTransaksi() {
 		setCurrentPage(1);
 	};
 
-	const filteredValue = transactions.filter((item) => {
+	const filteredValue = allTransaction.filter((item) => {
 		if (!search || search === '') {
 			return true;
 		}
 		return (
-			item.no_trans
-				.toString()
-				.toLowerCase()
-				.includes(search.toString().toLowerCase()) ||
-			item.tanggal
-				.toString()
-				.toLowerCase()
-				.includes(search.toString().toLowerCase()) ||
-			item.nama
+			item.id
 				.toString()
 				.toLowerCase()
 				.includes(search.toString().toLowerCase())
-		);
+		)
 	});
 
 	const nextPage = () => {
@@ -192,30 +184,24 @@ function AdminTransaksi() {
 		tableContent = currentValues.map((item, index) => (
 			<TableKasirAdmin
 				key={item.id}
-				no={index}
-				nama={item.nama}
-				no_trans={item.no_trans}
-				quantity={item.quantity}
-				harga={item.harga}
-				total={item.total}
-				tanggal={item.tanggal}
-				// key={item.id}
-				// no={(index + 1) + indexOfLastValue - 8}
-				// nama={item.products.map((n) => (n.nama))}
-				// no_trans={item.id}
-				// quantity={item.products.map((n) => (n.Detail_Transaction.qty))}
-				// harga={item.products.map((n) => (n.Detail_Transaction.sub_total))}
-				// total={item.total_biaya}
-				// tanggal={item.createdAt}
+				no={(index + 1) + indexOfLastValue - 8}
+				nama={item.products.map((n) => (n.nama))}
+				no_trans={item.id}
+				quantity={item.products.map((n) => (n.Detail_Transaction.qty))}
+				harga={item.products.map((n) => (n.Detail_Transaction.sub_total))}
+				total={item.total_biaya}
+				tanggal={item.createdAt}
 			/>
 		));
 	} else {
 		tableContent = (
-			<tr>
-				<td colSpan="8" className="text-center p-4">
-					Data tidak ditemukan
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td colSpan="8" className="text-center p-4">
+						Data tidak ditemukan
+					</td>
+				</tr>
+			</tbody>
 		);
 	}
 	return (
