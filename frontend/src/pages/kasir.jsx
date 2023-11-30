@@ -7,7 +7,7 @@ import { FaCartPlus, FaCheckCircle, FaCheckSquare } from 'react-icons/fa';
 import { ImPrinter } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDataTransaction } from '../redux/reducers/transaction-reducers';
+import { createDataTransaction, getDataTransaction } from '../redux/reducers/transaction-reducers';
 import { getDataProduct } from '../redux/reducers/product-reducers';
 import { getDataUser } from '../redux/reducers/user-reducers';
 
@@ -16,16 +16,6 @@ function KasirPage() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showModal, setShowModal] = useState(false);
 	const [showModalPilihBarang, setShowModalPilihBarang] = useState(false);
-
-	const toggleModal = (event) => {
-		event.preventDefault()
-		setShowModal(!showModal);
-	};
-
-	const toggleModalPilihBarang = (event) => {
-		event.preventDefault()
-		setShowModalPilihBarang(!showModalPilihBarang);
-	};
 
 	const { transactions } = useSelector((state) => state.transaction);
 	const { products } = useSelector((state) => state.product);
@@ -48,6 +38,14 @@ function KasirPage() {
 	const [kembalian, setKembalian] = useState('')
 	const [sudahBayar, setSudahBayar] = useState(false)
 
+	const toggleModal = () => {
+		setShowModal(!showModal);
+	};
+
+	const toggleModalPilihBarang = (event) => {
+		event.preventDefault()
+		setShowModalPilihBarang(!showModalPilihBarang);
+	};
 
 	useEffect(() => {
 		dispatch(getDataTransaction())
@@ -104,6 +102,32 @@ function KasirPage() {
 			}
 		}
 	};
+
+	// ---Simopan data di Server
+	const kirimData = () => {
+		const final_cart = cart?.map((item) => ({
+			product_id: item.id,
+			qty: item.qty, // Use item.qty instead of just qty
+			sub_total: item.sub_total, // Use item.sub_total instead of just sub_total
+		}));
+		const newTransaction = {
+			products: final_cart,
+			total_biaya: totalBiaya
+		}
+		dispatch(createDataTransaction(newTransaction))
+		//reset state page
+		setSelectedProduct(null);
+		setSearchBarang('');
+		setFilteredProducts([]);
+		setQty('');
+		setCart([])
+		setTotalBiaya(0)
+		setBayar('')
+		setKembalian('')
+		setSudahBayar(false)
+
+		toggleModal()
+	}
 
 	// ---Search transactions---
 	const searchBar = (e) => {
@@ -295,7 +319,7 @@ function KasirPage() {
 													:
 													<ul className='w-full space-y-2'>
 														{filteredProducts.map((product) => (
-															<li className='w-full bg-gray-100 py-1 px-2' key={product.id}
+															<li className='w-full bg-gray-100 py-1 px-2 cursor-pointer' key={product.id}
 																onClick={() => {
 																	setShowModalPilihBarang(false)
 																	setSelectedProduct(product)
@@ -341,7 +365,7 @@ function KasirPage() {
 
 								<br />
 								<br />
-								<button onClick={() => {setKembalian(bayar - totalBiaya), setSudahBayar(true)}} disabled={bayar < totalBiaya || cart.length == 0 || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+								<button onClick={() => { setKembalian(bayar - totalBiaya), setSudahBayar(true) }} disabled={bayar < totalBiaya || cart.length == 0 || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
 									<BsBasketFill />
 									Bayar
 								</button>
@@ -380,7 +404,6 @@ function KasirPage() {
 														:
 														''
 													}
-													{console.log(kembalian)}
 													<p>{item.nama}</p>
 												</td>
 												<td>{item.qty}</td>
@@ -412,12 +435,13 @@ function KasirPage() {
 							</div>
 						</div>
 						<div className="justify-end mx-6 my-2 flex gap-2">
-							<button className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center">
+							{/* <button className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center">
 								<ImPrinter />
-							</button>
+							</button> */}
 							<button
+								disabled={bayar < totalBiaya || cart.length == 0 || !sudahBayar ? 'disabled' : ''}
 								className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center"
-								onClick={toggleModal}
+								onClick={kirimData}
 							>
 								<FaCheckSquare /> Selesai
 							</button>
