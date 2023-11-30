@@ -9,7 +9,6 @@ import { getDataProduct } from '../redux/reducers/product-reducers';
 function GudangPage() {
 	const [search, setSearch] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(8);
 	const [value, setValue] = useState([
 		{
 			no: 1,
@@ -382,9 +381,9 @@ function GudangPage() {
 	}
 
 	return (
-		<div className='pt-20'>
+		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
 			<NavbarHome />
-			<main className="relative h-[35em] w-[65em] m-auto mt-6 bg-secondary border shadow-xl border-primary rounded">
+			<main className="relative h-[36em] w-[65em] m-auto mt-8 bg-secondary border shadow-xl border-primary rounded">
 				<header className="flex justify-start w-full h-[8%] bg-primary items-center">
 					<p className="ml-8 font-bold text-white text-xl">Daftar Barang</p>
 				</header>
@@ -422,9 +421,7 @@ function GudangPage() {
 					</table>
 				</section>
 				<footer className="flex justify-center bg-primary absolute bottom-0 w-full h-[8%] item-center">
-					<section
-						className="relative w-full flex justify-between items-center mx-8"
-					>
+					<section className="relative w-full flex justify-between items-center mx-8">
 						<div>
 							<p className="flex text-center text-white ">
 								{indexOfFirstValue + 1} -{' '}

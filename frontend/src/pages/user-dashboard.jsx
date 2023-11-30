@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import NavbarHome from '../components/navbar-home';
-import BarChart from '../components/bar-chart'
+import BarChart from '../components/bar-chart';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataUser } from '../redux/reducers/user-reducers';
 
@@ -9,9 +9,9 @@ function UserDashboard() {
     const { transactions } = useSelector((state) => state.transaction);
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getDataUser())
-    }, [dispatch])
+	useEffect(() => {
+		dispatch(getDataUser());
+	}, [dispatch]);
 
     const total_barang = userSelf?.Products?.reduce((total, product) => total + product.stok, 0);
     // Filter produk yang stoknya kurang dari 10
