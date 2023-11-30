@@ -284,10 +284,12 @@ function KasirPage() {
 										</div>
 									</div>
 								</form>
-								<button onClick={handleSubmitAddCart} disabled={qty == '' || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
-									<FaCartPlus />
-									Tambah ke Nota
-								</button>
+								<div className='flex w-full justify-end items-end px-8 py-2'>
+									<button onClick={handleSubmitAddCart} disabled={qty == '' || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg bg-primary text-white font-bold flex items-center space-x-2">
+										<FaCartPlus />
+										<p>Tambah ke Nota</p>
+									</button>
+								</div>
 							</div>
 							{/* Modal Pilih Barang */}
 							<div>
