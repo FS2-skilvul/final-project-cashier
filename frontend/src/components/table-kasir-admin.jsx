@@ -1,28 +1,31 @@
 import React from 'react';
 
-function TableKasirAdmin({
-	no,
-	nama,
-	no_trans,
-	quantity,
-	harga,
-	total,
-	tanggal,
-}) {
+function TableKasirAdmin({ no, nama, no_trans, quantity, harga, total, tanggal, }) {
+	// const formattedDate = new Date(tanggal).toLocaleDateString('id-ID');
 	return (
 		<>
 			<tbody className="text-center">
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">{no}</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">
+				<td className="p-1 py-3 border-2">{no}</td>
+				<td className="p-1 py-3 border-2">
 					{no_trans}
 				</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">{nama}</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">
-					{quantity}
+				{/* <td className="p-1 py-3 border-2">
+					{nama.map((item, index) => (
+						<div key={index}>{item}</div>
+					))}
 				</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">{harga}</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">{total}</td>
-				<td className="p-1 py-3 border-t-2 border-b-2 border-black">
+				<td className="p-1 py-3 border-2">
+					{quantity.map((item, index) => (
+						<div key={index}>{item}</div>
+					))}
+				</td>
+				<td className="p-1 py-3 border-2">
+					{harga.map((item, index) => (
+						<div key={index}>{item}</div>
+					))}
+				</td> */}
+				<td className="p-1 py-3 border-2">{total}</td>
+				<td className="p-1 py-3 border-2">
 					{tanggal}
 				</td>
 			</tbody>

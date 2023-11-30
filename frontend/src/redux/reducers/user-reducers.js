@@ -3,6 +3,7 @@ import axios from 'axios';
 const initialState = {
     userSelf: [],
     users: [],
+    productUsers: [],
     isLoading: false,
     isEmailExist: false,
     isSuccess: false,
@@ -58,6 +59,12 @@ function userReducer(state = initialState, action) {
                 ...state,
                 isLoading: false,
                 users: action.payload,
+            }
+        case "SUCCESS_GET_PRODUCT_DATA_USER":
+            return {
+                ...state,
+                isLoading: false,
+                productUsers: action.payload,
             }
         case "RESET_STATE":
             return {
@@ -119,6 +126,13 @@ function failedGetDataUser() {
 function successGetAllDataUser(data) {
     return {
         type: "SUCCESS_GET_ALL_DATA_USER",
+        payload: data
+    }
+}
+
+function successGetProductDataUser(data) {
+    return {
+        type: "SUCCESS_GET_PRODUCT_DATA_USER",
         payload: data
     }
 }
@@ -274,7 +288,7 @@ export function getAllDataUser() {
     }
 }
 
-export function getDataUserById(id) {
+export function getDataProductUserById(id) {
     return async function (dispatch) {
         try {
             dispatch(startFetching())
@@ -283,15 +297,13 @@ export function getDataUserById(id) {
                 const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
                 const { data } = await axios.get(`https://final-project-cashier-production.up.railway.app/user`, { headers })
 
-                // const selectedUser = data?.data?.find((item) => item.id == id);
                 const selectedUser = data.data.filter((item) => {
                     return (
                         item.id == id
                     );
                 });
-                // console.log(selectedUser[0].Products);
-                // console.log(login.data.token, data.data.nama)
-                dispatch(successGetDataUser(selectedUser[0].Products));
+
+                dispatch(successGetProductDataUser(selectedUser[0].Products));
             } else {
                 dispatch(failedGetDataUser())
             }

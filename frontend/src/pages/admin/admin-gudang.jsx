@@ -6,99 +6,21 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import NavbarAdmin from './../../components/navbar-admin';
 import TableGudangAdmin from '../../components/table-gudang-admin';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDataUserById } from '../../redux/reducers/user-reducers';
+import { getDataProductUserById } from '../../redux/reducers/user-reducers';
 // import { useParams } from 'react-router-dom';
 
 function AdminGudang() {
 	const [search, setSearch] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
-	const [value, setValue] = useState([
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-	]);
-
-	// const searchBar = (e) => {
-	// 	setSearch(e.target.value);
-	// 	setCurrentPage(1);
-	// };
-
-	// const filteredValue = value.filter((item) => {
-	// 	if (!search || search === '') {
-	// 		return true;
-	// 	}
-	// 	return (
-	// 		item.nama
-	// 			.toString()
-	// 			.toLowerCase()
-	// 			.includes(search.toString().toLowerCase()) ||
-	// 		item.kode
-	// 			.toString()
-	// 			.toLowerCase()
-	// 			.includes(search.toString().toLowerCase())
-	// 	);
-	// });
-
-	// const nextPage = () => {
-	// 	setCurrentPage((prevPage) => prevPage + 1);
-	// };
-
-	// const prevPage = () => {
-	// 	setCurrentPage((prevPage) => prevPage - 1);
-	// };
-
-	// const totalItems = filteredValue.length;
-	// const indexOfLastValue = currentPage * 8;
-	// const indexOfFirstValue = indexOfLastValue - 8;
-	// const currentValues = filteredValue.slice(
-	// 	indexOfFirstValue,
-	// 	indexOfLastValue,
-	// );
-	// let tableContent;
-
-	// if (currentValues.length > 0) {
-	// 	tableContent = currentValues.map((item) => (
-	// 		<TableGudang
-	// 			key={item.id}
-	// 			no={item.no}
-	// 			nama={item.nama}
-	// 			kode={item.kode}
-	// 			beli={item.beli}
-	// 			jual={item.jual}
-	// 			stok={item.stok}
-	// 			id={item.id}
-	// 		/>
-	// 	));
-	// } else {
-	// 	tableContent = (
-	// 		<tr>
-	// 			<td colSpan="8" className="text-center p-4">
-	// 				Data tidak ditemukan
-	// 			</td>
-	// 		</tr>
-	// 	);
-	// }
-
-	const { userSelf } = useSelector((state) => state.user);
+	const { productUsers } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const navigate = useNavigate();
-	// const [filteredValue, setFilteredValue] = useState([]);
-
-	// useEffect(() => {
-	// 	dispatch(getDataUserById());
-	// }, [dispatch]);
 
 	useEffect(() => {
 		if (id) {
 			try {
-				dispatch(getDataUserById(id));
+				dispatch(getDataProductUserById(id));
 			} catch (error) {
 				// Tangani kesalahan jika ada
 				console.error('Error adding user:', error);
@@ -128,7 +50,7 @@ function AdminGudang() {
 		setCurrentPage(1);
 	};
 
-	const filteredValue = userSelf.filter((item) => {
+	const filteredValue = productUsers?.filter((item) => {
 		if (!search || search === '') {
 			return true;
 		}
