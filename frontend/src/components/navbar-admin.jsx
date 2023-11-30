@@ -7,14 +7,14 @@ import {
 	IoIosLogOut,
 } from 'react-icons/io';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { FaStore } from 'react-icons/fa';
+// import { useSelector } from 'react-redux';
+// import { FaStore } from 'react-icons/fa';
 
 function NavbarAdmin() {
 	const [toogle, setToogle] = useState(false);
 	const location = useLocation();
 	const isActivePage = (pathname) => location.pathname === pathname;
-	const { id } = useParams();
+	// const { id } = useParams();
 	// const { users, isLoading } = useSelector((state) => state.user);
 
 	const users = {

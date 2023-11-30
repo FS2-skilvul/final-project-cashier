@@ -11,7 +11,9 @@ import Register from './pages/register';
 import GudangTambah from './pages/gudang-tambah';
 import GudangEdit from './pages/gudang-edit';
 import ProfilePage from './pages/profil';
-import AdminGudang from './pages/admin/admin-gudang';
+import AdminGudangPage from './pages/admin/admin-gudang';
+import AdminTransaksiPage from './pages/admin/admin-transaksi';
+import AdminCashflowPage from './pages/admin/admin-cashflow';
 
 function App() {
 	return (
@@ -34,13 +36,13 @@ function App() {
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
 				<Route
-					path="/admin-dashboard/cashflow/:id"
-					element={<AdminDashboardPage />}
+					path="/admin-dashboard/cashflow"
+					element={<AdminCashflowPage />}
 				/>
-				<Route path="/admin-dashboard/gudang/:id" element={<AdminGudang />} />
+				<Route path="/admin-dashboard/gudang" element={<AdminGudangPage />} />
 				<Route
-					path="/admin-dashboard/transaksi/:id"
-					element={<AdminDashboardPage />}
+					path="/admin-dashboard/transaksi"
+					element={<AdminTransaksiPage />}
 				/>
 			</Routes>
 		</>

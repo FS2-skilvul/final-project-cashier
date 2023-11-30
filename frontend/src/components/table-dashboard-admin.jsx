@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 
-function TableDashboardAdmin({ no, nama, kode, beli, jual, stok, id }) {
+function TableDashboardAdmin({ no, nama, kode, beli, id }) {
 	return (
 		<tbody className="text-center">
 			<tr>
@@ -11,7 +11,7 @@ function TableDashboardAdmin({ no, nama, kode, beli, jual, stok, id }) {
 				<td className="p-1 border-2">{kode}</td>
 				<td className="p-1 border-2">{beli}</td>
 				<td className="p-1 border-2 space-x-2">
-					<Link to={`/admin-dashboard/cashflow/${id}`}>
+					<Link to={`/admin-dashboard/cashflow`}>
 						<button className="text-white font-bold border-2 rounded-full bg-green-500 hover:bg-green-600 py-1 px-4 flex items-center gap-2 m-1">
 							<FaEye />
 							Lihat
@@ -19,7 +19,7 @@ function TableDashboardAdmin({ no, nama, kode, beli, jual, stok, id }) {
 					</Link>
 				</td>
 				<td className="p-1 border-2 space-x-2">
-					<Link to={`/admin-dasboard/gudang/${id}`}>
+					<Link to={`/admin-dashboard/gudang`}>
 						<button className="text-white font-bold border-2 rounded-full bg-green-500 hover:bg-green-600 py-1 px-4 flex items-center gap-2 m-1">
 							<FaEye />
 							Lihat
@@ -27,7 +27,7 @@ function TableDashboardAdmin({ no, nama, kode, beli, jual, stok, id }) {
 					</Link>
 				</td>
 				<td className="p-1 border-2 space-x-2">
-					<Link to={`admin-dashboard/transaksi/${id}`}>
+					<Link to={`/admin-dashboard/transaksi`}>
 						<button className="text-white font-bold border-2 rounded-full bg-green-500 hover:bg-green-600 py-1 px-4 flex items-center gap-2 m-1">
 							<FaEye />
 							Lihat

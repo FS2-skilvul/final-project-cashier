@@ -1,8 +1,6 @@
 import React from 'react';
 import NavbarAdmin from '../../components/navbar-admin';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa';
 import TableDashboardAdmin from '../../components/table-dashboard-admin';
 
 function AdminDashboard() {
@@ -11,232 +9,6 @@ function AdminDashboard() {
 	const [value, setValue] = useState([
 		{
 			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Miwdk',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 1,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
-			nama: 'Minyak',
-			kode: '#123',
-			beli: 45.0,
-			jual: 1,
-			stok: 1,
-			id: 1,
-		},
-		{
-			no: 12,
 			nama: 'Minyak',
 			kode: '#123',
 			beli: 45.0,
@@ -266,7 +38,7 @@ function AdminDashboard() {
 		}
 		const searchLower = search.toLowerCase();
 		const itemNameLower = item.nama.toLowerCase();
-		const itemKodeLower = item.kode_barang.toLowerCase();
+		const itemKodeLower = item.kode.toLowerCase();
 
 		return (
 			itemNameLower.includes(searchLower) || itemKodeLower.includes(searchLower)
@@ -323,14 +95,14 @@ function AdminDashboard() {
 					Selamat Datang Admin, Ini Adalah Daftar User Kasir Online
 				</div>
 			</div>
-			<main className="relative h-[40em] w-[85em] m-auto mt-8 bg-secondary border shadow-xl border-primary rounded">
+			<main className="relative h-[40em] w-[85em] m-auto mt-8 bg-secondary border-2 shadow-xl border-primary rounded">
 				<section className="flex flex-row justify-between m-4 mx-12 items-center">
 					<div className="font-bold text-primary text-2xl">
 						Daftar User Kasir Online
 					</div>
 					<input
 						type="text"
-						className="border-2 border-primary rounded px-4 py-2"
+						className="border border-primary rounded px-4 py-2"
 						value={search}
 						onChange={searchBar}
 						placeholder="Cari User"
