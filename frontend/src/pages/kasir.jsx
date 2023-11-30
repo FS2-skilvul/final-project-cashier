@@ -1,5 +1,6 @@
 import NavbarHome from '../components/navbar-home';
 import TableKasir from '../components/table-kasir';
+import logo_hitam from '../assets/Logo Hitam.png'
 import { useEffect, useState } from 'react';
 import { BsBasketFill } from 'react-icons/bs';
 import { FaCartPlus, FaCheckCircle, FaCheckSquare } from 'react-icons/fa';
@@ -7,125 +8,104 @@ import { ImPrinter } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataTransaction } from '../redux/reducers/transaction-reducers';
+import { getDataProduct } from '../redux/reducers/product-reducers';
+import { getDataUser } from '../redux/reducers/user-reducers';
 
 function KasirPage() {
 	const [search, setSearch] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showModal, setShowModal] = useState(false);
+	const [showModalPilihBarang, setShowModalPilihBarang] = useState(false);
 
-	const toggleModal = () => {
+	const toggleModal = (event) => {
+		event.preventDefault()
 		setShowModal(!showModal);
 	};
-	const [value, setValue] = useState([
-		{
-			no: 1,
-			no_trans: '#123',
-			nama: 'Minyak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 1,
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-		{
-			no: 1,
-			no_trans: 'wefwef3',
-			nama: 'Mwefwefak',
-			quantity: 45.0,
-			harga: 1,
-			total: 1,
-			tanggal: 'wefwefwe',
-		},
-	]);
+
+	const toggleModalPilihBarang = (event) => {
+		event.preventDefault()
+		setShowModalPilihBarang(!showModalPilihBarang);
+	};
 
 	const { transactions } = useSelector((state) => state.transaction);
+	const { products } = useSelector((state) => state.product);
+	const { users } = useSelector((state) => state.user);
 	const dispatch = useDispatch()
-	// const [filteredValue, setFilteredValue] = useState([]);
+	// Mendapatkan tanggal hari ini
+	const today = new Date();
+	const day = today.getDate();
+	const month = today.getMonth() + 1; // Perhatikan bahwa bulan dimulai dari 0
+	const year = today.getFullYear();
+	const formattedDate = `${day}-${month}-${year}`;
+	// Mendapatkan product
+	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [searchBarang, setSearchBarang] = useState('');
+	const [filteredProducts, setFilteredProducts] = useState([]);
+	const [qty, setQty] = useState('');
+	const [cart, setCart] = useState([])
+	const [totalBiaya, setTotalBiaya] = useState(0)
+	const [bayar, setBayar] = useState('')
+	const [kembalian, setKembalian] = useState('')
+	const [sudahBayar, setSudahBayar] = useState(false)
+
 
 	useEffect(() => {
 		dispatch(getDataTransaction())
+		dispatch(getDataProduct())
+		dispatch(getDataUser())
 	}, [dispatch])
 
+	// ---Search product---
+	useEffect(() => {
+		// Filter produk berdasarkan kata kunci pencarian
+		const filtered = products.filter((product) =>
+			product.nama.toString().toLowerCase().includes(searchBarang.toString().toLowerCase())
+			||
+			product.kode_barang.toString().toLowerCase().includes(searchBarang.toString().toLowerCase())
+		);
+		setFilteredProducts(filtered);
+	}, [searchBarang, products]);
+
+	// Memindahkan selected products ke cart
+	const handleAddCart = () => {
+		setCart([
+			...cart,
+			{
+				...selectedProduct,
+				qty,
+				sub_total: selectedProduct?.harga_jual * qty,
+			},
+		]);
+		setTotalBiaya(totalBiaya + (selectedProduct?.harga_jual * qty))
+	};
+
+	const handleSubmitAddCart = (e) => {
+		e.preventDefault(); // Prevent default form submission
+		handleAddCart();
+		setSelectedProduct(null)
+		setQty('')
+		setSearchBarang('')
+	};
+
+	// ---Delete Cart---
+	const deleteCart = (id) => {
+		const deletedItem = cart.find((item) => item.id === id);
+
+		if (deletedItem) {
+			const filterDelete = cart.filter((item) => item.id !== id);
+			setCart(filterDelete);
+			// Hitung total biaya setelah menghapus elemen dari cart
+			const newTotalBiaya = totalBiaya - deletedItem.sub_total;
+			// Periksa apakah nilai adalah NaN
+			if (!isNaN(newTotalBiaya)) {
+				setTotalBiaya(newTotalBiaya);
+			} else {
+				setTotalBiaya(0);
+			}
+		}
+	};
+
+	// ---Search transactions---
 	const searchBar = (e) => {
 		setSearch(e.target.value);
 		setCurrentPage(1);
@@ -143,6 +123,7 @@ function KasirPage() {
 		);
 	});
 
+	// ---Pagination---
 	const nextPage = () => {
 		setCurrentPage((prevPage) => prevPage + 1);
 	};
@@ -159,8 +140,8 @@ function KasirPage() {
 		indexOfLastValue,
 	);
 	let tableContent;
-	// console.log(transactions)
 
+	// Menampilkan data berdasarkan search
 	if (currentValues.length > 0) {
 		tableContent = currentValues.map((item, index) => (
 			<TableKasir
@@ -197,130 +178,216 @@ function KasirPage() {
 								<p className="text-3xl font-bold m-4 text-center py-2">
 									Input Transaksi
 								</p>
-								<div className="flex flex-col gap-4">
-									<div className="flex gap-4 px-8 w-full items-center ">
-										<p className="w-[10em]">Tgl Transaksi :</p>
-										<input
-											type="text"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Tanggal Transaksi"
-											value=""
-										/>
+								<form action="">
+									<div className="flex flex-col gap-4">
+										<div className="flex gap-4 px-8 w-full items-center ">
+											<p className="w-[10em]">Tgl Transaksi</p>
+											<input
+												type="text"
+												disabled
+												className="w-full h-8 rounded border bg-gray-200 border-black p-2"
+												placeholder="Tanggal Transaksi"
+												defaultValue={formattedDate}
+											/>
+										</div>
+										<div className="flex gap-4 px-8 w-full items-center justify-end">
+											<p className="w-[10em]">Kode Barang</p>
+											<button className="flex w-full h-8 items-center rounded border border-black p-2"
+												onClick={toggleModalPilihBarang}>
+												{selectedProduct == null ?
+													<p className='text-left text-gray-400'>Kode Barang</p>
+													:
+													<p className='text-left text-gray-700'>{selectedProduct.kode_barang}</p>}
+											</button>
+										</div>
+										<div className="flex gap-4 px-8 w-full items-center justify-end">
+											<p className="w-[10em]">Nama Barang</p>
+											{selectedProduct == null ?
+												<button className="flex w-full h-8 items-center rounded border border-black p-2"
+													onClick={toggleModalPilihBarang}>
+													<p className='text-left text-gray-400'>Nama Barang</p>
+												</button>
+												:
+												<button className="flex w-full h-fit items-center rounded border border-black p-2"
+													onClick={toggleModalPilihBarang}>
+													<p className='text-left text-gray-700 overflow-hidden  overflow-ellipsis'>{selectedProduct.nama}</p>
+												</button>
+											}
+										</div>
+										<div className="flex gap-4 px-8 w-full items-center justify-end">
+											<p className="w-[10em]">Harga</p>
+											<input
+												type="number"
+												disabled
+												className="w-full h-8 rounded border bg-gray-200 border-black p-2"
+												placeholder="Harga"
+												defaultValue={selectedProduct?.harga_jual.toString()}
+											/>
+										</div>
+										<div className="flex gap-4 px-8 w-full items-center">
+											<p className="w-[10em]">Quantity</p>
+											<div className='w-full'>
+												<input
+													type="number"
+													className="w-full h-8 rounded border border-black p-2"
+													placeholder="Quantity"
+													min={1}
+													max={selectedProduct?.stok}
+													value={qty}
+													onChange={(e) => {
+														const newValue = parseInt(e.target.value);
+														if (newValue > 0 && newValue <= selectedProduct?.stok && selectedProduct?.stok > 0) {
+															setQty(newValue);
+														} else {
+															// Nilai tidak valid (mungkin negatif atau melebihi stok), set ke 0 atau sesuai kebutuhan
+															setQty('');
+														}
+													}}
+												/>
+												{
+													selectedProduct && <p className='text-red-500 text-sm'>Maks. qty: {selectedProduct?.stok}</p>
+												}
+											</div>
+										</div>
+										<div className="flex gap-4 px-8 w-full items-center justify-end">
+											<p className="w-[10em]">Sub Total</p>
+											<input
+												type="number"
+												disabled
+												className="w-full h-8 rounded border bg-gray-200 border-black p-2"
+												value={selectedProduct ? selectedProduct.harga_jual * qty : 0}
+											/>
+										</div>
 									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Kode Barang :</p>
-										<input
-											type="text"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Kode Barang"
-											value=""
-										/>
-									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Nama Barang :</p>
-										<input
-											type="text"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Nama Barang"
-											value=""
-										/>
-									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Harga :</p>
-										<input
-											type="number"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Harga"
-											value=""
-										/>
-									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Quantity :</p>
-										<input
-											type="number"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Quantity"
-											value=""
-										/>
-									</div>
-									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Jumlah :</p>
-										<input
-											type="number"
-											className="w-full h-8 rounded border border-black p-2"
-											placeholder="Jumlah"
-											value=""
-										/>
-									</div>
-								</div>
-								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+								</form>
+								<button onClick={handleSubmitAddCart} disabled={qty == '' || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
 									<FaCartPlus />
 									Tambah ke Nota
 								</button>
 								<br />
 								<br />
 							</div>
+							{/* Modal Pilih Barang */}
+							<div>
+								{showModalPilihBarang && (
+									<div className="fixed inset-0 flex items-center justify-center z-10 ">
+										<div className="absolute inset-0 bg-black opacity-50"></div>
+										<div className="bg-white p-6 rounded z-20 w-[40em] h-[20em] items-center flex flex-col gap-4 relative">
+											<button
+												className="absolute right-0 top-0 m-5"
+												onClick={toggleModalPilihBarang}
+											>
+												<MdClose className="text-2xl font-bold" />
+											</button>
+											<h2 className="text-2xl font-bold mt-2 mb-2 text-center text-primary">
+												PILIH BARANG
+											</h2>
+											<input
+												type="text"
+												className=" border-2 border-black rounded px-8 w-full sm:w-fit py-1 h-fit"
+												value={searchBarang}
+												onChange={(e) => setSearchBarang(e.target.value)}
+												placeholder="Cari Barang">
+											</input>
+											<div className='w-full overflow-y-auto'>
+												{searchBarang == '' ?
+													<p>Masukkan kata kunci nama barang atau kode barang</p>
+													:
+													<ul className='w-full space-y-2'>
+														{filteredProducts.map((product) => (
+															<li className='w-full bg-gray-100 py-1 px-2' key={product.id}
+																onClick={() => {
+																	setShowModalPilihBarang(false)
+																	setSelectedProduct(product)
+
+																}}
+															>
+																{product.nama}
+															</li>
+														))}
+													</ul>
+												}
+											</div>
+										</div>
+									</div>
+								)}
+							</div>
 							<div className="relative">
 								<div className="border-b-2 border-black w-full"></div>
 								<br />
 								<div className="flex flex-col gap-4">
 									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Bayar :</p>
+										<p className="w-[10em]">Bayar</p>
 										<input
 											type="number"
+											disabled={sudahBayar ? 'disabled' : ''}
 											className="w-full h-8 rounded border border-black p-2"
 											placeholder="Bayar"
-											value=""
+											value={bayar}
+											onChange={(e) => setBayar(e.target.value)}
 										/>
 									</div>
 									<div className="flex gap-4 px-8 w-full items-center justify-end">
-										<p className="w-[10em]">Kembali :</p>
+										<p className="w-[10em]">Kembali</p>
 										<input
 											type="number"
-											className="w-full h-8 rounded border border-black p-2"
+											disabled
+											className="w-full h-8 rounded border bg-gray-200 border-black p-2"
 											placeholder="Kembali"
-											value=""
+											value={kembalian}
 										/>
 									</div>
 								</div>
 
 								<br />
 								<br />
-								<button className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+								<button onClick={() => {setKembalian(bayar - totalBiaya), setSudahBayar(true)}} disabled={bayar < totalBiaya || cart.length == 0 || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
 									<BsBasketFill />
 									Bayar
 								</button>
 							</div>
 						</div>
 					</div>
+					{/* Cart */}
 					<div className="w-full flex flex-col border border-black rounded-lg bg-white">
 						<div className="flex flex-col items-center m-2">
-							<img src="" alt="Logo Usaha" />
-							<p>Nama Usaha</p>
-							<p>Alamat</p>
+							<img src={logo_hitam} alt="Logo Usaha" className='w-12' />
+							<p>UMKM {users?.nama?.toString().toUpperCase()}</p>
+							<p>{users?.alamat?.toString()}</p>
 						</div>
-						<div className="flex justify-between mx-12">
-							<p>Tanggal</p>
-							<p>Waktu</p>
+						<div className="flex justify-end mx-9">
+							<p>{formattedDate}</p>
 						</div>
 						<div className='flex flex-col h-full justify-between space-y-6'>
 							<div className="px-8 py-2">
-								<table className="w-full border- table-fixed table">
+								<table className="w-full border- table-auto table">
 									<thead className="border-t-2 border-b-2 border-black">
 										<tr>
-											<th className="py-1 w-3/6">Nama Barang</th>
-											<th className="py-1 w-1/6">Qty</th>
-											<th className="py-1 w-1/6">Harga</th>
-											<th className="py-1 w-1/6">Subtotal</th>
+											<th className="py-1">Nama Barang</th>
+											<th className="py-1">Qty</th>
+											<th className="py-1">Harga</th>
+											<th className="py-1">Subtotal</th>
 										</tr>
 									</thead>
 									<tbody className="text-center ">
-										<tr>
-											<td className="text-left">halo</td>
-											<td>halo</td>
-											<td>halo</td>
-											<td className="text-right">Rp. 5</td>
-										</tr>
+										{cart?.map((item, index) => (
+											<tr key={index}>
+												<td className="flex text-left items-center space-x-1">
+													{sudahBayar == false ?
+														<button onClick={() => deleteCart(item.id)} className='bg-primary text-white px-0.5 py-0.5 rounded-md'>
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" /></svg>
+														</button>
+														:
+														''
+													}
+													{console.log(kembalian)}
+													<p>{item.nama}</p>
+												</td>
+												<td>{item.qty}</td>
+												<td>{item.harga_jual}</td>
+												<td className="text-right">{item.sub_total}</td>
+											</tr>
+										))}
 									</tbody>
 								</table>
 							</div>
@@ -334,9 +401,9 @@ function KasirPage() {
 										<p>Kembalian</p>
 									</div>
 									<div className="text-right">
-										<p>0</p>
-										<p>0</p>
-										<p>0</p>
+										<p>{totalBiaya}</p>
+										<p>{bayar == '' ? 0 : bayar}</p>
+										<p>{kembalian == '' ? 0 : kembalian}</p>
 									</div>
 								</div>
 								<div className="text-center font-bold">
