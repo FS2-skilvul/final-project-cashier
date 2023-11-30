@@ -274,6 +274,47 @@ export function getAllDataUser() {
     }
 }
 
+export function getDataUserById(id) {
+    return async function (dispatch) {
+        try {
+            dispatch(startFetching())
+            const token = localStorage.getItem('token')
+            if (token) {
+                const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
+                const { data } = await axios.get(`https://final-project-cashier-production.up.railway.app/user`, { headers })
+
+                // const selectedUser = data?.data?.find((item) => item.id == id);
+                const selectedUser = data.data.filter((item) => {
+                    return (
+                        item.id == id
+                    );
+                });
+                // console.log(selectedUser[0].Products);
+                // console.log(login.data.token, data.data.nama)
+                dispatch(successGetDataUser(selectedUser[0].Products));
+            } else {
+                dispatch(failedGetDataUser())
+            }
+
+        } catch (error) {
+            // Tangani kesalahan jika ada
+            console.error("Error adding user:", error);
+
+            // Dapatkan status code dari error (jika ada)
+            const statusCode = error.response ? error.response.status : null;
+
+            // Dapatkan pesan kesalahan dari error (jika ada)
+            const errorMessage = error.response ? error.response.data.message : null;
+
+            // Log status code dan pesan kesalahan
+            console.log("Status Code:", statusCode);
+            console.log("Error Message:", errorMessage);
+
+            dispatch(failedGetDataUser());
+        }
+    }
+}
+
 // export function centangTodo(id, completed) {
 //     return async function (dispatch) {
 //         dispatch(startFetching())
