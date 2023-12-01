@@ -2,16 +2,19 @@ import { React, useEffect, useState } from 'react';
 import NavbarHome from '../components/navbar-home';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { editDataProductById, getDataProductById } from '../redux/reducers/product-reducers';
+import {
+	editDataProductById,
+	getDataProductById,
+} from '../redux/reducers/product-reducers';
 
 function GudangEdit() {
 	const navigate = useNavigate();
-	const dispatch = useDispatch()
-	const { id } = useParams()
-	const { productById } = useSelector((state) => state.product)
+	const dispatch = useDispatch();
+	const { id } = useParams();
+	const { productById } = useSelector((state) => state.product);
 	const [showModal, setShowModal] = useState(false);
-	const [kodeBarang, setKodeBarang] = useState("");
-	const [namaBarang, setNamaBarang] = useState("");
+	const [kodeBarang, setKodeBarang] = useState('');
+	const [namaBarang, setNamaBarang] = useState('');
 	const [hargaBeli, setHargaBeli] = useState(1);
 	const [hargaJual, setHargaJual] = useState(1);
 	const [stok, setStok] = useState(1);
@@ -19,40 +22,39 @@ function GudangEdit() {
 	useEffect(() => {
 		if (id) {
 			try {
-				dispatch(getDataProductById(id))
-
+				dispatch(getDataProductById(id));
 			} catch (error) {
 				// Tangani kesalahan jika ada
-				console.error("Error adding user:", error);
+				console.error('Error adding user:', error);
 
 				// Dapatkan status code dari error (jika ada)
 				const statusCode = error.response ? error.response.status : null;
 
 				// Dapatkan pesan kesalahan dari error (jika ada)
-				const errorMessage = error.response ? error.response.data.message : null;
+				const errorMessage = error.response
+					? error.response.data.message
+					: null;
 
 				// Log status code dan pesan kesalahan
-				console.log("Status Code:", statusCode);
-				console.log("Error Message:", errorMessage);
-				navigate('/gudang')
+				console.log('Status Code:', statusCode);
+				console.log('Error Message:', errorMessage);
+				navigate('/gudang');
 			}
 		} else {
-			navigate('/gudang')
+			navigate('/gudang');
 		}
-	}, [dispatch, id])
+	}, [dispatch, id]);
 
 	useEffect(() => {
-		setKodeBarang(productById.kode_barang || '')
-		setNamaBarang(productById.nama || '')
-		setHargaBeli(productById.harga_beli || '')
-		setHargaJual(productById.harga_jual || '')
-		setStok(productById.stok || '')
-	}, [productById])
-
-
+		setKodeBarang(productById.kode_barang || '');
+		setNamaBarang(productById.nama || '');
+		setHargaBeli(productById.harga_beli || '');
+		setHargaJual(productById.harga_jual || '');
+		setStok(productById.stok || '');
+	}, [productById]);
 
 	const toggleModal = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		setShowModal(!showModal);
 	};
 
@@ -63,11 +65,11 @@ function GudangEdit() {
 			nama: namaBarang,
 			harga_beli: hargaBeli,
 			harga_jual: hargaJual,
-			stok: stok
-		}
-		dispatch(editDataProductById(id, newData))
-		navigate('/gudang')
-	}
+			stok: stok,
+		};
+		dispatch(editDataProductById(id, newData));
+		navigate('/gudang');
+	};
 
 	return (
 		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
@@ -149,8 +151,10 @@ function GudangEdit() {
 									Batalkan
 								</button>
 							</Link>
-							<button type='submit'
-								className="border border-primary px-4 py-1 rounded bg-primary text-white">
+							<button
+								type="submit"
+								className="border border-primary px-4 py-1 rounded bg-primary text-white"
+							>
 								Edit
 							</button>
 						</div>

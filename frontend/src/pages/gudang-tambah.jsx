@@ -12,9 +12,9 @@ function GudangTambah() {
 	};
 	const [showModal, setShowModal] = useState(false);
 
-	const dispatch = useDispatch()
-	const [kodeBarang, setKodeBarang] = useState("");
-	const [namaBarang, setNamaBarang] = useState("");
+	const dispatch = useDispatch();
+	const [kodeBarang, setKodeBarang] = useState('');
+	const [namaBarang, setNamaBarang] = useState('');
 	const [hargaBeli, setHargaBeli] = useState(1);
 	const [hargaJual, setHargaJual] = useState(1);
 	const [stok, setStok] = useState(1);
@@ -30,11 +30,11 @@ function GudangTambah() {
 			nama: namaBarang,
 			harga_beli: hargaBeli,
 			harga_jual: hargaJual,
-			stok: stok
-		}
-		dispatch(addDataProduct(newData))
-		navigate('/gudang')
-	}
+			stok: stok,
+		};
+		dispatch(addDataProduct(newData));
+		navigate('/gudang');
+	};
 
 	return (
 		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
@@ -106,8 +106,10 @@ function GudangTambah() {
 									Batalkan
 								</button>
 							</Link>
-							<button type='submit'
-								className="border border-primary px-4 py-1 rounded bg-primary text-white">
+							<button
+								type="submit"
+								className="border border-primary px-4 py-1 rounded bg-primary text-white"
+							>
 								Tambah
 							</button>
 						</div>
@@ -123,12 +125,16 @@ function GudangTambah() {
 								Simpan Perubahan ?
 							</h2>
 							<div className="flex gap-4">
-								<button onClick={toggleModal}
-									className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+								<button
+									onClick={toggleModal}
+									className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+								>
 									Batalkan
 								</button>
-								<button onClick={handleClickGudang}
-									className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+								<button
+									onClick={handleClickGudang}
+									className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+								>
 									Simpan
 								</button>
 							</div>
