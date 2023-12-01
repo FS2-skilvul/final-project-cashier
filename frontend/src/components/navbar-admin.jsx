@@ -1,4 +1,5 @@
 import logoBiru from '../assets/Logo Biru.png';
+import logoBiruKecil from '../assets/Vector (2).png'
 import { Link, useLocation, useParams } from 'react-router-dom';
 import {
 	IoIosArrowDown,
@@ -31,7 +32,8 @@ function NavbarAdmin() {
 			<div className="flex gap-6 font-bold items-center justify-center">
 				{isActivePage('/admin-dashboard') ? (
 					<Link to="/admin-dashboard">
-						<img src={logoBiru} alt="Logo Kasir Online" />
+						<img src={logoBiru} alt="Logo Kasir Online" className='hidden sm:flex' />
+						<img src={logoBiruKecil} alt="Logo Kasir Online" className='sm:hidden' />
 					</Link>
 				) : (
 					<div className="flex text-primary gap-20">

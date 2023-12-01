@@ -69,7 +69,7 @@ function UserDashboard() {
                             filteredProducts.map(product => (
                                 <div key={product.id} className='flex items-center justify-between bg-white px-4 sm:px-9 py-3 text-xl font-semibold text-gray-700 border-x-2 border-b-2 border-gray-400 space-x-1'>
                                     <p>{product.nama}</p>
-                                    <p>{product.stok} <span>pcs</span></p>
+                                    <p className='whitespace-nowrap'>{product.stok} <span>pcs</span></p>
                                 </div>
                             ))
                             :
