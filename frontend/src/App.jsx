@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import AdminDashboardPage from './pages/admin-dashboard';
+import AdminDashboardPage from './pages/admin/admin-dashboard';
 import LandingHome from '../src/pages/landing/home';
 import LandingFitur from '../src/pages/landing/fitur';
 import LandingAbout from '../src/pages/landing/about';
@@ -10,7 +10,10 @@ import Login from './pages/login';
 import Register from './pages/register';
 import GudangTambah from './pages/gudang-tambah';
 import GudangEdit from './pages/gudang-edit';
-import LandingPage from './pages/landing/landing';
+import ProfilePage from './pages/profil';
+import AdminGudangPage from './pages/admin/admin-gudang';
+import AdminTransaksiPage from './pages/admin/admin-transaksi';
+import AdminCashflowPage from './pages/admin/admin-cashflow';
 
 function App() {
 	return (
@@ -22,6 +25,7 @@ function App() {
 
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/profile" element={<ProfilePage />} />
 
 				<Route path="/user-dashboard" element={<UserDashboardPage />} />
 				<Route path="/gudang" element={<GudangPage />} />
@@ -31,6 +35,18 @@ function App() {
 				<Route path="/kasir" element={<KasirPage />} />
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
+				<Route
+					path="/admin-dashboard/cashflow/:id"
+					element={<AdminCashflowPage />}
+				/>
+				<Route
+					path="/admin-dashboard/gudang/:id"
+					element={<AdminGudangPage />}
+				/>
+				<Route
+					path="/admin-dashboard/transaksi/:id"
+					element={<AdminTransaksiPage />}
+				/>
 			</Routes>
 		</>
 	);

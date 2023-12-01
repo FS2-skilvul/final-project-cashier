@@ -80,9 +80,8 @@ export function getDataProduct() {
                 const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
                 const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/product', { headers })
 
-                // console.log(login.data.token, data.data.nama)
-                // console.log(data.data)
-                dispatch(successGetDataProduct(data.data));
+                const sortedData = data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                dispatch(successGetDataProduct(sortedData));
             } else {
                 dispatch(failedGetDataProduct())
             }
@@ -116,8 +115,8 @@ export function addDataProduct(newData) {
                 await axios.post('https://final-project-cashier-production.up.railway.app/product', newData, { headers })
 
                 const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/product', { headers })
-
-                dispatch(successGetDataProduct(data.data));
+                const sortedData = data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                dispatch(successGetDataProduct(sortedData));
             } else {
                 dispatch(failedGetDataProduct())
             }
@@ -186,7 +185,8 @@ export function editDataProductById(id, newData) {
                 await axios.put(`https://final-project-cashier-production.up.railway.app/product/${id}`, newData, { headers })
 
                 const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/product', { headers })
-                dispatch(successGetDataProduct(data.data));
+                const sortedData = data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                dispatch(successGetDataProduct(sortedData));
             } else {
                 dispatch(failedGetDataProduct())
             }
@@ -220,8 +220,8 @@ export function deleteDataProduct(id) {
                 await axios.delete(`https://final-project-cashier-production.up.railway.app/product/${id}`, { headers })
 
                 const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/product', { headers })
-
-                dispatch(successGetDataProduct(data.data));
+                const sortedData = data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                dispatch(successGetDataProduct(sortedData));
             } else {
                 dispatch(failedGetDataProduct())
             }
