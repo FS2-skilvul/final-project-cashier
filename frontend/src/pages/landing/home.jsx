@@ -11,12 +11,12 @@ function LandingHome() {
 			<main className="w-screen justify-center mt-[4.5rem] lg:flex lg:flex-row px-8">
 				<section className="flex justify-center flex-col items-center">
 					<div className="font-semibold text-center">
-						<div className="flex flex-col my-4 text-3xl items-center md:text-5xl md:space-y-2 font-bold">
+						<div className="flex flex-col my-4 text-3xl items-center md:text-5xl md:space-y-2 font-bold lg:text-7xl">
 							<p>Kelola Usaha Anda</p>
 							<p>Dengan Aplikasi</p>
 							<span className="font-bold text-primary">Kasir Online </span>
 						</div>
-						<p className="text-lg mx-4 my-2">
+						<p className="text-lg mx-4 my-2 lg:text-xl lg:mx-12">
 							Kami membantu Anda mendapatkan data-data menarik dari transaksi
 							Anda sehingga Anda bisa menjual lebih banyak lagi.
 						</p>

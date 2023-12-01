@@ -14,6 +14,7 @@ import ProfilePage from './pages/profil';
 import AdminGudangPage from './pages/admin/admin-gudang';
 import AdminTransaksiPage from './pages/admin/admin-transaksi';
 import AdminCashflowPage from './pages/admin/admin-cashflow';
+import LandingPage from '../src/pages/landing/landing';
 
 function App() {
 	return (
