@@ -2,38 +2,40 @@ import React from 'react';
 import NavbarLanding from '../../components/navbar-landing';
 import foto from '../../assets/unsplash_ONlW_Ye8HcQ.png';
 import logoKecil from '../../assets/Vector (2).png';
+import { Link } from 'react-router-dom';
 
 function LandingHome() {
 	return (
-		<div>
+		<>
 			<NavbarLanding />
-			<main className="w-screen h-[87.5vh] flex justify-center flex-col md:flex-row">
-				<section className="flex w-1/2 justify-center items-center px-12">
-					<div className="text-7xl font-semibold ml-20">
-						<p className="my-4">Kelola Usaha Anda</p>
-						<p className="my-4">Dengan Aplikasi</p>
-						<div className="flex flex-row items-center">
-							<span className="my-4 font-bold text-primary">Kasir Online</span>
-							<img src={logoKecil} alt="" className="ml-4 h-[100%]" />
+			<main className="w-screen justify-center mt-[4.5rem] lg:flex lg:flex-row px-8">
+				<section className="flex justify-center flex-col items-center">
+					<div className="font-semibold text-center">
+						<div className="flex flex-col my-4 text-3xl items-center md:text-5xl md:space-y-2 font-bold">
+							<p>Kelola Usaha Anda</p>
+							<p>Dengan Aplikasi</p>
+							<span className="font-bold text-primary">Kasir Online </span>
 						</div>
-						<p className="text-lg pr-48">
+						<p className="text-lg mx-4 my-2">
 							Kami membantu Anda mendapatkan data-data menarik dari transaksi
 							Anda sehingga Anda bisa menjual lebih banyak lagi.
 						</p>
-						<a className="text-lg font-bold" href="">
-							Pelajari Lebih Lanjut
-						</a>
 					</div>
+					<Link to={'/login'}>
+						<button className="text-sm md:text-lg text-white font-bold border rounded-full bg-primary px-6 py-2 mt-2">
+							Pelajari Lebih Lanjut
+						</button>
+					</Link>
 				</section>
-				<section className="flex w-1/2 justify-center items-center">
+				<section className="flex justify-center items-center">
 					<img
 						src={foto}
 						alt="Ini Gambar"
-						className="w-[80%] items-center justify-center"
+						className="w-[75%] md:w-[80%] lg:w-[95%] items-center justify-center md:m-10 m-8"
 					/>
 				</section>
 			</main>
-			<footer className="w-screen bg-primary p-4 px-12 text-white text-justify absolute bottom-0">
+			<footer className=" bg-primary py-10 px-12 md:py-6 text-white text-justify flex flex-col">
 				<p>
 					<b>KasirOnline</b> merupakan solusi pembukuan dan manajemen bisnis
 					digital yang akan membantu pengguna mengelola bisnis mereka dengan
@@ -44,7 +46,7 @@ function LandingHome() {
 					individu.
 				</p>
 			</footer>
-		</div>
+		</>
 	);
 }
 

@@ -8,16 +8,14 @@ import logoKecil from '../../assets/Vector (2).png';
 
 function LandingFitur() {
 	return (
-		<div>
+		<>
 			<NavbarLanding />
-			<main>
-				<div className="flex justify-center my-10">
-					<h1 className="text-6xl font-bold ">
-						FITUR UTAMA <span className="text-primary">Kasir Online</span>
-					</h1>
-					<img src={logoKecil} alt="" className="ml-4 h-[100%]" />
+			<main className="pt-4">
+				<div className="flex flex-col  justify-center mt-[4.5rem] items-center">
+					<h1 className="text-5xl font-bold">FITUR UTAMA</h1>
+					<h2 className="text-4xl font-bold text-primary">Kasir Online</h2>
 				</div>
-				<div className="flex mx-24 gap-16 justify-center items-center">
+				<div className="flex flex-col lg:flex-row justify-center items-center mt-2">
 					<ContainerFitur
 						image={ImgDashboard}
 						title="Dashboard"
@@ -36,7 +34,7 @@ function LandingFitur() {
 				</div>
 			</main>
 			<footer></footer>
-		</div>
+		</>
 	);
 }
 

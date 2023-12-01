@@ -10,12 +10,13 @@ import Login from './pages/login';
 import Register from './pages/register';
 import GudangTambah from './pages/gudang-tambah';
 import GudangEdit from './pages/gudang-edit';
+import LandingPage from './pages/landing/landing';
 
 function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<LandingHome />} />
+				<Route path="/" element={<LandingPage />} />
 				<Route path="/fitur" element={<LandingFitur />} />
 				<Route path="/about" element={<LandingAbout />} />
 
