@@ -76,9 +76,49 @@ function BarChart() {
         ],
     };
 
-    const options = {
+    const optionsX = {
         responsive: true,
         maintainAspectRatio: false,
+        indexAxis: 'x',
+        plugins: {
+            legend: {
+                position: 'top',
+                title: {
+                    font: {
+                        size: 30, // Ubah ukuran font legenda di sini
+                    },
+                },
+            },
+            title: {
+                display: true,
+                text: `PENDAPATAN DAN PENGELUARAN TAHUN ${currentYear}`,
+                font: {
+                    size: 30, // Ubah ukuran font judul di sini
+                },
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        size: 18, // Ubah ukuran font sumbu x di sini
+                    },
+                },
+            },
+            y: {
+                ticks: {
+                    font: {
+                        size: 18, // Ubah ukuran font sumbu y di sini
+                    },
+                },
+            },
+        },
+    };
+
+    const optionsY = {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
         plugins: {
             legend: {
                 position: 'top',
@@ -116,7 +156,12 @@ function BarChart() {
 
     return (
         <div>
-            <Bar options={options} data={data} className='w-full lg:w-[1200px] bg-white px-12 py-6' />
+            <div className='px-3 rounded-lg hidden md:flex'>
+                <Bar options={optionsX} data={data} className='h-[500px] sm:h-96 lg:h-full w-full lg:w-[1024px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+            </div>
+            <div className='px-3 rounded-lg md:hidden'>
+                <Bar options={optionsY} data={data} className='h-[500px] sm:h-96 lg:h-full w-full lg:w-[1024px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+            </div>
         </div>
     );
 }
