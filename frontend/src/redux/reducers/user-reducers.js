@@ -334,8 +334,9 @@ export function updateDataUser(newData) {
             const token = localStorage.getItem('token')
             if (token) {
                 const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
-                await axios.put('https://final-project-cashier-production.up.railway.app/user', newData, { headers })
-
+                // --- error disini ----
+                await axios.put('https://final-project-cashier-production.up.railway.app/user/userSelf', newData, { headers })
+                // ---------------------
                 const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', newData, { headers })
                 // console.log(login.data.token, data.data.nama)
                 dispatch(successGetDataUser(data.data));
