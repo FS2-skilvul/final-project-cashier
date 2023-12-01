@@ -124,7 +124,7 @@ function BarChart() {
                 position: 'top',
                 title: {
                     font: {
-                        size: 30, // Ubah ukuran font legenda di sini
+                        size: 24, // Ubah ukuran font legenda di sini
                     },
                 },
             },
@@ -140,14 +140,14 @@ function BarChart() {
             x: {
                 ticks: {
                     font: {
-                        size: 18, // Ubah ukuran font sumbu x di sini
+                        size: 14, // Ubah ukuran font sumbu x di sini
                     },
                 },
             },
             y: {
                 ticks: {
                     font: {
-                        size: 18, // Ubah ukuran font sumbu y di sini
+                        size: 14, // Ubah ukuran font sumbu y di sini
                     },
                 },
             },
@@ -155,12 +155,12 @@ function BarChart() {
     };
 
     return (
-        <div>
-            <div className='px-3 rounded-lg hidden md:flex'>
-                <Bar options={optionsX} data={data} className='h-[500px] sm:h-96 lg:h-full w-full lg:w-[1024px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+        <div className='w-full h-full' >
+            <div className='w-full h-[600px] md:px-3 lg:px-4 rounded-lg hidden md:flex'>
+                <Bar options={optionsX} data={data} className='h-[600px] sm:h-96 lg:max-h-[1200px] w-full max-w-[1200px] bg-white px-2 md:px-12 py-6 rounded-lg' />
             </div>
-            <div className='px-3 rounded-lg md:hidden'>
-                <Bar options={optionsY} data={data} className='h-[500px] sm:h-96 lg:h-full w-full lg:w-[1024px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+            <div className='w-full px-3 rounded-lg md:hidden'>
+                <Bar options={optionsY} data={data} className='h-[600px] sm:h-96 lg:h-full w-full bg-white px-2 md:px-12 py-6 rounded-lg border border-gray-300' />
             </div>
         </div>
     );
