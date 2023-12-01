@@ -21,12 +21,12 @@ function UserDashboard() {
         <div className="relative w-screen h-screen bg-[#F2F4F9]" >
             <NavbarHome />
             <div className='flex h-auto w-full justify-center bg-[#F2F4F9]'>
-                <div className="flex flex-col w-full lg:w-[1024px] h-auto items-center space-y-10 bg-[#F2F4F9] pt-20 pb-12">
+                <div className="flex flex-col w-full max-w-[1200px] h-auto items-center space-y-10 bg-[#F2F4F9] pt-20 pb-12">
                     {/* <div className='flex w-[1200px] justify-center mt-9 py-9 bg-primary text-white font-bold text-base md:text-3xl shadow-2xl shadow-gray-300'>
                     {userSelf.nama ? `Selamat Datang ${userSelf.nama}, Ini Adalah Semua Statistik dari UMKM Kamu` : ''}
                 </div> */}
-                    <div className="flex flex-col w-full items-center space-y-10 sm:mb-4">
-                        <div className="flex w-full justify-center mt-9 px-4 py-3 sm:py-6 lg:py-9 bg-primary text-white font-bold text-lg sm:text-xl md:text-3xl shadow-2xl shadow-gray-300">
+                    <div className="flex flex-col w-full items-center space-y-10 sm:mb-4 px-3 lg:px-4">
+                        <div className="flex w-full justify-center mt-9 px-4 py-4 sm:py-6 lg:py-9 bg-primary text-white font-bold text-lg sm:text-xl md:text-3xl shadow-2xl shadow-gray-300">
                             {userSelf.nama ? `Selamat Datang ${userSelf.nama}, Ini Adalah Semua Statistik dari UMKM Kamu` : ''}
                         </div>
                     </div>
@@ -60,7 +60,7 @@ function UserDashboard() {
                         </div>
                     </div>
                     <BarChart />
-                    <div className='w-full px-3 lg:px-0 lg:w-full'>
+                    <div className='w-full px-3 lg:px-4 '>
                         <div className='flex items-center space-x-6 text-white bg-[#EA0000] px-4 sm:px-9 py-2 rounded-t-lg'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 256"><path fill="currentColor" d="M236.8 188.09L149.35 36.22a24.76 24.76 0 0 0-42.7 0L19.2 188.09a23.51 23.51 0 0 0 0 23.72A24.35 24.35 0 0 0 40.55 224h174.9a24.35 24.35 0 0 0 21.33-12.19a23.51 23.51 0 0 0 .02-23.72M120 104a8 8 0 0 1 16 0v40a8 8 0 0 1-16 0Zm8 88a12 12 0 1 1 12-12a12 12 0 0 1-12 12" /></svg>
                             <p className='text-xl font-semibold'>Barang Yang Stoknya Akan Habis</p>

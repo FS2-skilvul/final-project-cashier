@@ -74,93 +74,95 @@ function GudangEdit() {
 	return (
 		<div className="relative w-full h-screen bg-[#F2F4F9] pt-20 pb-12">
 			<NavbarHome />
-			<main className="bg-secondary border-2 rounded border-primary w-[40em] h-[36em] flex flex-col mx-auto mt-8">
-				<div>
-					<header className="bg-primary w-full p-4 text-left font-bold text-white">
-						<p className="pl-4 text-lg">Edit Barang</p>
-					</header>
-					<form action="" onSubmit={toggleModal}>
-						<section className="flex flex-col gap-4 w-full p-6 ">
-							<div className="flex flex-col gap-2">
-								<p className="font-bold">Kode Barang :</p>
-								<input
-									type="text"
-									className="w-full border h-9 px-2 "
-									placeholder="Kode Produk"
-									required
-									// value={productById.kode_barang || ''}
-									value={kodeBarang}
-									onChange={(e) => setKodeBarang(e.target.value)}
-								/>
-							</div>
-							<div className="flex flex-col gap-2">
-								<p className="font-bold">Nama Barang :</p>
-								<input
-									type="text"
-									className="w-full border h-9 px-2"
-									placeholder="Nama Produk"
-									required
-									// value={productById.nama || ''}
-									value={namaBarang}
-									onChange={(e) => setNamaBarang(e.target.value)}
-								/>
-							</div>
-							<div className="flex flex-col gap-2">
-								<p className="font-bold">Harga Beli Barang :</p>
-								<input
-									type="number"
-									className="w-full border h-9 px-2"
-									placeholder="Harga Beli Produk"
-									required
-									min={1}
-									// value={productById.harga_beli || ''}
-									value={hargaBeli}
-									onChange={(e) => setHargaBeli(e.target.value)}
-								/>
-							</div>
-							<div className="flex flex-col gap-2">
-								<p className="font-bold">Harga Jual Barang :</p>
-								<input
-									type="number"
-									className="w-full border h-9 px-2"
-									placeholder="Harga Jual Produk"
-									required
-									min={1}
-									// value={productById.harga_jual || ''}
-									value={hargaJual}
-									onChange={(e) => setHargaJual(e.target.value)}
-								/>
-							</div>
-							<div className="flex flex-col gap-2">
-								<p className="font-bold">Jumlah Barang Masuk :</p>
-								<input
-									type="number"
-									className="w-full border h-9 px-2"
-									placeholder="Jumlah Stok Produk Masuk"
-									required
-									min={1}
-									// value={productById.stok || ''}
-									value={stok}
-									onChange={(e) => setStok(e.target.value)}
-								/>
-							</div>
-						</section>
-						<div className="flex flex-row gap-2 justify-end mr-8">
-							<Link to={'/gudang'}>
-								<button className="border border-primary px-2 py-1 rounded">
-									Batalkan
+			<div className='flex h-auto w-full justify-center bg-[#F2F4F9]'>
+				<main className="bg-secondary border-2 rounded border-primary w-full max-w-[40em] h-[36em] flex flex-col mx-3 mt-8">
+					<div>
+						<header className="bg-primary w-full p-4 text-left font-bold text-white">
+							<p className="pl-4 text-lg">Edit Barang</p>
+						</header>
+						<form action="" onSubmit={toggleModal}>
+							<section className="flex flex-col gap-4 w-full p-6 ">
+								<div className="flex flex-col gap-2">
+									<p className="font-bold">Kode Barang :</p>
+									<input
+										type="text"
+										className="w-full border h-9 px-2 "
+										placeholder="Kode Produk"
+										required
+										// value={productById.kode_barang || ''}
+										value={kodeBarang}
+										onChange={(e) => setKodeBarang(e.target.value)}
+									/>
+								</div>
+								<div className="flex flex-col gap-2">
+									<p className="font-bold">Nama Barang :</p>
+									<input
+										type="text"
+										className="w-full border h-9 px-2"
+										placeholder="Nama Produk"
+										required
+										// value={productById.nama || ''}
+										value={namaBarang}
+										onChange={(e) => setNamaBarang(e.target.value)}
+									/>
+								</div>
+								<div className="flex flex-col gap-2">
+									<p className="font-bold">Harga Beli Barang :</p>
+									<input
+										type="number"
+										className="w-full border h-9 px-2"
+										placeholder="Harga Beli Produk"
+										required
+										min={1}
+										// value={productById.harga_beli || ''}
+										value={hargaBeli}
+										onChange={(e) => setHargaBeli(e.target.value)}
+									/>
+								</div>
+								<div className="flex flex-col gap-2">
+									<p className="font-bold">Harga Jual Barang :</p>
+									<input
+										type="number"
+										className="w-full border h-9 px-2"
+										placeholder="Harga Jual Produk"
+										required
+										min={1}
+										// value={productById.harga_jual || ''}
+										value={hargaJual}
+										onChange={(e) => setHargaJual(e.target.value)}
+									/>
+								</div>
+								<div className="flex flex-col gap-2">
+									<p className="font-bold">Jumlah Barang Masuk :</p>
+									<input
+										type="number"
+										className="w-full border h-9 px-2"
+										placeholder="Jumlah Stok Produk Masuk"
+										required
+										min={1}
+										// value={productById.stok || ''}
+										value={stok}
+										onChange={(e) => setStok(e.target.value)}
+									/>
+								</div>
+							</section>
+							<div className="flex flex-row gap-2 justify-end mr-8">
+								<Link to={'/gudang'}>
+									<button className="border border-primary px-2 py-1 rounded">
+										Batalkan
+									</button>
+								</Link>
+								<button
+									type="submit"
+									className="border border-primary px-4 py-1 rounded bg-primary text-white"
+								>
+									Edit
 								</button>
-							</Link>
-							<button
-								type="submit"
-								className="border border-primary px-4 py-1 rounded bg-primary text-white"
-							>
-								Edit
-							</button>
-						</div>
-					</form>
-				</div>
-			</main>
+							</div>
+						</form>
+					</div>
+				</main>
+			</div>
 			<section className="relative">
 				{showModal && (
 					<div className="fixed inset-0 flex items-center justify-center z-10">
