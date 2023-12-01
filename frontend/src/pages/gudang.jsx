@@ -357,7 +357,7 @@ function GudangPage() {
 		tableContent = currentValues.map((item, index) => (
 			<TableGudang
 				key={item.id}
-				no={index + 1}
+				no={(index + 1) + indexOfLastValue - 8}
 				nama={item.nama}
 				kode={item.kode_barang}
 				beli={item.harga_beli}
