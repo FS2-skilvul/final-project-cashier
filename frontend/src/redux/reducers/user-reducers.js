@@ -327,17 +327,17 @@ export function getDataProductUserById(id) {
     }
 }
 
-export function updateDataUser(newData) {
+export function updateDataUser(id, newData) {
     return async function (dispatch) {
         try {
             dispatch(startFetching())
             const token = localStorage.getItem('token')
             if (token) {
                 const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
-                // --- error disini ----
-                await axios.put('https://final-project-cashier-production.up.railway.app/user/userSelf', newData, { headers })
-                // ---------------------
-                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', newData, { headers })
+
+                await axios.put(`https://final-project-cashier-production.up.railway.app/user/${id}`, newData, { headers })
+
+                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', { headers })
                 // console.log(login.data.token, data.data.nama)
                 dispatch(successGetDataUser(data.data));
             } else {
@@ -362,35 +362,5 @@ export function updateDataUser(newData) {
         }
     }
 }
-
-// export function centangTodo(id, completed) {
-//     return async function (dispatch) {
-//         dispatch(startFetching())
-//         await axios.put(`https://final-project-cashier-production.up.railway.app/${id}`, { completed })
-
-//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
-//         dispatch(successGetTodo(data))
-//     }
-// }
-
-// export function editTodo(id, value) {
-//     return async function (dispatch) {
-//         dispatch(startFetching())
-//         await axios.put(`https://final-project-cashier-production.up.railway.app/${id}`, { value })
-
-//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
-//         dispatch(successGetTodo(data))
-//     }
-// }
-
-// export function deleteTodo(id) {
-//     return async function (dispatch) {
-//         dispatch(startFetching())
-//         await axios.delete(`https://final-project-cashier-production.up.railway.app/${id}`)
-
-//         const { data } = await axios("https://final-project-cashier-production.up.railway.app")
-//         dispatch(successGetTodo(data))
-//     }
-// }
 
 export default userReducer;

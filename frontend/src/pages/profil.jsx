@@ -12,14 +12,12 @@ function ProfilePage() {
 	const dispatch = useDispatch()
 	const { userSelf, isLoading } = useSelector((state) => state.user)
 	const [formData, setFormData] = useState({
-		nama: '',
-		nama_toko: '',
-		email: '',
-		nomor_telepon: '',
-		alamat_toko: ''
+		nama: null,
+		nama_toko: null,
+		email: null,
+		nomor_telepon: null,
+		alamat_toko: null
 	})
-
-
 
 	useEffect(() => {
 		dispatch(getDataUser())
@@ -27,11 +25,11 @@ function ProfilePage() {
 
 	useEffect(() => {
 		setFormData({
-			nama: userSelf.nama,
-			nama_toko: userSelf.nama_toko,
-			email: userSelf.email,
-			nomor_telepon: userSelf.nomor_telepon,
-			alamat_toko: userSelf.alamat_toko
+			nama: userSelf.nama || '',
+			nama_toko: userSelf.nama_toko || '',
+			email: userSelf.email || '',
+			nomor_telepon: userSelf.nomor_telepon || '',
+			alamat_toko: userSelf.alamat_toko || ''
 		})
 	}, [userSelf]);
 
@@ -49,17 +47,26 @@ function ProfilePage() {
 	const resetFormData = (event) => {
 		event.preventDefault();
 		setFormData({
-			nama: userSelf.nama,
-			nama_toko: userSelf.nama_toko,
-			email: userSelf.email,
-			nomor_telepon: userSelf.nomor_telepon,
-			alamat_toko: userSelf.alamat_toko
+			nama: userSelf.nama ?? '',
+			nama_toko: userSelf.nama_toko ?? '',
+			email: userSelf.email ?? '',
+			nomor_telepon: userSelf.nomor_telepon ?? '',
+			alamat_toko: userSelf.alamat_toko ?? ''
 		})
 	}
 
 	const submitDataProfile = (e) => {
 		e.preventDefault()
-		dispatch(updateDataUser(formData))
+		setFormData({
+			nama: formData.nama  === '' ? null : formData.nama,
+			nama_toko: formData.nama_toko === '' ? null : formData.nama_toko,
+			email: formData.email === '' ? null : formData.email,
+			nomor_telepon: formData.nomor_telepon === '' ? null : formData.nomor_telepon,
+			alamat_toko: formData.alamat_toko === '' ? null : formData.alamat_toko
+		})
+		console.log(formData)
+		dispatch(updateDataUser(userSelf.id, formData))
+		toggleModal(e)
 	}
 
 	return (
@@ -83,7 +90,7 @@ function ProfilePage() {
 										required
 										className="w-full border h-9 px-2 "
 										placeholder="Masukkan Nama Pengguna"
-										value={formData.nama || ''}
+										value={formData.nama ?? ''}
 										onChange={(e) => setFormData({ ...formData, nama: e.target.value })}
 									/>
 								</div>
@@ -93,7 +100,7 @@ function ProfilePage() {
 										type="text"
 										className="w-full border h-9 px-2"
 										placeholder="Masukkan Nama Toko"
-										value={formData.nama_toko || ''}
+										value={formData.nama_toko ?? ''}
 										onChange={(e) => setFormData({ ...formData, nama_toko: e.target.value })}
 									/>
 								</div>
@@ -104,7 +111,7 @@ function ProfilePage() {
 										required
 										className="w-full border h-9 px-2"
 										placeholder="Masukkan Email"
-										value={formData.email || ''}
+										value={formData.email ?? ''}
 										onChange={(e) => setFormData({ ...formData, email: e.target.value })}
 									/>
 								</div>
@@ -114,7 +121,8 @@ function ProfilePage() {
 										type="number"
 										className="w-full border h-9 px-2"
 										placeholder="Masukkan No Telp"
-										value={formData.nomor_telepon || ''}
+										value={formData.nomor_telepon ?? ''}
+										min={0}
 										onChange={(e) => setFormData({ ...formData, nomor_telepon: e.target.value })}
 									/>
 								</div>
@@ -124,7 +132,7 @@ function ProfilePage() {
 										type="text"
 										className="w-full border h-9 px-2"
 										placeholder="Masukkan Alamat Toko"
-										value={formData.alamat_toko || ''}
+										value={formData.alamat_toko ?? ''}
 										onChange={(e) => setFormData({ ...formData, alamat_toko: e.target.value })}
 									/>
 								</div>
@@ -139,7 +147,7 @@ function ProfilePage() {
 							</div> */}
 							</section>
 							<div className="flex justify-between px-4 py-4">
-								<div className='bg-red-500 rounded-lg hover:bg-red-600 w-fit'>
+								<div className='bg-red-500 rounded-md hover:bg-red-600 w-fit'>
 									<Link to={'/user-dashboard'} className='flex items-center justify-center px-2 py-2 sm:py-1 rounded-lg text-white space-x-2'>
 										<svg width="16" height="16" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path fillRule="evenodd" clipRule="evenodd" d="M13.583 1.91667C13.5833 1.61253 13.4885 1.31592 13.3118 1.06834C13.1352 0.820763 12.8856 0.634608 12.5979 0.535928C12.3102 0.437248 11.9989 0.43098 11.7074 0.518003C11.416 0.605025 11.1591 0.780983 10.9726 1.02125L0.764293 14.1462C0.565151 14.4022 0.457031 14.7173 0.457031 15.0417C0.457031 15.366 0.565151 15.6811 0.764293 15.9371L10.9726 29.0621C11.1591 29.3024 11.416 29.4783 11.7074 29.5653C11.9989 29.6524 12.3102 29.6461 12.5979 29.5474C12.8856 29.4487 13.1352 29.2626 13.3118 29.015C13.4885 28.7674 13.5833 28.4708 13.583 28.1667V22.3479C21.4274 22.5113 25.1958 24.0002 27.0887 25.619C28.8883 27.1575 29.2178 28.9673 29.5605 30.8631L29.6495 31.3517C29.7149 31.7012 29.9059 32.0149 30.1864 32.2335C30.4669 32.4521 30.8176 32.5608 31.1726 32.5389C31.5276 32.517 31.8623 32.3662 32.1139 32.1148C32.3654 31.8634 32.5164 31.5287 32.5385 31.1738C32.7878 27.1663 32.413 21.3592 29.5824 16.5015C26.8349 11.7867 21.8883 8.16125 13.583 7.78208V1.91667Z" fill="currentColor" />

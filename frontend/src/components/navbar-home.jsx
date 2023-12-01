@@ -109,7 +109,7 @@ function NavbarHome() {
 					alt=""
 					className="border rounded-full w-10 border-primary"
 				/>
-				<p>{userSelf.nama}</p>
+				<p>{userSelf.nama || ''}</p>
 				<div className="relative">
 					<button onClick={toogleButton}>
 						{toogle && true ? <IoIosArrowForward /> : <IoIosArrowDown />}
