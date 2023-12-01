@@ -78,9 +78,49 @@ function BarChart() {
         ],
     };
 
-    const options = {
+    const optionsX = {
         responsive: true,
         maintainAspectRatio: false,
+        indexAxis: 'x',
+        plugins: {
+            legend: {
+                position: 'top',
+                title: {
+                    font: {
+                        size: 30, // Ubah ukuran font legenda di sini
+                    },
+                },
+            },
+            title: {
+                display: true,
+                text: `PENDAPATAN DAN PENGELUARAN TAHUN ${currentYear}`,
+                font: {
+                    size: 30, // Ubah ukuran font judul di sini
+                },
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        size: 18, // Ubah ukuran font sumbu x di sini
+                    },
+                },
+            },
+            y: {
+                ticks: {
+                    font: {
+                        size: 18, // Ubah ukuran font sumbu y di sini
+                    },
+                },
+            },
+        },
+    };
+
+    const optionsY = {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
         plugins: {
             legend: {
                 position: 'top',
@@ -102,14 +142,14 @@ function BarChart() {
             x: {
                 ticks: {
                     font: {
-                        size: 16, // Ubah ukuran font sumbu x di sini
+                        size: 14, // Ubah ukuran font sumbu x di sini
                     },
                 },
             },
             y: {
                 ticks: {
                     font: {
-                        size: 16, // Ubah ukuran font sumbu y di sini
+                        size: 14, // Ubah ukuran font sumbu y di sini
                     },
                 },
             },
@@ -117,8 +157,13 @@ function BarChart() {
     };
 
     return (
-        <div>
-            <Bar options={options} data={data} className='h-96 lg:h-full w-[800px] lg:w-[1200px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+        <div className='w-full h-full' >
+            <div className='w-full h-[600px] md:px-3 lg:px-4 rounded-b-lg hidden md:flex'>
+                <Bar options={optionsX} data={data} className='h-[600px] sm:h-96 lg:max-h-[1200px] w-full max-w-[1200px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+            </div>
+            <div className='w-full rounded-b-lg md:hidden'>
+                <Bar options={optionsY} data={data} className='h-[600px] sm:h-96 lg:h-full w-full bg-white px-2 md:px-12 py-6 rounded-b-lg border-b border-x border-gray-400' />
+            </div>
         </div>
     );
 }
