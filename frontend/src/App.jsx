@@ -14,12 +14,13 @@ import ProfilePage from './pages/profil';
 import AdminGudangPage from './pages/admin/admin-gudang';
 import AdminTransaksiPage from './pages/admin/admin-transaksi';
 import AdminCashflowPage from './pages/admin/admin-cashflow';
+import LandingPage from '../src/pages/landing/landing';
 
 function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<LandingHome />} />
+				<Route path="/" element={<LandingPage />} />
 				<Route path="/fitur" element={<LandingFitur />} />
 				<Route path="/about" element={<LandingAbout />} />
 
@@ -35,9 +36,18 @@ function App() {
 				<Route path="/kasir" element={<KasirPage />} />
 
 				<Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-				<Route path="/admin-dashboard/cashflow/:id" element={<AdminCashflowPage />}/>
-				<Route path="/admin-dashboard/gudang/:id" element={<AdminGudangPage />} />
-				<Route path="/admin-dashboard/transaksi/:id" element={<AdminTransaksiPage />}/>
+				<Route
+					path="/admin-dashboard/cashflow/:id"
+					element={<AdminCashflowPage />}
+				/>
+				<Route
+					path="/admin-dashboard/gudang/:id"
+					element={<AdminGudangPage />}
+				/>
+				<Route
+					path="/admin-dashboard/transaksi/:id"
+					element={<AdminTransaksiPage />}
+				/>
 			</Routes>
 		</>
 	);
