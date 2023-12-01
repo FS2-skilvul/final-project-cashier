@@ -10,10 +10,14 @@ function LandingFitur() {
 	return (
 		<>
 			<NavbarLanding />
-			<main className="pt-4">
+			<main className="pt-4 z-1">
 				<div className="flex flex-col  justify-center mt-[4.5rem] items-center">
-					<h1 className="text-5xl font-bold">FITUR UTAMA</h1>
-					<h2 className="text-4xl font-bold text-primary">Kasir Online</h2>
+					<h1 className="text-5xl font-bold text-center">
+						FITUR UTAMA{' '}
+						<span className="text-5xl font-bold text-primary">
+							Kasir Online
+						</span>
+					</h1>
 				</div>
 				<div className="flex flex-col lg:flex-row justify-center items-center mt-2">
 					<ContainerFitur

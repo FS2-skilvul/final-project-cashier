@@ -3,7 +3,7 @@ import logoBiru from '../assets/Logo Biru.png';
 
 function NavbarLanding() {
 	return (
-		<header className="flex py-4 px-6 sm:px-12 lg:px-16 w-screen bg-white shadow  text-primary fixed top-0 justify-between gap-2 z-10">
+		<header className="flex py-4 px-6 sm:px-12 lg:px-16 w-screen bg-white shadow  text-primary fixed top-0 justify-between gap-2 z-50">
 			<div className="flex font-bold items-center">
 				<a href="/">
 					<img src={logoBiru} alt="Logo Kasir Online" className="w-32" />

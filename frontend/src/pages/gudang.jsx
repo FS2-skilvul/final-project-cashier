@@ -357,7 +357,7 @@ function GudangPage() {
 		tableContent = currentValues.map((item, index) => (
 			<TableGudang
 				key={item.id}
-				no={(index + 1) + indexOfLastValue - 8}
+				no={index + 1 + indexOfLastValue - 8}
 				nama={item.nama}
 				kode={item.kode_barang}
 				beli={item.harga_beli}
@@ -379,24 +379,31 @@ function GudangPage() {
 	}
 
 	return (
-		<div className="relative flex flex-col items-center w-full h-screen bg-[#F2F4F9] px-3">
+		<div className="relative flex flex-col items-center w-full h-screen bg-[#F2F4F9] px-3 md:px-10">
 			<NavbarHome />
-			<div className='flex h-auto w-full justify-center bg-[#F2F4F9]'>
-				<div className='h-auto rounded-lg w-full max-w-[1200px] bg-[#F2F4F9] pt-28'>
-					<main className='w-full max-w-full h-auto pb-9 bg-[#F2F4F9]'>
+			<div className="flex h-auto w-full justify-center bg-[#F2F4F9]">
+				<div className="h-auto rounded-lg w-full max-w-[1200px] bg-[#F2F4F9] pt-28">
+					<main className="w-full max-w-full h-auto pb-9 bg-[#F2F4F9]">
 						<section className="w-full h-full border rounded-lg">
 							<div className="flex justify-center md:justify-start w-full py-2 bg-primary items-center rounded-t-lg border-t border-x border-black">
-								<p className="ml-8 font-bold text-white text-xl">DAFTAR USER</p>
+								<p className="ml-8 font-bold text-white text-xl">
+									DAFTAR BARANG
+								</p>
 							</div>
-							<div className='px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-full'>
-								<div className='flex w-full justify-start space-x-2 sm:justify-between items-center py-3'>
-									<div className='block rounded-lg'>
-										<Link to={'/gudang/tambah'} className='flex w-full items-center px-3 sm:px-4 bg-green-500 hover:bg-green-600 py-3 sm:py-2 rounded-lg text-white sm:space-x-4'>
+							<div className="px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-full">
+								<div className="flex w-full justify-start space-x-2 sm:justify-between items-center py-3">
+									<div className="block rounded-lg">
+										<Link
+											to={'/gudang/tambah'}
+											className="flex w-full items-center px-3 sm:px-4 bg-green-500 hover:bg-green-600 py-3 sm:py-2 rounded-lg text-white sm:space-x-4"
+										>
 											<FaPlus />
-											<p className='font-bold whitespace-nowrap hidden sm:flex'>Tambah Barang</p>
+											<p className="font-bold whitespace-nowrap hidden sm:flex">
+												Tambah Barang
+											</p>
 										</Link>
 									</div>
-									<div className='flex w-full justify-start sm:justify-end'>
+									<div className="flex w-full justify-start sm:justify-end">
 										<input
 											type="text"
 											className=" border-2 border-primary rounded px-3 sm:px-8 w-full sm:w-fit py-1 h-fit"
@@ -406,8 +413,8 @@ function GudangPage() {
 										></input>
 									</div>
 								</div>
-								<div className='flex flex-col h-full justify-between space-y-9 '>
-									<div className='overflow-x-auto'>
+								<div className="flex flex-col h-full justify-between space-y-9 ">
+									<div className="overflow-x-auto">
 										<div className="w-[900px] lg:w-full  flex justify-center">
 											<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-b-2">
 												<thead className="text-center bg-primary text-white ">
@@ -425,12 +432,11 @@ function GudangPage() {
 											</table>
 										</div>
 									</div>
-
 								</div>
 							</div>
 							<div className="flex bg-primary w-full h-auto items-center py-2 px-8 rounded-b-lg border-b border-x border-black ">
 								<div className="grid sm:grid-cols-2 gap-2 w-full justify-center sm:justify-between items-center">
-									<div className='w-full'>
+									<div className="w-full">
 										<p className="flex text-center text-white ">
 											{indexOfFirstValue + 1} -{' '}
 											{Math.min(indexOfLastValue, totalItems)} data | Halaman{' '}
