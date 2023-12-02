@@ -36,10 +36,10 @@ function NavbarHome() {
 		<>
 			<header className="fixed flex md:justify-center w-full p-4 px-0 md:px-8 lg:px-12 xl:px-16 bg-white shadow top-0 items-center text-xl z-10">
 				{menu && (
-					<div className="container absolute w-screen">
-						<div className="absolute right-0 -top-[1.35rem] w-1/2 h-screen opacity-95 bg-white mt-14">
-							<div className="flex flex-col p-8 items-center h-full">
-								<div className="flex flex-col font-semibold text-base items-center justify-center text-primary pb-2">
+					<div className="fixed md:hidden flex">
+						<div className="opacity-95 right-0 fixed top-[4.5rem] bg-white w-1/2 h-full">
+							<div className="flex flex-col items-center h-full">
+								<div className="flex flex-col font-semibold text-base items-center justify-center text-primary mt-12">
 									<img
 										src="https://c.pxhere.com/images/0d/18/4fa31701d2cfa087836d807967f3-1447663.jpg!d"
 										alt=""
@@ -132,7 +132,7 @@ function NavbarHome() {
 										</button>
 									</Link>
 								</div>
-								<button className="flex flex-1 items-end mb-12 text-primary">
+								<button className="flex flex-1 items-end mb-24 text-primary bottom-0">
 									<Link to="/">
 										<div className="flex flex-row items-center justify-center gap-2=">
 											<IoIosLogOut />
@@ -242,7 +242,7 @@ function NavbarHome() {
 								{toogle && true ? <IoIosArrowForward /> : <IoIosArrowDown />}
 							</button>
 							{toogle && (
-								<div className="flex flex-col fixed top-[5em] right-[2em] xl:right-[5em]">
+								<div className="flex-col fixed top-[5em] right-[2em] xl:right-[5em] hidden sm:flex">
 									<button className="bg-white border px-8 py-1">
 										<Link to="/profile">
 											<div className="flex flex-row items-center justify-center gap-2 ">

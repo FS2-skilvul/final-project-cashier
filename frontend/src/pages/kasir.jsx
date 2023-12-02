@@ -1,13 +1,16 @@
 import NavbarHome from '../components/navbar-home';
 import TableKasir from '../components/table-kasir';
-import logo_hitam from '../assets/Logo Hitam.png'
+import logo_hitam from '../assets/Logo Hitam.png';
 import { useEffect, useState } from 'react';
 import { BsBasketFill } from 'react-icons/bs';
 import { FaCartPlus, FaCheckCircle, FaCheckSquare } from 'react-icons/fa';
 import { ImPrinter } from 'react-icons/im';
 import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { createDataTransaction, getDataTransaction } from '../redux/reducers/transaction-reducers';
+import {
+	createDataTransaction,
+	getDataTransaction,
+} from '../redux/reducers/transaction-reducers';
 import { getDataProduct } from '../redux/reducers/product-reducers';
 import { getDataUser } from '../redux/reducers/user-reducers';
 
@@ -20,7 +23,7 @@ function KasirPage() {
 	const { transactions } = useSelector((state) => state.transaction);
 	const { products } = useSelector((state) => state.product);
 	const { userSelf } = useSelector((state) => state.user);
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	// Mendapatkan tanggal hari ini
 	const today = new Date();
 	const day = today.getDate();
@@ -32,34 +35,40 @@ function KasirPage() {
 	const [searchBarang, setSearchBarang] = useState('');
 	const [filteredProducts, setFilteredProducts] = useState([]);
 	const [qty, setQty] = useState('');
-	const [cart, setCart] = useState([])
-	const [totalBiaya, setTotalBiaya] = useState(0)
-	const [bayar, setBayar] = useState('')
-	const [kembalian, setKembalian] = useState('')
-	const [sudahBayar, setSudahBayar] = useState(false)
+	const [cart, setCart] = useState([]);
+	const [totalBiaya, setTotalBiaya] = useState(0);
+	const [bayar, setBayar] = useState('');
+	const [kembalian, setKembalian] = useState('');
+	const [sudahBayar, setSudahBayar] = useState(false);
 
 	const toggleModal = () => {
 		setShowModal(!showModal);
 	};
 
 	const toggleModalPilihBarang = (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		setShowModalPilihBarang(!showModalPilihBarang);
 	};
 
 	useEffect(() => {
-		dispatch(getDataTransaction())
-		dispatch(getDataProduct())
-		dispatch(getDataUser())
-	}, [dispatch])
+		dispatch(getDataTransaction());
+		dispatch(getDataProduct());
+		dispatch(getDataUser());
+	}, [dispatch]);
 
 	// ---Search product---
 	useEffect(() => {
 		// Filter produk berdasarkan kata kunci pencarian
-		const filtered = products.filter((product) =>
-			product.nama.toString().toLowerCase().includes(searchBarang.toString().toLowerCase())
-			||
-			product.kode_barang.toString().toLowerCase().includes(searchBarang.toString().toLowerCase())
+		const filtered = products.filter(
+			(product) =>
+				product.nama
+					.toString()
+					.toLowerCase()
+					.includes(searchBarang.toString().toLowerCase()) ||
+				product.kode_barang
+					.toString()
+					.toLowerCase()
+					.includes(searchBarang.toString().toLowerCase()),
 		);
 		setFilteredProducts(filtered);
 	}, [searchBarang, products]);
@@ -74,15 +83,15 @@ function KasirPage() {
 				sub_total: selectedProduct?.harga_jual * qty,
 			},
 		]);
-		setTotalBiaya(totalBiaya + (selectedProduct?.harga_jual * qty))
+		setTotalBiaya(totalBiaya + selectedProduct?.harga_jual * qty);
 	};
 
 	const handleSubmitAddCart = (e) => {
 		e.preventDefault(); // Prevent default form submission
 		handleAddCart();
-		setSelectedProduct(null)
-		setQty('')
-		setSearchBarang('')
+		setSelectedProduct(null);
+		setQty('');
+		setSearchBarang('');
 	};
 
 	// ---Delete Cart---
@@ -112,22 +121,22 @@ function KasirPage() {
 		}));
 		const newTransaction = {
 			products: final_cart,
-			total_biaya: totalBiaya
-		}
-		dispatch(createDataTransaction(newTransaction))
+			total_biaya: totalBiaya,
+		};
+		dispatch(createDataTransaction(newTransaction));
 		//reset state page
 		setSelectedProduct(null);
 		setSearchBarang('');
 		setFilteredProducts([]);
 		setQty('');
-		setCart([])
-		setTotalBiaya(0)
-		setBayar('')
-		setKembalian('')
-		setSudahBayar(false)
+		setCart([]);
+		setTotalBiaya(0);
+		setBayar('');
+		setKembalian('');
+		setSudahBayar(false);
 
-		toggleModal()
-	}
+		toggleModal();
+	};
 
 	// ---Search transactions---
 	const searchBar = (e) => {
@@ -139,12 +148,10 @@ function KasirPage() {
 		if (!search || search === '') {
 			return true;
 		}
-		return (
-			item.id
-				.toString()
-				.toLowerCase()
-				.includes(search.toString().toLowerCase())
-		);
+		return item.id
+			.toString()
+			.toLowerCase()
+			.includes(search.toString().toLowerCase());
 	});
 
 	// ---Pagination---
@@ -170,11 +177,11 @@ function KasirPage() {
 		tableContent = currentValues.map((item, index) => (
 			<TableKasir
 				key={item.id}
-				no={(index + 1) + indexOfLastValue - 8}
-				nama={item.products.map((n) => (n.nama))}
+				no={index + 1 + indexOfLastValue - 8}
+				nama={item.products.map((n) => n.nama)}
 				no_trans={item.id}
-				quantity={item.products.map((n) => (n.Detail_Transaction.qty))}
-				harga={item.products.map((n) => (n.Detail_Transaction.sub_total))}
+				quantity={item.products.map((n) => n.Detail_Transaction.qty)}
+				harga={item.products.map((n) => n.Detail_Transaction.sub_total)}
 				total={item.total_biaya}
 				tanggal={item.createdAt}
 			/>
@@ -194,7 +201,7 @@ function KasirPage() {
 	return (
 		<div className="relative flex flex-col items-center w-full h-auto bg-[#F2F4F9] pt-32 pb-12">
 			<NavbarHome />
-			<main className='w-full max-w-[1200px] px-3 sm:px-8'>
+			<main className="w-full max-w-[1200px] px-3 sm:px-8">
 				<section className="grid lg:grid-cols-2 gap-12">
 					<div className="w-full flex flex-col ">
 						<div className="flex flex-col border border-black rounded-lg bg-white justify-around">
@@ -216,27 +223,38 @@ function KasirPage() {
 										</div>
 										<div className="flex gap-4 px-8 w-full items-center justify-end">
 											<p className="w-[10em]">Kode Barang</p>
-											<button className="flex w-full h-8 items-center rounded border border-black p-2"
-												onClick={toggleModalPilihBarang}>
-												{selectedProduct == null ?
-													<p className='text-left text-gray-400'>Kode Barang</p>
-													:
-													<p className='text-left text-gray-700'>{selectedProduct.kode_barang}</p>}
+											<button
+												className="flex w-full h-8 items-center rounded border border-black p-2"
+												onClick={toggleModalPilihBarang}
+											>
+												{selectedProduct == null ? (
+													<p className="text-left text-gray-400">Kode Barang</p>
+												) : (
+													<p className="text-left text-gray-700">
+														{selectedProduct.kode_barang}
+													</p>
+												)}
 											</button>
 										</div>
 										<div className="flex gap-4 px-8 w-full items-center justify-end">
 											<p className="w-[10em]">Nama Barang</p>
-											{selectedProduct == null ?
-												<button className="flex w-full h-8 items-center rounded border border-black p-2"
-													onClick={toggleModalPilihBarang}>
-													<p className='text-left text-gray-400'>Nama Barang</p>
+											{selectedProduct == null ? (
+												<button
+													className="flex w-full h-8 items-center rounded border border-black p-2"
+													onClick={toggleModalPilihBarang}
+												>
+													<p className="text-left text-gray-400">Nama Barang</p>
 												</button>
-												:
-												<button className="flex w-full h-fit items-center rounded border border-black p-2"
-													onClick={toggleModalPilihBarang}>
-													<p className='text-left text-gray-700 overflow-hidden  overflow-ellipsis'>{selectedProduct.nama}</p>
+											) : (
+												<button
+													className="flex w-full h-fit items-center rounded border border-black p-2"
+													onClick={toggleModalPilihBarang}
+												>
+													<p className="text-left text-gray-700 overflow-hidden  overflow-ellipsis">
+														{selectedProduct.nama}
+													</p>
 												</button>
-											}
+											)}
 										</div>
 										<div className="flex gap-4 px-8 w-full items-center justify-end">
 											<p className="w-[10em]">Harga</p>
@@ -250,7 +268,7 @@ function KasirPage() {
 										</div>
 										<div className="flex gap-4 px-8 w-full items-center">
 											<p className="w-[10em]">Quantity</p>
-											<div className='w-full'>
+											<div className="w-full">
 												<input
 													type="number"
 													className="w-full h-8 rounded border border-black p-2"
@@ -260,7 +278,11 @@ function KasirPage() {
 													value={qty}
 													onChange={(e) => {
 														const newValue = parseInt(e.target.value);
-														if (newValue > 0 && newValue <= selectedProduct?.stok && selectedProduct?.stok > 0) {
+														if (
+															newValue > 0 &&
+															newValue <= selectedProduct?.stok &&
+															selectedProduct?.stok > 0
+														) {
 															setQty(newValue);
 														} else {
 															// Nilai tidak valid (mungkin negatif atau melebihi stok), set ke 0 atau sesuai kebutuhan
@@ -268,9 +290,11 @@ function KasirPage() {
 														}
 													}}
 												/>
-												{
-													selectedProduct && <p className='text-red-500 text-sm'>Maks. qty: {selectedProduct?.stok}</p>
-												}
+												{selectedProduct && (
+													<p className="text-red-500 text-sm">
+														Maks. qty: {selectedProduct?.stok}
+													</p>
+												)}
 											</div>
 										</div>
 										<div className="flex gap-4 px-8 w-full items-center justify-end">
@@ -279,13 +303,19 @@ function KasirPage() {
 												type="number"
 												disabled
 												className="w-full h-8 rounded border bg-gray-200 border-black p-2"
-												value={selectedProduct ? selectedProduct.harga_jual * qty : 0}
+												value={
+													selectedProduct ? selectedProduct.harga_jual * qty : 0
+												}
 											/>
 										</div>
 									</div>
 								</form>
-								<div className='flex w-full justify-end items-end px-8 py-2'>
-									<button onClick={handleSubmitAddCart} disabled={qty == '' || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg bg-primary text-white font-bold flex items-center space-x-2">
+								<div className="flex w-full justify-end items-end px-8 py-2">
+									<button
+										onClick={handleSubmitAddCart}
+										disabled={qty == '' || sudahBayar ? 'disabled' : ''}
+										className="border-2 p-1 px-4 rounded-lg bg-primary text-white font-bold flex items-center space-x-2"
+									>
 										<FaCartPlus />
 										<p>Tambah ke Nota</p>
 									</button>
@@ -311,26 +341,29 @@ function KasirPage() {
 												className=" border-2 border-black rounded px-8 w-full sm:w-fit py-1 h-fit"
 												value={searchBarang}
 												onChange={(e) => setSearchBarang(e.target.value)}
-												placeholder="Cari Barang">
-											</input>
-											<div className='w-full overflow-y-auto'>
-												{searchBarang == '' ?
-													<p>Masukkan kata kunci nama barang atau kode barang</p>
-													:
-													<ul className='w-full space-y-2'>
+												placeholder="Cari Barang"
+											></input>
+											<div className="w-full overflow-y-auto">
+												{searchBarang == '' ? (
+													<p className="text-center">
+														Masukkan kata kunci nama barang atau kode barang
+													</p>
+												) : (
+													<ul className="w-full space-y-2">
 														{filteredProducts.map((product) => (
-															<li className='w-full bg-gray-100 py-1 px-2 cursor-pointer' key={product.id}
+															<li
+																className="w-full bg-gray-100 py-1 px-2 cursor-pointer"
+																key={product.id}
 																onClick={() => {
-																	setShowModalPilihBarang(false)
-																	setSelectedProduct(product)
-
+																	setShowModalPilihBarang(false);
+																	setSelectedProduct(product);
 																}}
 															>
 																{product.nama}
 															</li>
 														))}
 													</ul>
-												}
+												)}
 											</div>
 										</div>
 									</div>
@@ -365,7 +398,17 @@ function KasirPage() {
 
 								<br />
 								<br />
-								<button onClick={() => { setKembalian(bayar - totalBiaya), setSudahBayar(true) }} disabled={bayar < totalBiaya || cart.length == 0 || sudahBayar ? 'disabled' : ''} className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2">
+								<button
+									onClick={() => {
+										setKembalian(bayar - totalBiaya), setSudahBayar(true);
+									}}
+									disabled={
+										bayar < totalBiaya || cart.length == 0 || sudahBayar
+											? 'disabled'
+											: ''
+									}
+									className="border-2 p-1 px-4 rounded-lg absolute right-8 bottom-2 mx-auto bg-primary text-white font-bold flex items-center gap-2"
+								>
 									<BsBasketFill />
 									Bayar
 								</button>
@@ -375,14 +418,21 @@ function KasirPage() {
 					{/* Cart */}
 					<div className="w-full flex flex-col border border-black rounded-lg bg-white">
 						<div className="flex flex-col items-center m-2">
-							<img src={logo_hitam} alt="Logo Usaha" className='w-12' />
-							<p>UMKM {userSelf?.nama?.toString().toUpperCase()}</p>
-							<p>{userSelf?.alamat?.toString()}</p>
+							<img src={logo_hitam} alt="Logo Usaha" className="w-12 m-1" />
+							<div>
+								<p className="mx-1 font-bold">
+									UMKM {userSelf?.nama_toko?.toString().toUpperCase()} -{' '}
+									{userSelf?.nomor_telepon?.toString().toUpperCase()}
+								</p>
+							</div>
+							<p className="mx-1 text-center">
+								{userSelf?.alamat_toko?.toString()}
+							</p>
 						</div>
 						<div className="flex justify-end mx-9">
 							<p>{formattedDate}</p>
 						</div>
-						<div className='flex flex-col h-full justify-between space-y-6'>
+						<div className="flex flex-col h-full justify-between space-y-6">
 							<div className="px-8 py-2">
 								<table className="w-full border- table-auto table">
 									<thead className="border-t-2 border-b-2 border-black">
@@ -397,13 +447,26 @@ function KasirPage() {
 										{cart?.map((item, index) => (
 											<tr key={index}>
 												<td className="flex text-left items-center space-x-1">
-													{sudahBayar == false ?
-														<button onClick={() => deleteCart(item.id)} className='bg-primary text-white px-0.5 py-0.5 rounded-md'>
-															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" /></svg>
+													{sudahBayar == false ? (
+														<button
+															onClick={() => deleteCart(item.id)}
+															className="bg-primary text-white px-0.5 py-0.5 rounded-md"
+														>
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																width="24"
+																height="24"
+																viewBox="0 0 24 24"
+															>
+																<path
+																	fill="currentColor"
+																	d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+																/>
+															</svg>
 														</button>
-														:
+													) : (
 														''
-													}
+													)}
 													<p>{item.nama}</p>
 												</td>
 												<td>{item.qty}</td>
@@ -439,7 +502,11 @@ function KasirPage() {
 								<ImPrinter />
 							</button> */}
 							<button
-								disabled={bayar < totalBiaya || cart.length == 0 || !sudahBayar ? 'disabled' : ''}
+								disabled={
+									bayar < totalBiaya || cart.length == 0 || !sudahBayar
+										? 'disabled'
+										: ''
+								}
 								className="flex border bg-primary text-white font-bold gap-2 px-4 py-1 rounded-lg items-center"
 								onClick={kirimData}
 							>
@@ -478,12 +545,12 @@ function KasirPage() {
 					</div>
 				</section>
 				<section className="w-full ">
-					<div className='rounded-t-lg px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-auto lg:overflow-hidden'>
-						<div className='grid grid-cols-1 sm:grid-cols-2 justify-center sm:justify-between items-center'>
+					<div className="rounded-t-lg px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-auto lg:overflow-hidden">
+						<div className="grid grid-cols-1 sm:grid-cols-2 justify-center sm:justify-between items-center">
 							<h1 className="text-center sm:text-left text-2xl my-4 font-bold">
 								Laporan Transaksi
 							</h1>
-							<div className='flex justify-start sm:justify-end mb-4 sm:mb-0'>
+							<div className="flex justify-start sm:justify-end mb-4 sm:mb-0">
 								<input
 									type="text"
 									className=" border-2 border-black rounded px-8  sm:w-fit py-1 h-fit"
@@ -492,10 +559,9 @@ function KasirPage() {
 									placeholder="Cari Nomor Transaksi"
 								></input>
 							</div>
-
 						</div>
-						<div className='flex flex-col h-full justify-between space-y-9 '>
-							<div className='overflow-x-auto'>
+						<div className="flex flex-col h-full justify-between space-y-9 ">
+							<div className="overflow-x-auto">
 								<div className="w-[800px] md:w-full  flex justify-center">
 									<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-black">
 										<thead className="text-center bg-primary text-white ">
@@ -527,16 +593,15 @@ function KasirPage() {
 									</table>
 								</div>
 							</div>
-
 						</div>
 					</div>
 					<div className="flex bg-primary w-full h-auto items-center py-2 px-8 rounded-b-lg border-b border-x border-black ">
 						<div className="grid sm:grid-cols-2 gap-2 w-full justify-center sm:justify-between items-center">
-							<div className='w-full'>
+							<div className="w-full">
 								<p className="flex text-center text-white ">
 									{indexOfFirstValue + 1} -{' '}
-									{Math.min(indexOfLastValue, totalItems)} data | Halaman{' '}
-									{currentPage} | Jumlah Barang : {totalItems}
+									{Math.min(indexOfLastValue, totalItems)} Transaksi | Halaman{' '}
+									{currentPage} | Jumlah Transaksi : {totalItems}
 								</p>
 								<p></p>
 							</div>
