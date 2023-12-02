@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { deleteDataProduct } from '../redux/reducers/product-reducers';
 
 function TableGudang({ no, nama, kode, beli, jual, stok, id }) {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	return (
 		<tbody className="text-center">
@@ -19,7 +19,10 @@ function TableGudang({ no, nama, kode, beli, jual, stok, id }) {
 					<button className="text-white font-bold border-2 rounded bg-green-500 hover:bg-green-600 py-1 px-4">
 						<Link to={`/gudang/edit/${id}`}>Edit</Link>
 					</button>
-					<button onClick={(e) => dispatch(deleteDataProduct(id))} className="text-white font-bold border-2 rounded bg-red-500 hover:bg-red-600 py-1 px-4">
+					<button
+						onClick={(e) => dispatch(deleteDataProduct(id))}
+						className="text-white font-bold border-2 rounded bg-red-500 hover:bg-red-600 py-1 px-4"
+					>
 						Hapus
 					</button>
 				</td>

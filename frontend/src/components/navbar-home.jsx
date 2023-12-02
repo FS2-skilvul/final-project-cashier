@@ -36,8 +36,8 @@ function NavbarHome() {
 		<>
 			<header className="fixed flex md:justify-center w-full p-4 px-0 md:px-8 lg:px-12 xl:px-16 bg-white shadow top-0 items-center text-xl z-10">
 				{menu && (
-					<div className="fixed md:hidden flex">
-						<div className="opacity-95 right-0 fixed top-[4.5rem] bg-white w-1/2 h-full">
+					<div className="fixed md:hidden flex font-bold">
+						<div className="opacity-95 right-0 fixed top-[4rem] bg-white w-1/2 h-full">
 							<div className="flex flex-col items-center h-full">
 								<div className="flex flex-col font-semibold text-base items-center justify-center text-primary mt-12">
 									<img
@@ -47,11 +47,11 @@ function NavbarHome() {
 									/>
 									<p className="text-xl">{userSelf.nama}</p>{' '}
 								</div>
-								<div className="relative ">
+								<div className="relative">
 									<div className="flex flex-col top-[6.5em] right-[1em] items-end text-primary">
 										<button className="">
 											<Link to="/profile">
-												<div className="flex flex-row items-center justify-center gap-2">
+												<div className="flex flex-row items-center justify-center gap-2 text-sm font-bold">
 													<IoMdPerson />
 													Profile
 												</div>
@@ -59,18 +59,18 @@ function NavbarHome() {
 										</button>
 									</div>
 								</div>
-								<div className="gap-4 flex flex-col mt-8">
+								<div className="gap-4 flex flex-col mt-8 text-lg">
 									<Link to="/user-dashboard">
 										<button
-											className={`flex gap-4 ${
+											className={`flex gap-2 items-center ${
 												isActivePage('/user-dashboard')
 													? 'text-blue-500 fill-blue-500'
 													: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
 											}`}
 										>
 											<svg
-												width="24"
-												height="24"
+												width="15"
+												height="15"
 												viewBox="0 0 24 24"
 												xmlns="http://www.w3.org/2000/svg"
 											>
@@ -81,7 +81,7 @@ function NavbarHome() {
 									</Link>
 									<Link to={'/gudang'}>
 										<button
-											className={`flex gap-4 ${
+											className={`flex gap-2 items-center ${
 												isActivePage('/gudang') ||
 												isActivePage('/gudang/tambah') ||
 												isActivePage('/gudang/edit')
@@ -90,8 +90,8 @@ function NavbarHome() {
 											}`}
 										>
 											<svg
-												width="28"
-												height="28"
+												width="15"
+												height="15"
 												viewBox="0 0 28 28"
 												xmlns="http://www.w3.org/2000/svg"
 											>
@@ -110,15 +110,15 @@ function NavbarHome() {
 									</Link>
 									<Link to="/kasir">
 										<button
-											className={`flex gap-4 ${
+											className={`flex gap-2 items-center ${
 												isActivePage('/kasir')
 													? 'text-blue-500 fill-blue-500'
 													: 'text-gray-500 fill-gray-500 hover:text-blue-500 hover:fill-blue-500'
 											}`}
 										>
 											<svg
-												width="26"
-												height="26"
+												width="15"
+												height="15"
 												viewBox="0 0 26 26"
 												xmlns="http://www.w3.org/2000/svg"
 											>
@@ -134,7 +134,7 @@ function NavbarHome() {
 								</div>
 								<button className="flex flex-1 items-end mb-24 text-primary bottom-0">
 									<Link to="/">
-										<div className="flex flex-row items-center justify-center gap-2=">
+										<div className="flex flex-row items-center justify-center gap-2 text-sm font-bold">
 											<IoIosLogOut />
 											Keluar
 										</div>

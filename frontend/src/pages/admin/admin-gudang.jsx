@@ -114,14 +114,16 @@ function AdminGudang() {
 					<main className="w-full max-w-[65em] h-auto pb-9">
 						<section className="w-full h-full border rounded-lg">
 							<div className="flex justify-center md:justify-start w-full py-2 bg-primary items-center rounded-t-lg border-t border-x border-black">
-								<p className="ml-8 font-bold text-white text-xl">DAFTAR USER</p>
+								<p className="ml-8 font-bold text-white text-xl">
+									DAFTAR BARANG
+								</p>
 							</div>
 							<div className="px-4 sm:px-8 pb-8 border bg-white border-t-black border-x-black h-full">
 								<div className="flex w-full justify-start sm:justify-between items-center py-3">
-									<div className="bg-red-500 rounded-lg hover:bg-red-600">
+									<div className="bg-red-500 rounded-lg hover:bg-red-600 mr-2">
 										<Link
 											to={'/admin-dashboard'}
-											className="flex items-center px-4 py-2 sm:py-1 rounded-lg text-white space-x-2"
+											className="flex items-center px-4 py-2 sm:py-1 rounded-lg text-white space-x-2 "
 										>
 											<svg
 												width="20"
@@ -152,7 +154,7 @@ function AdminGudang() {
 								</div>
 								<div className="flex flex-col h-full justify-between space-y-9 ">
 									<div className="overflow-x-auto">
-										<div className="w-[900px] md:w-full  flex justify-center">
+										<div className="w-[900px] md:w-full flex justify-center">
 											<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-b-2">
 												<thead className="text-center bg-primary text-white ">
 													<tr>

@@ -117,8 +117,8 @@ function GudangPage() {
 								</div>
 								<div className="flex flex-col h-full justify-between space-y-9 ">
 									<div className="overflow-x-auto">
-										<div className="w-[900px] lg:w-full  flex justify-center">
-											<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-b-2">
+										<div className="w-[900px] lg:w-full flex justify-center overflow-x-auto">
+											<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-b-2 divide-y">
 												<thead className="text-center bg-primary text-white ">
 													<tr>
 														<th className="p-1 py-2 border">No</th>
