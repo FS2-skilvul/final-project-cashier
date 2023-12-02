@@ -155,12 +155,12 @@ function BarChart() {
     };
 
     return (
-        <div className='w-full h-full' >
-            <div className='w-full h-[600px] md:px-3 lg:px-4 rounded-lg hidden md:flex'>
-                <Bar options={optionsX} data={data} className='h-[600px] sm:h-96 lg:max-h-[1200px] w-full max-w-[1200px] bg-white px-2 md:px-12 py-6 rounded-lg' />
+        <div className='flex justify-center w-full h-full' >
+            <div className='w-[100vw] h-[600px] min-x-700 max-w-[1200px] px-4 rounded-b-lg hidden md:block'>
+                <Bar options={optionsX} data={data} className=' bg-white px-2 md:px-12 py-6 rounded-lg border border-gray-400' />
             </div>
-            <div className='w-full px-3 rounded-lg md:hidden'>
-                <Bar options={optionsY} data={data} className='h-[600px] sm:h-96 lg:h-full w-full bg-white px-2 md:px-12 py-6 rounded-lg border border-gray-300' />
+            <div className='w-[95vw] h-[60vh] min-h-[600px] rounded-b-lg md:hidden'>
+                <Bar options={optionsY} data={data} className='bg-white px-2 md:px-12 py-6 rounded-lg border border-gray-400' />
             </div>
         </div>
     );

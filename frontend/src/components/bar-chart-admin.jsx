@@ -158,11 +158,11 @@ function BarChart() {
 
     return (
         <div className='w-full h-full' >
-            <div className='w-full h-[600px] md:px-3 lg:px-4 rounded-b-lg hidden md:flex'>
-                <Bar options={optionsX} data={data} className='h-[600px] sm:h-96 lg:max-h-[1200px] w-full max-w-[1200px] bg-white px-2 md:px-12 py-6 rounded-b-lg' />
+            <div className='w-[85vw] h-[600px] min-x-700 max-w-[900px]  rounded-b-lg hidden md:block'>
+                <Bar options={optionsX} data={data} className=' bg-white px-2 md:px-12 py-6 rounded-b-lg' />
             </div>
-            <div className='w-full rounded-b-lg md:hidden'>
-                <Bar options={optionsY} data={data} className='h-[600px] sm:h-96 lg:h-full w-full bg-white px-2 md:px-12 py-6 rounded-b-lg border-b border-x border-gray-400' />
+            <div className='w-[95vw] h-[60vh] min-h-[600px] rounded-b-lg md:hidden'>
+                <Bar options={optionsY} data={data} className='bg-white px-2 md:px-12 py-6 rounded-b-lg' />
             </div>
         </div>
     );
