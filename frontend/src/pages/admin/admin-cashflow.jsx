@@ -8,7 +8,7 @@ function AdminCashflow() {
 			<NavbarAdmin />
 			<div className='flex h-auto w-full justify-center bg-[#F2F4F9] pb-12'>
 				<div className='h-auto w-full lg:w-fit bg-[#F2F4F9]'>
-					<div className='w-full bg-white pt-3 pl-2 md:pt-6 md:pl-6 rounded-t-lg'>
+					<div className='w-full bg-white pt-3 pl-2 md:pt-6 md:pl-6 rounded-t-lg border-t border-x border-gray-400'>
 						<div className='bg-red-500 rounded-lg hover:bg-red-600 w-fit'>
 							<Link to={'/admin-dashboard'} className='flex items-center px-4 py-2 sm:py-1 rounded-lg text-white space-x-2'>
 								<svg width="20" height="20" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
