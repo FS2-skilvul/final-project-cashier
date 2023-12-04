@@ -40,7 +40,6 @@ function App() {
 		}
 	}, [token])
 
-	console.log(roleUser)
 
 	return (
 		<>

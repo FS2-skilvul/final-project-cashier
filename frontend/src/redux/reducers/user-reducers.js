@@ -3,6 +3,7 @@ import axios from "axios";
 const initialState = {
   userSelf: [],
   users: [],
+  selectedUser: [],
   productUsers: [],
   isLoading: false,
   isEmailExist: false,
@@ -53,6 +54,12 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+      };
+    case "SUCCESS_GET_DATA_USER_BY_ID":
+      return {
+        ...state,
+        isLoading: false,
+        selectedUser: action.payload,
       };
     case "SUCCESS_GET_ALL_DATA_USER":
       return {
@@ -121,6 +128,13 @@ function successGetDataUser(data) {
 function failedGetDataUser() {
   return {
     type: "FAILED_GET_DATA_USER",
+  };
+}
+
+function successGetDataUserById(data) {
+  return {
+    type: "SUCCESS_GET_DATA_USER_BY_ID",
+    payload: data,
   };
 }
 
@@ -263,6 +277,42 @@ export function getDataUser() {
   };
 }
 
+export function getDataUserById(id) {
+  return async function (dispatch) {
+    try {
+      dispatch(startFetching());
+      const token = localStorage.getItem("token");
+      if (token) {
+        const headers = { Authorization: `Bearer ${token}` }; // auth header with bearer token
+        const { data } = await axios.get(
+          `https://final-project-cashier-production.up.railway.app/user/${id}`,
+          { headers },
+        );
+
+        // console.log(login.data.token, data.data.nama)
+        dispatch(successGetDataUserById(data.data));
+      } else {
+        dispatch(failedGetDataUser());
+      }
+    } catch (error) {
+      // Tangani kesalahan jika ada
+      console.error("Error adding user:", error);
+
+      // Dapatkan status code dari error (jika ada)
+      const statusCode = error.response ? error.response.status : null;
+
+      // Dapatkan pesan kesalahan dari error (jika ada)
+      const errorMessage = error.response ? error.response.data.message : null;
+
+      // Log status code dan pesan kesalahan
+      console.log("Status Code:", statusCode);
+      console.log("Error Message:", errorMessage);
+
+      dispatch(failedGetDataUser());
+    }
+  };
+}
+
 export function getAllDataUser() {
   return async function (dispatch) {
     try {
@@ -338,39 +388,39 @@ export function getDataProductUserById(id) {
 }
 
 export function updateDataUser(id, newData) {
-    return async function (dispatch) {
-        try {
-            dispatch(startFetching())
-            const token = localStorage.getItem('token')
-            if (token) {
-                const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
+  return async function (dispatch) {
+    try {
+      dispatch(startFetching())
+      const token = localStorage.getItem('token')
+      if (token) {
+        const headers = { 'Authorization': `Bearer ${token}` }; // auth header with bearer token
 
-                await axios.put(`https://final-project-cashier-production.up.railway.app/user/${id}`, newData, { headers })
+        await axios.put(`https://final-project-cashier-production.up.railway.app/user/${id}`, newData, { headers })
 
-                const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', { headers })
-                // console.log(login.data.token, data.data.nama)
-                dispatch(successGetDataUser(data.data));
-            } else {
-                dispatch(failedGetDataUser())
-            }
+        const { data } = await axios.get('https://final-project-cashier-production.up.railway.app/user/self', { headers })
+        // console.log(login.data.token, data.data.nama)
+        dispatch(successGetDataUser(data.data));
+      } else {
+        dispatch(failedGetDataUser())
+      }
 
-        } catch (error) {
-            // Tangani kesalahan jika ada
-            console.error("Error adding user:", error);
+    } catch (error) {
+      // Tangani kesalahan jika ada
+      console.error("Error adding user:", error);
 
-            // Dapatkan status code dari error (jika ada)
-            const statusCode = error.response ? error.response.status : null;
+      // Dapatkan status code dari error (jika ada)
+      const statusCode = error.response ? error.response.status : null;
 
-            // Dapatkan pesan kesalahan dari error (jika ada)
-            const errorMessage = error.response ? error.response.data.message : null;
+      // Dapatkan pesan kesalahan dari error (jika ada)
+      const errorMessage = error.response ? error.response.data.message : null;
 
-            // Log status code dan pesan kesalahan
-            console.log("Status Code:", statusCode);
-            console.log("Error Message:", errorMessage);
+      // Log status code dan pesan kesalahan
+      console.log("Status Code:", statusCode);
+      console.log("Error Message:", errorMessage);
 
-            dispatch(failedGetDataUser());
-        }
+      dispatch(failedGetDataUser());
     }
+  }
 }
 
 export default userReducer;
