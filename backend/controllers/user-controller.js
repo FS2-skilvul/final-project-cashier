@@ -131,6 +131,43 @@ module.exports = {
         }
     },
 
+    updateUserSelf: async (req, res) => {
+        const userId = req.payload.id
+        const data = req.body;
+
+        try {
+            // Temukan user berdasarkan ID
+            const user = await User.findByPk(userId);
+
+            if (!user) {
+                return res.status(404).json({
+                    message: 'user tidak ditemukan'
+                });
+            }
+
+            // Cek apakah password diubah
+            if (data.password) {
+                // hash password
+                const hashPassword = bcrypt.hashSync(data.password, 10)
+                data.password = hashPassword
+            }
+
+            // Ubah data user
+            await user.update(data);
+
+            res.json({
+                message: 'User berhasil diubah',
+                data: user
+            });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Terjadi kesalahan server'
+            });
+        }
+    },
+
     deleteUser: async (req, res) => {
         const userId = req.params.id;
 

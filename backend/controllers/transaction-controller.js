@@ -8,7 +8,14 @@ module.exports = {
             const userId = req.payload.id
             const roleUser = req.payload.role
 
-            const transactionAdmin = await Transaction.findAll()
+            const transactionAdmin = await Transaction.findAll({
+                include: [
+                    {
+                        model: Product,
+                        as: 'products',
+                    },
+                ],
+            })
             const transactionUser = await Transaction.findAll({
                 where: {
                     user_id: userId
@@ -115,7 +122,7 @@ module.exports = {
             }
 
             // input data
-            if (products && total_biaya) {
+            if (products.length > 0 && total_biaya) {
                 const transaction = await Transaction.create(createTransaction)
                 for (const { product_id, qty, sub_total } of products) {
                     createDetailTransaction = {

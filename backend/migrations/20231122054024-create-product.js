@@ -19,6 +19,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      kode_barang: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       nama: {
         type: Sequelize.STRING,
         allowNull: false
