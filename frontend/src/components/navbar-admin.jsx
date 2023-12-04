@@ -79,11 +79,11 @@ function NavbarAdmin() {
 	}
 
 	return (
-		<header className="fixed flex justify-between w-full p-2 sm:p-5 px-4 md:px-8 lg:px-12 xl:px-24 bg-white shadow top-0 items-center text-sm md:text-xl z-10">
+		<header className="fixed flex justify-between w-full p-4 sm:p-5 px-4 md:px-8 lg:px-12 xl:px-24 bg-white shadow top-0 items-center text-sm md:text-xl z-10">
 			<div className="flex gap-6 font-bold items-center justify-center">
 				{menu && (
 					<div className="fixed md:hidden flex">
-						<div className="opacity-95 right-0 fixed top-[4.5rem] bg-white w-1/2 h-full">
+						<div className="opacity-95 right-0 fixed top-[4rem] bg-white w-1/2 h-full">
 							<div className="flex flex-col items-center h-full ">
 								<div className="flex flex-col font-semibold text-base items-center justify-center text-primary mt-12">
 									<img
@@ -105,7 +105,10 @@ function NavbarAdmin() {
 										</button>
 									</div>
 								</div>
-								<button onClick={() => localStorage.removeItem('token')} className="flex flex-1 items-end mb-24 text-primary bottom-0">
+								<button
+									onClick={() => localStorage.removeItem('token')}
+									className="flex flex-1 items-end mb-24 text-primary bottom-0"
+								>
 									<Link to="/">
 										<div className="flex flex-row items-center justify-center gap-2 text-sm">
 											<IoIosLogOut />
@@ -135,7 +138,7 @@ function NavbarAdmin() {
 									fill="#5371FF"
 								/>
 							</svg>
-							<p className='truncate'>{selectedUser.nama}</p>
+							<p className="truncate">{selectedUser.nama}</p>
 						</div>
 						<div className="flex gap-3 items-center w-32 md:w-64">
 							<svg
@@ -149,7 +152,7 @@ function NavbarAdmin() {
 									fill="#5371FF"
 								/>
 							</svg>
-							<p className='truncate'>{selectedUser.nama_toko}</p>
+							<p className="truncate">{selectedUser.nama_toko}</p>
 						</div>
 					</div>
 				)}
@@ -167,7 +170,10 @@ function NavbarAdmin() {
 					</button>
 					{toogle && (
 						<div className="flex flex-col fixed top-[5em] right-[2em] xl:right-[5rem]">
-							<button onClick={() => localStorage.removeItem('token')} className="bg-white border px-8 py-1">
+							<button
+								onClick={() => localStorage.removeItem('token')}
+								className="bg-white border px-8 py-1"
+							>
 								<Link to="/">
 									<div className="flex flex-row items-center justify-center gap-2">
 										<IoIosLogOut />
@@ -181,8 +187,9 @@ function NavbarAdmin() {
 			</div>
 			<button
 				onClick={menuButton}
-				className={`flex items-center justify-center md:hidden text-primary text-3xl transition-transform transform ${menu ? 'rotate-180' : 'rotate-0'
-					}`}
+				className={`flex items-center justify-center md:hidden text-primary text-3xl transition-transform transform ${
+					menu ? 'rotate-180' : 'rotate-0'
+				}`}
 			>
 				{menu ? <IoMdClose /> : <IoMdMenu />}
 			</button>

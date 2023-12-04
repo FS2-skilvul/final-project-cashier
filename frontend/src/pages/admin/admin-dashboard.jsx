@@ -101,7 +101,7 @@ function AdminDashboard() {
 								</div>
 								<div className="flex flex-col h-full justify-between space-y-9 ">
 									<div className="overflow-x-auto">
-										<div className="w-[900px] md:w-full  flex justify-center">
+										<div className="w-[900px] md:w-full flex justify-center">
 											<table className="table-auto border-collapse w-full border-r-2 border-l-2 border-b-2">
 												<thead className="text-center bg-primary text-white ">
 													<tr>
