@@ -125,7 +125,7 @@ function UserDashboard() {
 									d="M236.8 188.09L149.35 36.22a24.76 24.76 0 0 0-42.7 0L19.2 188.09a23.51 23.51 0 0 0 0 23.72A24.35 24.35 0 0 0 40.55 224h174.9a24.35 24.35 0 0 0 21.33-12.19a23.51 23.51 0 0 0 .02-23.72M120 104a8 8 0 0 1 16 0v40a8 8 0 0 1-16 0Zm8 88a12 12 0 1 1 12-12a12 12 0 0 1-12 12"
 								/>
 							</svg>
-							<p className="text-xl font-semibold">
+							<p className="text-lg sm:text-xl font-semibold">
 								Barang Yang Stoknya Akan Habis
 							</p>
 						</div>
@@ -133,7 +133,7 @@ function UserDashboard() {
 							filteredProducts.map((product) => (
 								<div
 									key={product.id}
-									className="flex items-center justify-between bg-white px-4 sm:px-9 py-3 text-xl font-semibold text-gray-700 border-x-2 border-b-2 border-gray-400 space-x-1"
+									className="flex items-center justify-between bg-white px-4 sm:px-9 py-3 text-base sm:text-lg font-semibold text-gray-700 border-x-2 border-b-2 border-gray-400 space-x-1"
 								>
 									<p>{product.nama}</p>
 									<p className="whitespace-nowrap">
@@ -142,7 +142,7 @@ function UserDashboard() {
 								</div>
 							))
 						) : (
-							<div className="flex items-center justify-between bg-white px-4 sm:px-9 py-3 text-xl font-semibold text-gray-700 border-x-2 border-b-2 border-gray-400">
+							<div className="flex items-center justify-between bg-white px-4 sm:px-9 py-3 text-base sm:text-lg font-semibold text-gray-700 border-x-2 border-b-2 border-gray-400">
 								<p>Tidak ada barang yang stoknya menipis</p>
 							</div>
 						)}

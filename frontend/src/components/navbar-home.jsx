@@ -251,7 +251,7 @@ function NavbarHome() {
 											</div>
 										</Link>
 									</button>
-									<button className="bg-white border px-8 py-1">
+									<button onClick={() => localStorage.removeItem('token')} className="bg-white border px-8 py-1">
 										<Link to="/">
 											<div className="flex flex-row items-center justify-center gap-2">
 												<IoIosLogOut />
