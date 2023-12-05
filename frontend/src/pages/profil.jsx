@@ -82,7 +82,7 @@ function ProfilePage() {
 	return (
 		<div className="relative w-full h-screen bg-[#F2F4F9] pt-28 pb-12">
 			<NavbarHome />
-			<div className="flex h-auto w-full justify-center bg-[#F2F4F9] pb-12 px-3">
+			<div className="flex h-auto w-full justify-center bg-[#F2F4F9] pb-12 px-5">
 				<main className="flex h-auto w-full justify-center">
 					<div className="bg-secondary border-2 rounded border-primary w-[40em] max-h-[36em] flex flex-col">
 						<header className="bg-primary w-full py-4 text-left font-bold text-white flex items-center ">
@@ -196,7 +196,7 @@ function ProfilePage() {
 					{showSuccess && (
 						<div className="fixed inset-0 flex items-center justify-center z-10 ">
 							<div className="absolute inset-0 bg-black opacity-50"></div>
-							<div className="bg-white p-6 rounded-xl z-20 w-[25em] h-[15em] items-center flex flex-col justify-center relative">
+							<div className="bg-white p-6 m-8 md:m-12 rounded-xl z-20 w-[25em] h-[15em] items-center flex flex-col justify-center relative">
 								<button
 									className="absolute right-0 top-0 m-5"
 									onClick={toggleShowSuccess}
