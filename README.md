@@ -1,6 +1,6 @@
 # final-project-cashier
 
-Demo: soon
+Demo: https://kasironlineumkm.vercel.app/
 
 API: https://final-project-cashier-production.up.railway.app/
 
