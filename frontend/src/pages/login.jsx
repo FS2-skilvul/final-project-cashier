@@ -60,7 +60,7 @@ function Login() {
                         </button>
                     </form>
                     {isLoginSuccess ? '' : <p className='text-red-600 font-semibold'>ANDA GAGAL LOGIN</p>}
-                    <p className='font-medium'>Belum punya akun? <Link to='/register' className='text-blue-500 hover:text-blue-600'>Masuk Disini</Link></p>
+                    <p className='font-medium'>Belum punya akun? <Link to='/register' className='text-blue-500 hover:text-blue-600'>Daftar Disini</Link></p>
                 </div>
             </div>
         </div>
